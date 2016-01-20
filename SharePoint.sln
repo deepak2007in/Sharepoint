@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharePoint", "SharePoint\SharePoint.csproj", "{4C1B966B-E9AA-4324-B342-67460EB11F76}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectSaving", "Calculation\ProjectSaving.csproj", "{FA9CBA86-1218-48F2-A3FD-7161FAC74FAE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{4C1B966B-E9AA-4324-B342-67460EB11F76}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C1B966B-E9AA-4324-B342-67460EB11F76}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C1B966B-E9AA-4324-B342-67460EB11F76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA9CBA86-1218-48F2-A3FD-7161FAC74FAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA9CBA86-1218-48F2-A3FD-7161FAC74FAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA9CBA86-1218-48F2-A3FD-7161FAC74FAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA9CBA86-1218-48F2-A3FD-7161FAC74FAE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

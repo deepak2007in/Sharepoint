@@ -1,5 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="CalculationControl.ascx.cs" Inherits="SharePoint.CalculationControl" %>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         $(":checkbox").each(function () {
@@ -10,6 +11,7 @@
             showTable();
             hideRow($(this));
         });
+        $("#datepicker").datepicker();
     });
 
     function hideRow(checkBox)
@@ -51,6 +53,9 @@
                                         <asp:ListItem Enabled="true" Value="RevenueGrowth" Text="Revenue Growth"></asp:ListItem>
                                         <asp:ListItem Enabled="true" Value="CapacityIncrease" Text="Capacity Increase"></asp:ListItem>
                                     </asp:CheckBoxList>
+<br />
+Date: <input type="text" id="datepicker"></p>
+<br />
 <table id="dynamicTable" border="1" width="100%" style="table-layout: fixed; empty-cells: show; display:none">
     <tr id="Header" style="background-color: Blue; color: White; border: 0px !Important;">
         <td>
