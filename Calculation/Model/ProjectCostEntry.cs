@@ -1,5 +1,5 @@
 ﻿
-namespace ProjectSaving
+namespace SCI.CIProject.ProjectSaving
 {
     public struct ProjectCostEntry
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ProjectSaving
+namespace SCI.CIProject.ProjectSaving
 {
     public class ProjectMetadata
     {

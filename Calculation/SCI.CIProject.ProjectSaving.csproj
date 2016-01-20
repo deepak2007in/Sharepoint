@@ -7,8 +7,8 @@
     <ProjectGuid>{FA9CBA86-1218-48F2-A3FD-7161FAC74FAE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ProjectSaving</RootNamespace>
-    <AssemblyName>ProjectSaving</AssemblyName>
+    <RootNamespace>SCI.CIProject.ProjectSaving</RootNamespace>
+    <AssemblyName>SCI.CIProject.ProjectSaving</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
