@@ -28,6 +28,8 @@ namespace SCI.CIProject.ProjectSaving
         /// <param name="implementationDate">The provided implementation date for the project.</param>
         public ProjectTimeline(DateTime implementationDate)
         {
+            this.ImplementationDate = implementationDate;
+            this.Months = new int[12];
         }
 
         /// <summary>
@@ -58,7 +60,7 @@ namespace SCI.CIProject.ProjectSaving
         /// <returns>True if it is greater than 10 months from now; false otherwise.</returns>
         public static bool ValidateImplementationDate(DateTime implementationDate)
         {
-            throw new NotImplementedException();
+            return DateTime.Now.AddMonths(10) < implementationDate;
         }
 
         /// <summary>
@@ -67,7 +69,7 @@ namespace SCI.CIProject.ProjectSaving
         /// <returns>True if the implementation date does fall in first 5 days of the month; false otherwise.</returns>
         private bool IsImplementationDateBaselined()
         {
-            throw new NotImplementedException();
+            return this.ImplementationDate.Day < 6;
         }
 
         /// <summary>
@@ -75,7 +77,12 @@ namespace SCI.CIProject.ProjectSaving
         /// </summary>
         private void GenerateMonths()
         {
-            throw new NotImplementedException();
+            var isDayOfMonthBaselined = this.IsImplementationDateBaselined();
+            var startDate = isDayOfMonthBaselined ? this.ImplementationDate : this.ImplementationDate.AddMonths(1);
+            for (var index = 0; index < 12; index++)
+            {
+                this.Months[index] = startDate.AddMonths(index).Month;
+            }
         }
     }
 }
