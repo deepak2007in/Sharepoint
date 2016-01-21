@@ -28,7 +28,41 @@ namespace SCI.CIProject.ProjectSaving
         /// <summary>
         /// Gets or sets the actual cost.
         /// </summary>
-        public int Cost { get; set; }
+        public long Cost { get; set; }
+
+        /// <summary>
+        /// Provide the string representation of the <see cref="ProjectCostEntry"/> with the provided input values.
+        /// </summary>
+        /// <param name="projectType">Type of project.</param>
+        /// <param name="costType">The actual or target cost indicator.</param>
+        /// <param name="month">Month for the calculation.</param>
+        /// <returns>The string representation of the <see cref="ProjectCostEntry"/></returns>
+        public static string ToString(ProjectType projectType, CostType costType, int month)
+        {
+            return string.Format("{0}_{1}_{2}", projectType, costType, month);
+        }
+
+        /// <summary>
+        /// Provide the string representation of the <see cref="ProjectCostEntry"/> with the provided input values.
+        /// </summary>
+        /// <param name="projectType">Type of project.</param>
+        /// <param name="costType">The actual or target cost indicator.</param>
+        /// <returns>The string representation of the <see cref="ProjectCostEntry"/></returns>
+        public static string ToString(ProjectType projectType, CostType costType)
+        {
+            return string.Format("{0}_{1}", projectType, costType);
+        }
+
+        /// <summary>
+        /// Provide the string representation of the <see cref="ProjectCostEntry"/> with the provided input values.
+        /// </summary>
+        /// <param name="costType">The actual or target cost indicator.</param>
+        /// <param name="month">Month for the calculation.</param>
+        /// <returns>The string representation of the <see cref="ProjectCostEntry"/></returns>
+        public static string ToString(CostType costType, int month)
+        {
+            return string.Format("{0}_{1}", costType, month);
+        }
 
         /// <summary>
         /// Overrides the string representation of the <see cref="ProjectCostEntry"/>.
