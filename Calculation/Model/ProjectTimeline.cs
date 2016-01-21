@@ -52,7 +52,7 @@ namespace SCI.CIProject.ProjectSaving
         }
 
         /// <summary>
-        /// Validates that the implementation date should be less than 10 months from now.
+        /// Validates that the implementation date should not be less than 10 months from now.
         /// </summary>
         /// <param name="implementationDate">The provided  implementation date for the project.</param>
         /// <returns>True if it is greater than 10 months from now; false otherwise.</returns>

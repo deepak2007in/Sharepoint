@@ -14,7 +14,7 @@ namespace SCI.CIProject.ProjectSaving
             
         }
 
-        public void Populate(IDictionary<string, ProjectCostEntry> CostEntries)
+        public void Populate(IList<ProjectCostEntry> CostEntries)
         {
 
         }

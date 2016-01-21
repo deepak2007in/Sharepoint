@@ -3,8 +3,12 @@ using System.Collections.Generic;
 
 namespace SCI.CIProject.ProjectSaving
 {
-    public struct ProjectCost
+    public class ProjectCost
     {
+        public ProjectCost(int period)
+        {
+            this.Period = period;
+        }
         public int Period { get; set; }
         public long CapExAmount { get; set; }
         public long ImplementationCost { get; set; }
@@ -15,9 +19,9 @@ namespace SCI.CIProject.ProjectSaving
                 return this.CapExAmount + this.ImplementationCost;
             }
         }
-        private IDictionary<string, ProjectCostEntry> CostEntries { get; set; }
+        private IDictionary<string, ProjectCostEntry> costEntries;
 
-        public void Populate(IDictionary<string, ProjectCostEntry> CostEntries)
+        public void Populate(IList<ProjectCostEntry> CostEntries)
         {
 
         }
