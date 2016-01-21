@@ -1,8 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-
+﻿//-----------------------------------------------------------------------
+// <copyright file="ProjectCost.cs" company="TechBlocks">
+//     Class responsible for the composition of project specific metadata. 
+// </copyright>
+//-----------------------------------------------------------------------
 namespace SCI.CIProject.ProjectSaving
 {
+    using System;
+    using System.Collections.Generic;
+
     public class ProjectCost
     {
         public ProjectCost(int period)
@@ -19,7 +24,7 @@ namespace SCI.CIProject.ProjectSaving
                 return this.CapExAmount + this.ImplementationCost;
             }
         }
-        private IDictionary<string, ProjectCostEntry> costEntries;
+        private readonly IDictionary<string, ProjectCostEntry> costEntries;
 
         public void Populate(IList<ProjectCostEntry> CostEntries)
         {
