@@ -418,6 +418,15 @@ namespace SharePoint {
         protected global::System.Web.UI.WebControls.Label lblImpDate;
         
         /// <summary>
+        /// txtImplementationDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtImplementationDate;
+        
+        /// <summary>
         /// lblCompDate control.
         /// </summary>
         /// <remarks>
@@ -425,6 +434,15 @@ namespace SharePoint {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblCompDate;
+        
+        /// <summary>
+        /// txtCompletionDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtCompletionDate;
         
         /// <summary>
         /// lblcancelDate control.
@@ -796,6 +814,24 @@ namespace SharePoint {
         protected global::System.Web.UI.WebControls.TextBox estlbltotalval;
         
         /// <summary>
+        /// dynamicTable control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTable dynamicTable;
+        
+        /// <summary>
+        /// Header control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow Header;
+        
+        /// <summary>
         /// lblprojtypheading control.
         /// </summary>
         /// <remarks>
@@ -911,6 +947,15 @@ namespace SharePoint {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblmnth12;
+        
+        /// <summary>
+        /// CostAvoidanceTarget control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow CostAvoidanceTarget;
         
         /// <summary>
         /// hdngCAAct control.
@@ -1030,6 +1075,15 @@ namespace SharePoint {
         protected global::System.Web.UI.WebControls.TextBox cat12;
         
         /// <summary>
+        /// CostAvoidanceActual control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow CostAvoidanceActual;
+        
+        /// <summary>
         /// Label4 control.
         /// </summary>
         /// <remarks>
@@ -1145,6 +1199,15 @@ namespace SharePoint {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox caa12;
+        
+        /// <summary>
+        /// CostReductionTarget control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow CostReductionTarget;
         
         /// <summary>
         /// Label5 control.
@@ -1264,6 +1327,15 @@ namespace SharePoint {
         protected global::System.Web.UI.WebControls.TextBox crt12;
         
         /// <summary>
+        /// CostReductionActual control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow CostReductionActual;
+        
+        /// <summary>
         /// Label6 control.
         /// </summary>
         /// <remarks>
@@ -1379,6 +1451,15 @@ namespace SharePoint {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox cra12;
+        
+        /// <summary>
+        /// RevenueGrowthTarget control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow RevenueGrowthTarget;
         
         /// <summary>
         /// Label7 control.
@@ -1498,6 +1579,15 @@ namespace SharePoint {
         protected global::System.Web.UI.WebControls.TextBox rgt12;
         
         /// <summary>
+        /// RevenueGrowthActual control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow RevenueGrowthActual;
+        
+        /// <summary>
         /// Label8 control.
         /// </summary>
         /// <remarks>
@@ -1613,6 +1703,15 @@ namespace SharePoint {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox rga12;
+        
+        /// <summary>
+        /// CapacityIncreaseTarget control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow CapacityIncreaseTarget;
         
         /// <summary>
         /// Label9 control.
@@ -1732,6 +1831,15 @@ namespace SharePoint {
         protected global::System.Web.UI.WebControls.TextBox cit12;
         
         /// <summary>
+        /// CapacityIncreaseActual control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow CapacityIncreaseActual;
+        
+        /// <summary>
         /// Label10 control.
         /// </summary>
         /// <remarks>
@@ -1849,6 +1957,15 @@ namespace SharePoint {
         protected global::System.Web.UI.WebControls.TextBox cia12;
         
         /// <summary>
+        /// TotalTarget control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow TotalTarget;
+        
+        /// <summary>
         /// targettotal control.
         /// </summary>
         /// <remarks>
@@ -1964,6 +2081,15 @@ namespace SharePoint {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox target12total;
+        
+        /// <summary>
+        /// TotalActual control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow TotalActual;
         
         /// <summary>
         /// ActualTotal control.

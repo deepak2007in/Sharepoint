@@ -30,6 +30,7 @@ namespace SCI.CIProject.ProjectSaving
         {
             this.ImplementationDate = implementationDate;
             this.Months = new int[12];
+            this.GenerateMonths();
         }
 
         /// <summary>

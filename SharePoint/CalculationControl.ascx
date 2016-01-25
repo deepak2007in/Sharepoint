@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="CalculationControl.ascx.cs" Inherits="SharePoint.CalculationControl" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="CalculationControl.ascx.cs" Inherits="SharePoint.CalculationControl" ClientIDMode="Static" %>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script type="text/javascript">
@@ -11,7 +11,8 @@
             showTable();
             hideRow($(this));
         });
-        //$("#datepicker").datepicker();
+        $("#txtImplementationDate").datepicker();
+        $("#txtCompletionDate").datepicker();
     });
 
     function getValueSelected(checkBox)
@@ -404,13 +405,17 @@
                     <td>
                         <asp:Label ID="lblImpDate" runat="server" Text="Implementation Date"></asp:Label>
                     </td>
-                    <td></td>
+                    <td>
+                        <asp:TextBox ID="txtImplementationDate" runat="server" OnTextChanged="txtImplementationDate_TextChanged" EnableViewState="true"  />
+                    </td>
                 </tr>
                 <tr>
                     <td>
                         <asp:Label ID="lblCompDate" runat="server" Text="Completion Date"></asp:Label>
                     </td>
-                    <td></td>
+                    <td>
+                        <input type="text" id="txtCompletionDate" runat="server" enableviewstate="true"  />
+                    </td>
                 </tr>
                 <tr>
                     <td>
@@ -616,7 +621,7 @@
         </td>
     </tr>
 </table>
-<table id="dynamicTable" border="1" width="100%" style="table-layout: fixed; empty-cells: show; display: none">
+<table id="dynamicTable" runat="server" border="1" width="100%" style="table-layout: fixed; empty-cells: show; display: none">
     <tr id="Header" style="background-color: Blue; color: White; border: 0px !Important;">
         <td>
             <asp:Label ID="lblprojtypheading" runat="server" Text="Project Type"></asp:Label>
@@ -1081,7 +1086,7 @@
         <td nowrap="true" valign="top" width="213px" class="ms-formlabel"></td>
         <td width="350px">
             <asp:Button ID="btnSave" runat="server" BackColor="#FF9933" Font-Bold="True" Font-Size="Medium"
-                Text="Submit" />&nbsp;&nbsp;
+                Text="Submit" OnClick="btnSave_Click" />&nbsp;&nbsp;
             <asp:Button ID="btnCancel" runat="server" BackColor="#FF9933" Font-Bold="True" CausesValidation="false"
                 Text="Cancel" Font-Size="Medium" />&nbsp;&nbsp;
             <asp:Button ID="btnDraft" Text="Draft" runat="server" BackColor="#FF9933" Font-Bold="True"

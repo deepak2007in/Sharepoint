@@ -87,19 +87,11 @@ namespace SCI.CIProject.ProjectSaving
         /// <summary>
         /// Sets the actual or target cost entry for the given project type and the month.
         /// </summary>
-        /// <param name="projectType">Type of project.</param>
-        /// <param name="costType">The actual or target cost indicator.</param>
-        /// <param name="month">Month for the calculation.</param>
-        /// <param name="cost">The cost value.</param>
-        public void SetCostEntry(ProjectType projectType, CostType costType, int month, long cost)
+        /// <param name="projectCostEntry">Instance of the <see cref="ProjectCostEntry" /> structure.</param>
+        public void SetCostEntry(ProjectCostEntry projectCostEntry)
         {
-            var key = ProjectCostEntry.ToString(projectType, costType, month);
-            var costEntry = new ProjectCostEntry();
-            costEntry.ProjectType = projectType;
-            costEntry.CostType = costType;
-            costEntry.Month = month;
-            costEntry.Cost = cost;
-            this.costEntries[key] = costEntry;
+            var key = projectCostEntry.ToString();
+            this.costEntries[key] = projectCostEntry;
         }
 
         /// <summary>
