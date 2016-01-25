@@ -56,6 +56,47 @@
 <br />
 Date: <input type="text" id="datepicker"></p>
 <br />
+<table id="projectSaving" border="1" width="100%" style="table-layout: fixed; empty-cells: show;">
+    <tr>
+        <td>
+            <table border="1" width="30%" style="table-layout: fixed; empty-cells: show;">
+                <tr>
+                    <td>CapEx Amount</td>
+                    <td><asp:TextBox ID="txtCapExAmount" runat="server" /></td>
+                </tr>
+                <tr>
+                    <td>Implementation Cost</td>
+                    <td><asp:TextBox ID="txtImplementationCost" runat="server" /></td>
+                </tr>
+                <tr>
+                    <td>Total</td>
+                    <td><asp:TextBox ID="txtTotal" runat="server" /></td>
+                </tr>
+                <tr>
+                    <td>Implementation Date</td>
+                    <td><asp:TextBox ID="txtImplementationDate" runat="server" /></td>
+                </tr>
+                <tr>
+                    <td>Completion Date</td>
+                    <td><asp:TextBox ID="txtCompletionDate" runat="server" /></td>
+                </tr>
+            </table>
+        </td>
+        <td>
+            <table border="1" width="30%" style="table-layout: fixed; empty-cells: show;">
+                <tr>
+                    <td>Period</td>
+                    <td><asp:DropDownList ID="ddlPeriod" runat="server" /></td>
+                </tr>
+                <tr>
+                    <td colspan="2">This CI has saved year to date:</td>
+                    <td><asp:DropDownList ID="DropDownList1" runat="server" /></td>
+                </tr>
+            </table>
+        </td>
+        <td></td>
+    </tr>
+</table>
 <table id="dynamicTable" border="1" width="100%" style="table-layout: fixed; empty-cells: show; display:none">
     <tr id="Header" style="background-color: Blue; color: White; border: 0px !Important;">
         <td>
