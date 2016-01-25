@@ -994,13 +994,13 @@ namespace SharePoint {
         protected global::System.Web.UI.WebControls.TextBox cat3;
         
         /// <summary>
-        /// ca4 control.
+        /// cat4 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox ca4;
+        protected global::System.Web.UI.WebControls.TextBox cat4;
         
         /// <summary>
         /// cat5 control.

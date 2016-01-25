@@ -65,9 +65,12 @@ namespace SharePoint
 
             lbltotal.Text = projectCost.TotalCost.ToString();
 
+            var targets = new[] { cat1, cat2, cat3, cat4, cat5, cat6, cat7, cat8, cat9, cat10, cat11, cat12 };
+            var actuals = new[] { caa1, caa2, caa3, caa4, caa5, caa6, caa7, caa8, caa9, caa10, caa11, caa12 };
+            // this.ProcessCheckBoxes(projectCost, chkCostAvoidance, ProjectType.CostAvoidance, targets)
         }
 
-        
+
         private void ProcessCheckBoxes(ProjectCost projectCost, CheckBox checkBox, ProjectType projectType, TextBox[] targets, TextBox[] actuals, int[] months)
         {
             if (checkBox.Checked)

@@ -406,7 +406,7 @@
                         <asp:Label ID="lblImpDate" runat="server" Text="Implementation Date"></asp:Label>
                     </td>
                     <td>
-                        <asp:TextBox ID="txtImplementationDate" runat="server" OnTextChanged="txtImplementationDate_TextChanged" EnableViewState="true"  />
+                        <asp:TextBox ID="txtImplementationDate" runat="server" EnableViewState="true"  />
                     </td>
                 </tr>
                 <tr>
@@ -677,7 +677,7 @@
             <asp:TextBox ID="cat3" runat="server"></asp:TextBox>
         </td>
         <td>
-            <asp:TextBox ID="ca4" runat="server"></asp:TextBox>
+            <asp:TextBox ID="cat4" runat="server"></asp:TextBox>
         </td>
         <td>
             <asp:TextBox ID="cat5" runat="server"></asp:TextBox>
