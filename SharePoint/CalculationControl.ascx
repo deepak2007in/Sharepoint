@@ -484,7 +484,7 @@
                         <asp:Label ID="lblca" runat="server" Text="CA"></asp:Label>
                     </td>
                     <td>
-                        <asp:TextBox ID="twelvtxtcavaule" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="twelvtxtcavalue" runat="server"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
