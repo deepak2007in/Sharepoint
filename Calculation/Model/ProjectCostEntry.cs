@@ -39,7 +39,7 @@ namespace SCI.CIProject.ProjectSaving
         /// <returns>The string representation of the <see cref="ProjectCostEntry"/></returns>
         public static string ToString(ProjectType projectType, CostType costType, int month)
         {
-            return string.Format("{0}_{1}_{2}", projectType, costType, month);
+            return string.Format("{0}_{1}_{2}", projectType, costType, FormatMonth(month));
         }
 
         /// <summary>
@@ -61,7 +61,8 @@ namespace SCI.CIProject.ProjectSaving
         /// <returns>The string representation of the <see cref="ProjectCostEntry"/></returns>
         public static string ToString(CostType costType, int month)
         {
-            return string.Format("{0}_{1}", costType, month);
+
+            return string.Format("{0}_{1}", costType, FormatMonth(month));
         }
 
         /// <summary>
@@ -71,7 +72,12 @@ namespace SCI.CIProject.ProjectSaving
         /// <returns>The string representation of the <see cref="ProjectCostEntry"/></returns>
         public override string ToString()
         {
-            return this.Month > 0 ? string.Format("{0}_{1}_{2}", this.ProjectType, this.CostType, this.Month) : "NA";
+            return this.Month > 0 ? string.Format("{0}_{1}_{2}", this.ProjectType, this.CostType, FormatMonth(this.Month)) : "NA";
+        }
+
+        private static string FormatMonth(int month)
+        {
+            return month.ToString().PadLeft(2, '0');
         }
     }
 }

@@ -129,7 +129,7 @@ namespace SCI.CIProject.ProjectSaving
             for (var index = 0; index < this.Period; index++)
             {
                 var month = startDate.AddMonths(index).Month;
-                var keyToSearch = ProjectCostEntry.ToString(projectType, CostType.Target, month);
+                var keyToSearch = ProjectCostEntry.ToString(projectType, CostType.Actual, month);
                 cost += this.GetTotal(keyToSearch);
             }
 
@@ -140,13 +140,16 @@ namespace SCI.CIProject.ProjectSaving
         /// Gets the total saving for the 12 months to be realized.
         /// </summary>
         /// <param name="projectType">The type of project.</param>
+        /// <param name="monthToStart">The month to start with.</param>
         /// <returns>The total cost.</returns>
-        public long GetSavedOver12Months(ProjectType projectType)
+        public long GetSavedOver12Months(ProjectType projectType, int monthToStart)
         {
-            var cost = 0L;
-            for (var index = 0; index < 12; index++)
+            var startDate = new DateTime(DateTime.Now.Year, monthToStart, 1);
+            var cost = this.GetSavedYearToDate(projectType, monthToStart);
+            for (var index = this.Period; index < 12; index++)
             {
-                var keyToSearch = ProjectCostEntry.ToString(projectType, CostType.Target);
+                var month = startDate.AddMonths(index).Month;
+                var keyToSearch = ProjectCostEntry.ToString(projectType, CostType.Target, month);
                 cost += this.GetTotal(keyToSearch);
             }
 
@@ -161,7 +164,7 @@ namespace SCI.CIProject.ProjectSaving
         /// <returns>The total cost.</returns>
         public long GetEstimatedSavingsToBeRealized(ProjectType projectType, int monthToStart)
         {
-            var costFor12Months = this.GetSavedOver12Months(projectType);
+            var costFor12Months = this.GetSavedOver12Months(projectType, monthToStart);
             var costForPeriodMonths = this.GetSavedYearToDate(projectType, monthToStart);
             return costFor12Months - costForPeriodMonths;
         }
