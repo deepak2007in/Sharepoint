@@ -1984,22 +1984,22 @@ namespace SharePoint {
         protected global::System.Web.UI.WebControls.TextBox target1total;
         
         /// <summary>
-        /// target22total control.
+        /// target2total control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox target22total;
+        protected global::System.Web.UI.WebControls.TextBox target2total;
         
         /// <summary>
-        /// targe3total control.
+        /// target3total control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox targe3total;
+        protected global::System.Web.UI.WebControls.TextBox target3total;
         
         /// <summary>
         /// target4total control.
@@ -2200,13 +2200,13 @@ namespace SharePoint {
         protected global::System.Web.UI.WebControls.TextBox actual11total;
         
         /// <summary>
-        /// actual12Ctotal control.
+        /// actual12total control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox actual12Ctotal;
+        protected global::System.Web.UI.WebControls.TextBox actual12total;
         
         /// <summary>
         /// btnSave control.

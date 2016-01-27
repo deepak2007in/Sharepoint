@@ -14,13 +14,13 @@ namespace SharePoint
         protected void Page_Load(object sender, EventArgs e)
         {
             cat1.Text = cat2.Text = cat3.Text = cat4.Text = cat5.Text = cat6.Text = cat7.Text = cat8.Text = cat9.Text = cat10.Text = cat11.Text = cat12.Text = "10000";
-            //caa1.Text = caa2.Text = caa3.Text = caa4.Text = caa5.Text = caa6.Text = caa7.Text = caa8.Text = caa9.Text = caa10.Text = caa11.Text = caa12.Text = "5000";
-            //crt1.Text = crt2.Text = crt3.Text = crt4.Text = crt5.Text = crt6.Text = crt7.Text = crt8.Text = crt9.Text = crt10.Text = crt11.Text = crt12.Text = "10000";
-            //cra1.Text = cra2.Text = cra3.Text = cra4.Text = cra5.Text = cra6.Text = cra7.Text = cra8.Text = cra9.Text = cra10.Text = cra11.Text = cra12.Text = "4000";
-            //rgt1.Text = rgt2.Text = rgt3.Text = rgt4.Text = rgt5.Text = rgt6.Text = rgt7.Text = rgt8.Text = rgt9.Text = rgt10.Text = rgt11.Text = rgt12.Text = "10000";
-            //rga1.Text = rga2.Text = rga3.Text = rga4.Text = rga5.Text = rga6.Text = rga7.Text = rga8.Text = rga9.Text = rga10.Text = rga11.Text = rga12.Text = "6000";
-            //cit1.Text = cit2.Text = cit3.Text = cit4.Text = cit5.Text = cit6.Text = cit7.Text = cit8.Text = cit9.Text = cit10.Text = cit11.Text = cit12.Text = "10000";
-            //cia1.Text = cia2.Text = cia3.Text = cia4.Text = cia5.Text = cia6.Text = cia7.Text = cia8.Text = cia9.Text = cia10.Text = cia11.Text = cia12.Text = "7000";
+            caa1.Text = caa2.Text = caa3.Text = caa4.Text = caa5.Text = caa6.Text = caa7.Text = caa8.Text = caa9.Text = caa10.Text = caa11.Text = caa12.Text = "5000";
+            crt1.Text = crt2.Text = crt3.Text = crt4.Text = crt5.Text = crt6.Text = crt7.Text = crt8.Text = crt9.Text = crt10.Text = crt11.Text = crt12.Text = "10000";
+            cra1.Text = cra2.Text = cra3.Text = cra4.Text = cra5.Text = cra6.Text = cra7.Text = cra8.Text = cra9.Text = cra10.Text = cra11.Text = cra12.Text = "4000";
+            rgt1.Text = rgt2.Text = rgt3.Text = rgt4.Text = rgt5.Text = rgt6.Text = rgt7.Text = rgt8.Text = rgt9.Text = rgt10.Text = rgt11.Text = rgt12.Text = "10000";
+            rga1.Text = rga2.Text = rga3.Text = rga4.Text = rga5.Text = rga6.Text = rga7.Text = rga8.Text = rga9.Text = rga10.Text = rga11.Text = rga12.Text = "6000";
+            cit1.Text = cit2.Text = cit3.Text = cit4.Text = cit5.Text = cit6.Text = cit7.Text = cit8.Text = cit9.Text = cit10.Text = cit11.Text = cit12.Text = "10000";
+            cia1.Text = cia2.Text = cia3.Text = cia4.Text = cia5.Text = cia6.Text = cia7.Text = cia8.Text = cia9.Text = cia10.Text = cia11.Text = cia12.Text = "7000";
         }
 
         protected void btnSave_Click(object sender, EventArgs e)
@@ -116,8 +116,21 @@ namespace SharePoint
             esttxtrg.Text = rgEstimatedSavingsToBeRealized.ToString();
             esttxtci.Text = ciEstimatedSavingsToBeRealized.ToString();
             estlbltotalval.Text = (caEstimatedSavingsToBeRealized + crEstimatedSavingsToBeRealized + rgEstimatedSavingsToBeRealized + ciEstimatedSavingsToBeRealized).ToString();
+
+            targets = new[] { target1total, target2total, target3total, target4total, target5total, target6total, target7total, target8total, target9total, target10total, target11total, target12total };
+            this.ProcessFooter(targets, months, projectCost.GetTargetTotal);
+
+            actuals = new[] { actual1total, actual2total, actual3total, actual4total, actual5total, actual6total, actual7total, actual8total, actual9total, actual10total, actual11total, actual12total };
+            this.ProcessFooter(actuals, months, projectCost.GetActualTotal);
         }
 
+        private void ProcessFooter(TextBox[] textBoxes, int[] months, Func<int, long> calculator)
+        {
+            for (var index = 0; index < textBoxes.Length; index++)
+            {
+                textBoxes[index].Text = calculator.Invoke(months[index]).ToString();
+            }
+        }
 
         private void ProcessCheckBoxes(ProjectCost projectCost, CheckBox checkBox, ProjectType projectType, TextBox[] targets, TextBox[] actuals, int[] months)
         {

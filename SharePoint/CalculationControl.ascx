@@ -999,10 +999,10 @@
             <asp:TextBox ID="target1total" runat="server" ReadOnly="true"></asp:TextBox>
         </td>
         <td>
-            <asp:TextBox ID="target22total" runat="server" ReadOnly="true"></asp:TextBox>
+            <asp:TextBox ID="target2total" runat="server" ReadOnly="true"></asp:TextBox>
         </td>
         <td>
-            <asp:TextBox ID="targe3total" runat="server" ReadOnly="true"></asp:TextBox>
+            <asp:TextBox ID="target3total" runat="server" ReadOnly="true"></asp:TextBox>
         </td>
         <td>
             <asp:TextBox ID="target4total" runat="server" ReadOnly="true"></asp:TextBox>
@@ -1070,7 +1070,7 @@
             <asp:TextBox ID="actual11total" runat="server" ReadOnly="true"></asp:TextBox>
         </td>
         <td>
-            <asp:TextBox ID="actual12Ctotal" runat="server" ReadOnly="true"></asp:TextBox>
+            <asp:TextBox ID="actual12total" runat="server" ReadOnly="true"></asp:TextBox>
         </td>
     </tr>
 </table>
