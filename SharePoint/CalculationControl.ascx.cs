@@ -26,7 +26,8 @@ namespace SharePoint
         {
             var implementationDateStr = txtImplementationDate.Text;
             var implementationDate = DateTime.ParseExact(implementationDateStr, "MM/dd/yyyy", CultureInfo.InvariantCulture);
-            if (ProjectTimeline.ValidateImplementationDate(implementationDate))
+            var validationResult = ProjectTimeline.ValidateImplementationDate(implementationDate);
+            if (validationResult)
             {
                 var projectTimeLine = new ProjectTimeline(implementationDate);
                 txtCompletionDate.Value = projectTimeLine.CompletionDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture);
@@ -48,9 +49,7 @@ namespace SharePoint
                 }
                 return months;
             }
-            {
-                throw new ArgumentException("Implementation Date should be greater than 10 months from now.");
-            }
+            return new int[0];
         }
 
         private void ProcessTotalCost(int[] months)
