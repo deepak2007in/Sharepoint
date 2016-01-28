@@ -106,9 +106,6 @@ namespace SharePoint
             esttxtci.Text = sharepointListItem.EstimatedSaving_CI.ToString();
             estlbltotalval.Text = sharepointListItem.EstimatedSaving_Total.ToString();
 
-            Integration.SaveInformation(sharepointListItem);
-            var newItem = Integration.GetInformation();
-
             targets = new[] { target1total, target2total, target3total, target4total, target5total, target6total, target7total, target8total, target9total, target10total, target11total, target12total };
             this.ProcessFooter(targets, months, projectCost.GetTargetTotal);
 
