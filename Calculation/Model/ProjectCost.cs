@@ -94,6 +94,16 @@ namespace SCI.CIProject.ProjectSaving
             this.costEntries[key] = projectCostEntry;
         }
 
+        public void SetCostEntry(ProjectType projectType, CostType costTye, int month, long cost)
+        {
+            var projectCostEntry = new ProjectCostEntry();
+            projectCostEntry.ProjectType = projectType;
+            projectCostEntry.CostType = costTye;
+            projectCostEntry.Month = month;
+            projectCostEntry.Cost = cost;
+            this.SetCostEntry(projectCostEntry);
+        }
+
         /// <summary>
         /// Gets the total targeted cost for all the project types for the given month.
         /// </summary>
