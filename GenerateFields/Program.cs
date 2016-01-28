@@ -64,9 +64,9 @@ namespace GenerateFields
             }
             else
             {
-                Console.Write("Enter value for SP Site");
+                Console.WriteLine("Enter value for SP Site");
                 spSite = Console.ReadLine();
-                Console.Write("Enter value for List Name");
+                Console.WriteLine("Enter value for List Name");
                 listName = Console.ReadLine();
             }
 
@@ -193,7 +193,7 @@ namespace GenerateFields
 
         private static void DisplayProperties()
         {
-            Console.WriteLine("Enter string literal");
+            Console.WriteLine("\nEnter string literal");
             var literal = Console.ReadLine();
             foreach(var propertyName in properties)
             {
