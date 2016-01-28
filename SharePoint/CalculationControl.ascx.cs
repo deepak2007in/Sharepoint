@@ -87,35 +87,24 @@ namespace SharePoint
             actuals = new[] { cia1, cia2, cia3, cia4, cia5, cia6, cia7, cia8, cia9, cia10, cia11, cia12 };
             this.ProcessCheckBoxes(projectCost, chkCapacityIncrease, ProjectType.CapacityIncrease, targets, actuals, months);
 
-            var caSavedOver12Months = projectCost.GetSavedOver12Months(ProjectType.CostAvoidance, int.Parse(lblmnth1.Text));
-            var crSavedOver12Months = projectCost.GetSavedOver12Months(ProjectType.CostReduction, int.Parse(lblmnth1.Text));
-            var rgSavedOver12Months = projectCost.GetSavedOver12Months(ProjectType.RevenueGrowth, int.Parse(lblmnth1.Text));
-            var ciSavedOver12Months = projectCost.GetSavedOver12Months(ProjectType.CapacityIncrease, int.Parse(lblmnth1.Text));
-            twelvtxtcavalue.Text = caSavedOver12Months.ToString();
-            twelvtxtcrvalue.Text = crSavedOver12Months.ToString();
-            twelvtxtrgvalue.Text = rgSavedOver12Months.ToString();
-            twelvtxtcivalue.Text = ciSavedOver12Months.ToString();
-            twelvtxttatalvalue.Text = (caSavedOver12Months + crSavedOver12Months + rgSavedOver12Months + ciSavedOver12Months).ToString();
+            var sharepointListItem = SharePointListItem.Convert(projectCost, int.Parse(lblmnth1.Text));
+            twelvtxtcavalue.Text = sharepointListItem.SavedOver12Months_CA.ToString();
+            twelvtxtcrvalue.Text = sharepointListItem.SavedOver12Months_CR.ToString();
+            twelvtxtrgvalue.Text = sharepointListItem.SavedOver12Months_RG.ToString();
+            twelvtxtcivalue.Text = sharepointListItem.SavedOver12Months_CI.ToString();
+            twelvtxttatalvalue.Text = sharepointListItem.SavedOver12Months_Total.ToString();
 
-            var caSavedYearToDate = projectCost.GetSavedYearToDate(ProjectType.CostAvoidance, int.Parse(lblmnth1.Text));
-            var crSavedYearToDate = projectCost.GetSavedYearToDate(ProjectType.CostReduction, int.Parse(lblmnth1.Text));
-            var rgSavedYearToDate = projectCost.GetSavedYearToDate(ProjectType.RevenueGrowth, int.Parse(lblmnth1.Text));
-            var ciSavedYearToDate = projectCost.GetSavedYearToDate(ProjectType.CapacityIncrease, int.Parse(lblmnth1.Text));
-            yeartxtca.Text = caSavedYearToDate.ToString();
-            yeartxtcr.Text = crSavedYearToDate.ToString();
-            yeartxtrg.Text = rgSavedYearToDate.ToString();
-            yeartxtci.Text = ciSavedYearToDate.ToString();
-            yearlbltotalval.Text = (caSavedYearToDate + crSavedYearToDate + rgSavedYearToDate + ciSavedYearToDate).ToString();
+            yeartxtca.Text = sharepointListItem.SavedYearToDate_CA.ToString();
+            yeartxtcr.Text = sharepointListItem.SavedYearToDate_CR.ToString();
+            yeartxtrg.Text = sharepointListItem.SavedYearToDate_RG.ToString();
+            yeartxtci.Text = sharepointListItem.SavedYearToDate_CI.ToString();
+            yearlbltotalval.Text = sharepointListItem.SavedYearToDate_Total.ToString();
 
-            var caEstimatedSavingsToBeRealized = projectCost.GetEstimatedSavingsToBeRealized(ProjectType.CostAvoidance, int.Parse(lblmnth1.Text));
-            var crEstimatedSavingsToBeRealized = projectCost.GetEstimatedSavingsToBeRealized(ProjectType.CostReduction, int.Parse(lblmnth1.Text));
-            var rgEstimatedSavingsToBeRealized = projectCost.GetEstimatedSavingsToBeRealized(ProjectType.RevenueGrowth, int.Parse(lblmnth1.Text));
-            var ciEstimatedSavingsToBeRealized = projectCost.GetEstimatedSavingsToBeRealized(ProjectType.CapacityIncrease, int.Parse(lblmnth1.Text));
-            esttxtca.Text = caEstimatedSavingsToBeRealized.ToString();
-            esttxtcr.Text = crEstimatedSavingsToBeRealized.ToString();
-            esttxtrg.Text = rgEstimatedSavingsToBeRealized.ToString();
-            esttxtci.Text = ciEstimatedSavingsToBeRealized.ToString();
-            estlbltotalval.Text = (caEstimatedSavingsToBeRealized + crEstimatedSavingsToBeRealized + rgEstimatedSavingsToBeRealized + ciEstimatedSavingsToBeRealized).ToString();
+            esttxtca.Text = sharepointListItem.EstimatedSaving_CA.ToString();
+            esttxtcr.Text = sharepointListItem.EstimatedSaving_CR.ToString();
+            esttxtrg.Text = sharepointListItem.EstimatedSaving_RG.ToString();
+            esttxtci.Text = sharepointListItem.EstimatedSaving_CI.ToString();
+            estlbltotalval.Text = sharepointListItem.EstimatedSaving_Total.ToString();
 
             targets = new[] { target1total, target2total, target3total, target4total, target5total, target6total, target7total, target8total, target9total, target10total, target11total, target12total };
             this.ProcessFooter(targets, months, projectCost.GetTargetTotal);
@@ -134,27 +123,17 @@ namespace SharePoint
 
         private void ProcessCheckBoxes(ProjectCost projectCost, CheckBox checkBox, ProjectType projectType, TextBox[] targets, TextBox[] actuals, int[] months)
         {
-            if (checkBox.Checked)
+            var cost = 0L;
+            for (var index = 0; index < months.Length; index++)
             {
-                var projectCostEntry = new ProjectCostEntry();
-                for (var index = 0; index < months.Length; index++)
-                {
-                    projectCostEntry.Month = months[index];
-                    projectCostEntry.CostType = CostType.Target;
-                    projectCostEntry.ProjectType = projectType;
-                    projectCostEntry.Cost = long.Parse(targets[index].Text);
-                    projectCost.SetCostEntry(projectCostEntry);
-                }
+                var parseResult = long.TryParse(targets[index].Text, out cost);
+                projectCost.SetCostEntry(projectType, CostType.Target, months[index], checkBox.Checked && parseResult? cost : 0);
+            }
 
-                for (var index = 0; index < months.Length; index++)
-                {
-                    projectCostEntry.Month = months[index];
-                    projectCostEntry.CostType = CostType.Actual;
-                    projectCostEntry.ProjectType = projectType;
-                    projectCostEntry.Cost = long.Parse(actuals[index].Text);
-                    projectCost.SetCostEntry(projectCostEntry);
-                }
-
+            for (var index = 0; index < months.Length; index++)
+            {
+                var parseResult = long.TryParse(actuals[index].Text, out cost);
+                projectCost.SetCostEntry(projectType, CostType.Actual, months[index], checkBox.Checked && parseResult ? cost : 0);
             }
         }
     }
