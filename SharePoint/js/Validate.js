@@ -2,66 +2,62 @@
 var Checkboxs = ['chkCostAvoidance', 'chkCostReduction', 'chkRevenueGrowth', 'chkCapacityIncrease'];
 var tablevalues = ['CostAvoidance', 'CostReduction', 'RevenueGrowth', 'CapacityIncrease'];
 
+function getValueSelected(checkBox) {
+    var checkBoxName = checkBox.attr('name');
+    if (checkBoxName.indexOf('CostAvoidance') >= 0) {
+        return 'CostAvoidance';
+    }
+    if (checkBoxName.indexOf('CostReduction') >= 0) {
+        return 'CostReduction';
+    }
+    if (checkBoxName.indexOf('RevenueGrowth') >= 0) {
+        return 'RevenueGrowth';
+    }
+    if (checkBoxName.indexOf('CapacityIncrease') >= 0) {
+        return 'CapacityIncrease';
+    }
+    return '';
+}
+function hideAggregateRow(checkBox) {
+    var valueSelected = getValueSelected(checkBox);
+    if (valueSelected != '') {
+        var isChecked = checkBox.is(':checked');
+        if (isChecked) {
+            showTableData();
+            showCheckBoxSelectedRaw(valueSelected);
+            displayAggregate(valueSelected, true);
+        }
+        else {
+            HideSelectedRaw(valueSelected);
+            checkAllcheckboxes();
+            displayAggregate(valueSelected, false);
+        }
+    }
+}
 $(document).ready(function () {
 
     CheckBoxesSelected();
     checkAllcheckboxes();
+    $(":checkbox").each(function () {
+        hideAggregateRow($(this));
+    });
     // cost avoidance click event chekbox
     $('[id*="chkCostAvoidance"]').click(function () {
-        if ($(this).is(":checked")) {
-            showTableData();
-            showCheckBoxSelectedRaw("CostAvoidance");
-            displayAggregate("CostAvoidance", true);
-        }
-        else {
-            HideSelectedRaw("CostAvoidance");
-            checkAllcheckboxes();
-            displayAggregate("CostAvoidance", false);
-        }
-
+        hideAggregateRow($(this));
     });
 
     // cost Reduction click event chekbox
     $('[id*="chkCostReduction"]').click(function () {
-        if ($(this).is(":checked")) {
-            showTableData();
-            showCheckBoxSelectedRaw("CostReduction");
-            displayAggregate("CostReduction", true);
-        }
-        else {
-            HideSelectedRaw("CostReduction");
-            checkAllcheckboxes();
-            displayAggregate("CostReduction", false);
-        }
+        hideAggregateRow($(this));
     });
     // Revenue Growth click event chekbox
     $('[id*="chkRevenueGrowth"]').click(function () {
-        if ($(this).is(":checked")) {
-            showTableData();
-            showCheckBoxSelectedRaw("RevenueGrowth");
-            displayAggregate("RevenueGrowth", true);
-        }
-        else {
-            HideSelectedRaw("RevenueGrowth");
-            checkAllcheckboxes();
-            displayAggregate("RevenueGrowth", false);
-        }
-
+        hideAggregateRow($(this));
     });
     // Capacity Increase click event chekbox
     $('[id*="chkCapacityIncrease"]').click(function () {
-        if ($(this).is(":checked")) {
-            showTableData();
-            showCheckBoxSelectedRaw("CapacityIncrease");
-            displayAggregate("CapacityIncrease", true);
-        }
-        else {
-            HideSelectedRaw("CapacityIncrease");
-            displayAggregate("CapacityIncrease", false);
-        }
+        hideAggregateRow($(this));
     });
-
-
 
     if ($('[id$=rdoCIAccept] input:checked').val() == "No")
     { $('[id$=ddlCiIdeaNum]').prop("disabled", true); }
