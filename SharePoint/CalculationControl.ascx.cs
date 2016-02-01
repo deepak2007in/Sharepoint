@@ -93,6 +93,102 @@ namespace SharePoint
             }
         }
 
+        private TextBox[] ActualTextBoxesForMonth1
+        {
+            get
+            {
+                return new[] { caa1, cra1, rga1, cia1 };
+            }
+        }
+
+        private TextBox[] ActualTextBoxesForMonth2
+        {
+            get
+            {
+                return new[] { caa2, cra2, rga2, cia2 };
+            }
+        }
+
+        private TextBox[] ActualTextBoxesForMonth3
+        {
+            get
+            {
+                return new[] { caa3, cra3, rga3, cia3 };
+            }
+        }
+
+        private TextBox[] ActualTextBoxesForMonth4
+        {
+            get
+            {
+                return new[] { caa4, cra4, rga4, cia4 };
+            }
+        }
+
+        private TextBox[] ActualTextBoxesForMonth5
+        {
+            get
+            {
+                return new[] { caa5, cra5, rga5, cia5 };
+            }
+        }
+
+        private TextBox[] ActualTextBoxesForMonth6
+        {
+            get
+            {
+                return new[] { caa6, cra6, rga6, cia6 };
+            }
+        }
+
+        private TextBox[] ActualTextBoxesForMonth7
+        {
+            get
+            {
+                return new[] { caa7, cra7, rga7, cia7 };
+            }
+        }
+
+        private TextBox[] ActualTextBoxesForMonth8
+        {
+            get
+            {
+                return new[] { caa8, cra8, rga8, cia8 };
+            }
+        }
+
+        private TextBox[] ActualTextBoxesForMonth9
+        {
+            get
+            {
+                return new[] { caa9, cra9, rga9, cia9 };
+            }
+        }
+
+        private TextBox[] ActualTextBoxesForMonth10
+        {
+            get
+            {
+                return new[] { caa10, cra10, rga10, cia10 };
+            }
+        }
+
+        private TextBox[] ActualTextBoxesForMonth11
+        {
+            get
+            {
+                return new[] { caa11, cra11, rga11, cia11 };
+            }
+        }
+
+        private TextBox[] ActualTextBoxesForMonth12
+        {
+            get
+            {
+                return new[] { caa12, cra12, rga12, cia12 };
+            }
+        }
+
         private int[] ProcessTimeline()
         {
             var implementationDate = dtImplDate.SelectedDate;
@@ -117,10 +213,80 @@ namespace SharePoint
                     lblmnth11.Text = months[10].ToString();
                     lblmnth12.Text = months[11].ToString();
                 }
+                this.DisableCells(implementationDate, new[] { lblmnth1, lblmnth2, lblmnth3, lblmnth4, lblmnth5, lblmnth6, lblmnth7, lblmnth8, lblmnth9, lblmnth10, lblmnth11, lblmnth12});
                 return months;
             }
             return new int[0];
         }
+
+        private void DisableCells(DateTime implementationDate, Label[] months)
+        {
+            var monthIndex = 0;
+            foreach(var lblMonth in months)
+            {
+                var newDate = implementationDate.AddMonths(monthIndex);
+                var month = int.Parse(lblMonth.Text);
+                var dateToCompare = new DateTime(newDate.Year, month, 1);
+                if (dateToCompare < DateTime.Now)
+                {
+                    monthIndex++;
+                    continue;
+                }
+                else
+                {
+                    TextBox[] textBoxes;
+                    switch (lblMonth.ID.ToLower())
+                    {
+                        case "lblmnth1":
+                            textBoxes = this.ActualTextBoxesForMonth1;
+                            break;
+                        case "lblmnth2":
+                            textBoxes = this.ActualTextBoxesForMonth2;
+                            break;
+                        case "lblmnth3":
+                            textBoxes = this.ActualTextBoxesForMonth3;
+                            break;
+                        case "lblmnth4":
+                            textBoxes = this.ActualTextBoxesForMonth4;
+                            break;
+                        case "lblmnth5":
+                            textBoxes = this.ActualTextBoxesForMonth5;
+                            break;
+                        case "lblmnth6":
+                            textBoxes = this.ActualTextBoxesForMonth6;
+                            break;
+                        case "lblmnth7":
+                            textBoxes = this.ActualTextBoxesForMonth7;
+                            break;
+                        case "lblmnth8":
+                            textBoxes = this.ActualTextBoxesForMonth8;
+                            break;
+                        case "lblmnth9":
+                            textBoxes = this.ActualTextBoxesForMonth9;
+                            break;
+                        case "lblmnth10":
+                            textBoxes = this.ActualTextBoxesForMonth10;
+                            break;
+                        case "lblmnth11":
+                            textBoxes = this.ActualTextBoxesForMonth11;
+                            break;
+                        case "lblmnth12":
+                            textBoxes = this.ActualTextBoxesForMonth12;
+                            break;
+                        default:
+                            textBoxes = new TextBox[0];
+                            break;
+                    }
+
+                    foreach (var textBox in textBoxes)
+                    {
+                        textBox.Enabled = false;
+                    }
+                    monthIndex++;
+                }
+            }
+        }
+
 
         private ProjectCost ProcessCost(int[] months)
         {

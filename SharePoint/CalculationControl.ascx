@@ -1039,7 +1039,7 @@
             <asp:Label ID="targettotal" runat="server" Text="Target Total"></asp:Label>
         </td>
         <td>
-            <asp:TextBox ID="target1total" runat="server" ReadOnly="true"></asp:TextBox>
+            <asp:TextBox ID="target1total" runat="server" ReadOnly="true" ></asp:TextBox>
         </td>
         <td>
             <asp:TextBox ID="target2total" runat="server" ReadOnly="true"></asp:TextBox>
