@@ -213,23 +213,20 @@ namespace SharePoint
                     lblmnth11.Text = months[10].ToString();
                     lblmnth12.Text = months[11].ToString();
                 }
-                this.DisableCells(implementationDate, new[] { lblmnth1, lblmnth2, lblmnth3, lblmnth4, lblmnth5, lblmnth6, lblmnth7, lblmnth8, lblmnth9, lblmnth10, lblmnth11, lblmnth12});
+                this.DisableCells(projectTimeLine.MonthDates, new[] { lblmnth1, lblmnth2, lblmnth3, lblmnth4, lblmnth5, lblmnth6, lblmnth7, lblmnth8, lblmnth9, lblmnth10, lblmnth11, lblmnth12 });
                 ddlPeriod.SelectedValue = implementationDate.AddMonths(-1).Month.ToString();
                 return months;
             }
             return new int[0];
         }
-        private void DisableCells(DateTime implementationDate, Label[] months)
+        private void DisableCells(DateTime[] monthDates, Label[] labels)
         {
-            var monthIndex = 0;
-            foreach(var lblMonth in months)
+            for (var index = 0; index < monthDates.Length; index++)
             {
-                var newDate = implementationDate.AddMonths(monthIndex);
-                var month = int.Parse(lblMonth.Text);
-                var dateToCompare = new DateTime(newDate.Year, month, 1);
-                if (dateToCompare < DateTime.Now)
+                var monthDate = monthDates[index];
+                var lblMonth = labels[index];
+                if (monthDate < DateTime.Now)
                 {
-                    monthIndex++;
                     continue;
                 }
                 else
@@ -282,7 +279,6 @@ namespace SharePoint
                     {
                         textBox.Enabled = false;
                     }
-                    monthIndex++;
                 }
             }
         }
@@ -350,7 +346,7 @@ namespace SharePoint
             for (var index = 0; index < months.Length; index++)
             {
                 var parseResult = long.TryParse(targets[index].Text, out cost);
-                projectCost.SetCostEntry(projectType, CostType.Target, months[index], checkBox.Checked && parseResult? cost : 0);
+                projectCost.SetCostEntry(projectType, CostType.Target, months[index], checkBox.Checked && parseResult ? cost : 0);
             }
 
             for (var index = 0; index < months.Length; index++)

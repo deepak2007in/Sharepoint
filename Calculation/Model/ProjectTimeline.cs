@@ -30,6 +30,7 @@ namespace SCI.CIProject.ProjectSaving
         {
             this.ImplementationDate = implementationDate;
             this.Months = new int[12];
+            this.MonthDates = new DateTime[12];
             this.GenerateMonths();
         }
 
@@ -37,6 +38,11 @@ namespace SCI.CIProject.ProjectSaving
         /// Gets all implementation months in the form of array.
         /// </summary>
         public int[] Months { get; private set; }
+
+        /// <summary>
+        /// Gets all the chunks for the date interval.
+        /// </summary>
+        public DateTime[] MonthDates { get; private set; }
 
         /// <summary>
         /// Gets the implementation date for the project.
@@ -97,6 +103,7 @@ namespace SCI.CIProject.ProjectSaving
             for (var index = 0; index < 12; index++)
             {
                 this.Months[index] = startDate.AddMonths(index).Month;
+                this.MonthDates[index] = new DateTime(startDate.AddMonths(index).Year, this.Months[index], 1);
             }
         }
     }
