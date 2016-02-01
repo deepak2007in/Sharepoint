@@ -214,11 +214,11 @@ namespace SharePoint
                     lblmnth12.Text = months[11].ToString();
                 }
                 this.DisableCells(implementationDate, new[] { lblmnth1, lblmnth2, lblmnth3, lblmnth4, lblmnth5, lblmnth6, lblmnth7, lblmnth8, lblmnth9, lblmnth10, lblmnth11, lblmnth12});
+                ddlPeriod.SelectedValue = implementationDate.AddMonths(-1).Month.ToString();
                 return months;
             }
             return new int[0];
         }
-
         private void DisableCells(DateTime implementationDate, Label[] months)
         {
             var monthIndex = 0;
@@ -286,7 +286,6 @@ namespace SharePoint
                 }
             }
         }
-
 
         private ProjectCost ProcessCost(int[] months)
         {
