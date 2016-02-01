@@ -95,13 +95,12 @@ namespace SharePoint
 
         private int[] ProcessTimeline()
         {
-            var implementationDateStr = txtImplementationDate.Text;
-            var implementationDate = DateTime.ParseExact(implementationDateStr, "MM/dd/yyyy", CultureInfo.InvariantCulture);
+            var implementationDate = dtImplDate.SelectedDate;
             var validationResult = ProjectTimeline.ValidateImplementationDate(implementationDate);
             if (validationResult)
             {
                 var projectTimeLine = new ProjectTimeline(implementationDate);
-                txtCompletionDate.Value = projectTimeLine.CompletionDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture);
+                dtComplDate.SelectedDate = projectTimeLine.CompletionDate;
                 var months = projectTimeLine.Months;
                 if (months.Length == 12)
                 {
@@ -209,6 +208,11 @@ namespace SharePoint
                 var cost = projectCost.GetCostEntry(projectType, CostType.Actual, months[index]);
                 actuals[index].Text = cost.ToString();
             }
+        }
+
+        protected void dtImplDate_SelectionChanged(object sender, EventArgs e)
+        {
+            var processingMonths = this.ProcessTimeline();
         }
     }
 }

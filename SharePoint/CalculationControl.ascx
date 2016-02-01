@@ -1,77 +1,69 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="CalculationControl.ascx.cs" Inherits="SharePoint.CalculationControl" ClientIDMode="Static" %>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<script type="text/javascript" src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="/js/jquery-1.11.3.min.js" type="text/javascript"></script>
+<script src="/js/language.js" type="text/javascript"></script>
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js" type="text/javascript"></script>
+<script src="/js/Validate.js" type="text/javascript"></script>
+<link href="/css/style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript">
-    $(document).ready(function () {
-        $(":checkbox").each(function () {
-            hideRow($(this));
+    function ValidateNumeric(object) {
+        $(object).keypress(function (e) {
+            //if the letter is not digit then display error and don't type anything
+            if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                //display error message
+                $(".errmsg").html("Digits Only").show().fadeOut("slow");
+                return false;
+            }
         });
-        showTable();
-        $(":checkbox").change(function () {
-            showTable();
-            hideRow($(this));
-        });
-        $("#txtImplementationDate").datepicker();
-        $("#txtCompletionDate").datepicker();
-    });
-
-    function getValueSelected(checkBox)
-    {
-        var checkBoxName = checkBox.attr('name');
-        if (checkBoxName.indexOf('CostAvoidance') >= 0) {
-            return 'CostAvoidance';
-        }
-        if (checkBoxName.indexOf('CostReduction') >= 0) {
-            return 'CostReduction';
-        }
-        if (checkBoxName.indexOf('RevenueGrowth') >= 0) {
-            return 'RevenueGrowth';
-        }
-        if (checkBoxName.indexOf('CapacityIncrease') >= 0) {
-            return 'CapacityIncrease';
-        }
-        return '';
     }
-    function hideRow(checkBox) {
-        var valueSelected = getValueSelected(checkBox);
-        if (valueSelected != '')
-        {
-            var isChecked = checkBox.is(':checked');
-            if (isChecked) {
-                $('#' + valueSelected + "Actual").show();
-                $('#' + valueSelected + "Target").show();
+
+
+    function ApprovalValidation() {
+
+        var errmgs = ValidateSaveFields();
+
+        if (errmgs != "") {
+            alert(errmgs);
+            return false;
+        }
+
+        else { return true; }
+    }
+
+
+    $(document).ready(function () {
+        var capexpamount = document.getElementById("<%=txtcapExp.ClientID %>");
+        var implemcost = document.getElementById("<%=txtimplcost.ClientID %>");
+
+        ValidateNumeric(capexpamount);
+        ValidateNumeric(implemcost);
+        $(capexpamount).blur(function () {
+            if (implemcost.value != "") {
+                var result = parseInt(capexpamount.value) + parseInt(implemcost.value);
+                $("#<%=lbltotalval.ClientID %>").text(result);
+                $("#<%=hdntotal.ClientID %>").val(result);
             }
             else {
-                $('#' + valueSelected + "Actual").hide();
-                $('#' + valueSelected + "Target").hide();
-            }
-        }
-    }
 
-    function showTable() {
-        var valueSelected = '';
-        $("input[type='checkbox']:checked").each(function () {
-            if (valueSelected === '')
-            {
-                valueSelected = getValueSelected($(this));
+                $("#<%=lbltotalval.ClientID %>").text(capexpamount.value);
+                $("#<%=hdntotal.ClientID %>").val(capexpamount.value);
             }
         });
 
-        if (valueSelected === '')
-        {
-            $('#Header').hide();
-            $('#TotalActual').hide();
-            $('#TotalTarget').hide();
-            $('#dynamicTable').hide();
-        }
-        else
-        {
-            $('#dynamicTable').show();
-            $('#Header').show();
-            $('#TotalActual').show();
-            $('#TotalTarget').show();
-        }
-    }
+        $(implemcost).blur(function () {
+            if (implemcost.value != "") {
+
+                var result = parseInt(capexpamount.value) + parseInt(implemcost.value);
+                $("#<%=lbltotalval.ClientID %>").text(result);
+                $("#<%=hdntotal.ClientID %>").val(result);
+            }
+            else {
+                $("#<%=lbltotalval.ClientID %>").text(capexpamount.value);
+                $("#<%=hdntotal.ClientID %>").val(capexpamount.value);
+
+            }
+        });
+
+    });
 </script>
 <table width="100%" style="background-color: Gray;">
     <tr>
@@ -79,17 +71,19 @@
             <table style="background-color: White; width: 100%;">
                 <tr style="color: White; background-color: #1a75ff;">
                     <td colspan="2">
-                        <b style="font-size: 16px; text-align: left;">
+                        <b style="font-size: 13px; text-align: left;">
                             <asp:Label ID="lblHeader" runat="server" Text="CONTINUOUS IMPROVEMENT PROJECT FORM">
                             </asp:Label>
-                            <asp:Label ID="Label11" runat="server" Text="Project Status">
+                            <asp:Label ID="Label11" runat="server" Text="Project Status" Style="margin-left: 310px;">
                                         
                             </asp:Label>
-                            <asp:Label ID="txtProjStatus" runat="server" Text="Draft" Style="background-color: Gray; border-color: Gray; width: 30px;" />
+                            <asp:Label ID="txtProjStatus" runat="server" Text="Draft" Style="background-color: Gray;
+                                border-color: Gray; width: 30px;" />
                             &nbsp;&nbsp;
                             <asp:Label ID="lblAuditStatushdr" runat="server" Text="Audit Status">                                        
                             </asp:Label>
-                            <asp:Label ID="txtAudStatus" runat="server" Text="Draft" Style="background-color: Gray; border-color: Gray; width: 30px;" />
+                            <asp:Label ID="txtAudStatus" runat="server" Text="Draft" Style="background-color: Gray;
+                                border-color: Gray; width: 30px;" />
                             <asp:CheckBox ID="chklanguage" runat="server" Checked="false" Style="text-align: right;" />
                             <asp:Label ID="lblFrench" runat="server" Text="french" Style="text-align: right;"></asp:Label>
                         </b>
@@ -97,7 +91,7 @@
                 </tr>
                 <tr>
                     <td style="width: 60%;">
-                        <table id="projectInformation" border="1px;" width="100%;">
+                        <table id="projectInformation" border="0px;" width="100%;">
                             <tr style="color: White; background-color: #ffa64d;">
                                 <td colspan="2">
                                     <b style="font-size: 14px;">
@@ -129,7 +123,7 @@
                                     :<span style="color: Red;">*</span>
                                 </td>
                                 <td>
-                                    <asp:DropDownList ID="ddlfacilty" runat="server">
+                                    <asp:DropDownList ID="ddlfacilty" runat="server" AutoPostBack="true">
                                     </asp:DropDownList>
                                 </td>
                             </tr>
@@ -182,7 +176,7 @@
                                     </label>
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtProjLeaderUser" runat="server"></asp:TextBox>
+                                   <asp:TextBox ID="txtProjLeaderUser" runat="server"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
@@ -248,10 +242,10 @@
                                     </label>
                                 </td>
                                 <td>
-                                    <asp:CheckBox ID="chkCostAvoidance" runat="server" Text="Cost Avoidance" ValidationGroup="dynamicRowSelector" CausesValidation="true" />&nbsp;&nbsp;
-                                    <asp:CheckBox ID="chkCostReduction" runat="server" Text="Cost Reduction" ValidationGroup="dynamicRowSelector" CausesValidation="true" /></br>
-                                    <asp:CheckBox ID="chkRevenueGrowth" runat="server" Text="Revenue Growth" ValidationGroup="dynamicRowSelector" CausesValidation="true" />&nbsp;
-                                    <asp:CheckBox ID="chkCapacityIncrease" runat="server" Text="Capacity Increase" ValidationGroup="dynamicRowSelector" CausesValidation="true" />
+                                    <asp:CheckBox ID="chkCostAvoidance" runat="server" Text="Cost Avoidance" />&nbsp;&nbsp;
+                                    <asp:CheckBox ID="chkCostReduction" runat="server" Text="Cost Reduction" /></br>
+                                    <asp:CheckBox ID="chkRevenueGrowth" runat="server" Text="Revenue Growth" />&nbsp;
+                                    <asp:CheckBox ID="chkCapacityIncrease" runat="server" Text="Capacity Increase" />
                                 </td>
                             </tr>
                             <tr>
@@ -268,7 +262,7 @@
                         </table>
                     </td>
                     <td style="width: 40%; vertical-align: top">
-                        <table id="projectApproval" border="1px;" width="100%;">
+                        <table id="projectApproval" border="0px;" width="100%;">
                             <tr style="color: White; background-color: #ffa64d;">
                                 <td colspan="2">
                                     <b style="font-size: 14px;">
@@ -284,7 +278,9 @@
                                         Project Approved By
                                     </label>
                                 </td>
-                                <td></td>
+                                <td>
+                                    
+                                </td>
                             </tr>
                             <tr>
                                 <td>
@@ -340,7 +336,8 @@
                                     :
                                 </td>
                                 <td>
-                                    <asp:Label ID="lblprojstatusvalue" runat="server" Text="Draft" Style="background-color: Gray; border-color: Gray; width: 35%; color: White; text-align: center; display: inline-block;" />
+                                    <asp:Label ID="lblprojstatusvalue" runat="server" Text="Draft" Style="background-color: Gray;
+                                        border-color: Gray; width: 35%; color: White; text-align: center; display: inline-block;" />
                                 </td>
                             </tr>
                         </table>
@@ -350,7 +347,37 @@
         </td>
     </tr>
 </table>
-<table border="1" width="100%" id="tblcalculation">
+<table>
+    <tr>
+        <td colspan="2" style="background-color: #FFCC99">
+            </br><b><asp:Label ID="lblProjectDescription" runat="server" Text="Project Description"></asp:Label><span
+                style="color: Red">*</span></b> :
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" style="background-color: #FFCC99">
+            <b>
+                <asp:Label ID="lblProjectBenefits" runat="server" Text="Project Benefits"></asp:Label><span
+                    style="color: Red">*</span></b> :
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" class="style3">
+            
+        </td>
+    </tr>
+    <tr>
+        <td class="style3">
+            <asp:Label ID="lblFileUpload" Visible="false" runat="server" Font-Bold="true" Text="You have checked this CI as confidential and are not able to upload documents to SharePoint.</br> As a result, please email all attachments to CIAuditor@scilogistics.com with the CI # in the Subject Line. </br>- Thank you, The CI Team."></asp:Label>
+        </td>
+    </tr>
+</table>
+<table border="0" width="100%" id="tblcalculation">
     <tr>
         <td colspan="3" style="background-color: #FFCC99">
             <b>
@@ -358,270 +385,286 @@
             </b>
         </td>
     </tr>
-    <tr>
-        <td style="width: 40%;">
-            <table border="1" width="100%" style="padding-bottom: 33px;">
-                <tr>
-                    <td>
-                        <asp:Label ID="lblcaprequire" runat="server" Text="Capital Required"></asp:Label>
-                    </td>
-                    <td>
-                        <asp:RadioButtonList ID="rdoCapitalrequi" runat="server" RepeatDirection="Horizontal">
-                            <asp:ListItem Enabled="true" Text="No" Value="0" Selected="True"></asp:ListItem>
-                            <asp:ListItem Enabled="true" Text="Yes" Value="1"></asp:ListItem>
-                        </asp:RadioButtonList>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <asp:Label ID="lblCapExpAmount" runat="server" Text="CapEx Amount"></asp:Label>
-                    </td>
-                    <td>$<asp:TextBox ID="txtcapExp" runat="server"></asp:TextBox>&nbsp;<span class="errmsg"></span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <asp:Label ID="lblImplCost" runat="server" Text="Implementation Cost"></asp:Label>
-                    </td>
-                    <td>$<asp:TextBox ID="txtimplcost" runat="server"></asp:TextBox>&nbsp;<span class="errmsg"></span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <asp:Label ID="lbltotal" runat="server" Text="Total"></asp:Label>
-                    </td>
-                    <td>
-                        <asp:Label ID="lbltotalval" runat="server"></asp:Label>
-                        <asp:HiddenField runat="server" ID="hdntotal" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <asp:Label ID="lblProjStartDate" runat="server" Text="Project Start Date"></asp:Label>
-                    </td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>
-                        <asp:Label ID="lblImpDate" runat="server" Text="Implementation Date"></asp:Label>
-                    </td>
-                    <td>
-                        <asp:TextBox ID="txtImplementationDate" runat="server" EnableViewState="true"  />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <asp:Label ID="lblCompDate" runat="server" Text="Completion Date"></asp:Label>
-                    </td>
-                    <td>
-                        <input type="text" id="txtCompletionDate" runat="server" enableviewstate="true"  />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <asp:Label ID="lblcancelDate" runat="server" Text="Cancelled Date"></asp:Label>
-                    </td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>
-                        <asp:Label ID="lblcelbtype" runat="server" Text="Celebration Type"></asp:Label>
-                    </td>
-                    <td>
-                        <asp:CheckBox ID="chkcelebtype" runat="server"></asp:CheckBox>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <asp:Label ID="lblCelebrDate" runat="server" Text="Celebration Date"></asp:Label>
-                    </td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>
-                        <asp:Label ID="lblCelebType" runat="server" Text="Celebration Type"></asp:Label>
-                    </td>
-                    <td>
-                        <asp:DropDownList ID="ddlCelebType" runat="server">
-                        </asp:DropDownList>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <asp:Label ID="lblPeriod" runat="server" Text="Period"></asp:Label>
-                    </td>
-                    <td>
-                        <asp:DropDownList ID="ddlPeriod" runat="server" Width="40%">
-                            <asp:ListItem Enabled="true" Text="Select" Value="0" Selected="True"></asp:ListItem>
-                            <asp:ListItem Enabled="true" Text="1" Value="1"></asp:ListItem>
-                            <asp:ListItem Enabled="true" Text="2" Value="2"></asp:ListItem>
-                            <asp:ListItem Enabled="true" Text="3" Value="3"></asp:ListItem>
-                            <asp:ListItem Enabled="true" Text="4" Value="4"></asp:ListItem>
-                            <asp:ListItem Enabled="true" Text="5" Value="5"></asp:ListItem>
-                            <asp:ListItem Enabled="true" Text="6" Value="6"></asp:ListItem>
-                            <asp:ListItem Enabled="true" Text="7" Value="7"></asp:ListItem>
-                            <asp:ListItem Enabled="true" Text="8" Value="8"></asp:ListItem>
-                            <asp:ListItem Enabled="true" Text="9" Value="9"></asp:ListItem>
-                            <asp:ListItem Enabled="true" Text="10" Value="10"></asp:ListItem>
-                            <asp:ListItem Enabled="true" Text="11" Value="11"></asp:ListItem>
-                            <asp:ListItem Enabled="true" Text="12" Value="12"></asp:ListItem>
-                        </asp:DropDownList>
-                    </td>
-                </tr>
-            </table>
-        </td>
-        <td>
-            <table border="1" width="100%" style="vertical-align: top; padding-bottom: 153px;">
-                <tr>
-                    <td colspan="2" style="background-color: #FFCC99">
-                        <b>
-                            <asp:Label ID="Label1" runat="server" Text="This CI will save over 12months"></asp:Label>
-                        </b>
-                    </td>
-                </tr>
-                <tr id="twelveca">
-                    <td>
-                        <asp:Label ID="lblca" runat="server" Text="CA"></asp:Label>
-                    </td>
-                    <td>
-                        <asp:TextBox ID="twelvtxtcavalue" runat="server"></asp:TextBox>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <asp:Label ID="lblcr" runat="server" Text="CR"></asp:Label>
-                    </td>
-                    <td>
-                        <asp:TextBox ID="twelvtxtcrvalue" runat="server"></asp:TextBox>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <asp:Label ID="lblrg" runat="server" Text="RG"></asp:Label>
-                    </td>
-                    <td>
-                        <asp:TextBox ID="twelvtxtrgvalue" runat="server"></asp:TextBox>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <asp:Label ID="lblci" runat="server" Text="CI"></asp:Label>
-                    </td>
-                    <td>
-                        <asp:TextBox ID="twelvtxtcivalue" runat="server"></asp:TextBox>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <asp:Label ID="lbltotalAmount" runat="server" Text="Total"></asp:Label>
-                    </td>
-                    <td>
-                        <asp:TextBox ID="twelvtxttatalvalue" runat="server" ReadOnly="true"></asp:TextBox>
-                    </td>
-                </tr>
-            </table>
-        </td>
-        <td>
-            <table border="1" width="100%" style="vertical-align: top;">
-                <tr>
-                    <td colspan="2" style="background-color: #FFCC99">
-                        <b>
-                            <asp:Label ID="Label2" runat="server" Text="This CI has saved year to date"></asp:Label>
-                        </b>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <asp:Label ID="yearlblca" runat="server" Text="CA"></asp:Label>
-                    </td>
-                    <td>
-                        <asp:TextBox ID="yeartxtca" runat="server"></asp:TextBox>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <asp:Label ID="yearlblcr" runat="server" Text="CR"></asp:Label>
-                    </td>
-                    <td>
-                        <asp:TextBox ID="yeartxtcr" runat="server"></asp:TextBox>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <asp:Label ID="yearlblrg" runat="server" Text="RG"></asp:Label>
-                    </td>
-                    <td>
-                        <asp:TextBox ID="yeartxtrg" runat="server"></asp:TextBox>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <asp:Label ID="yearlblci" runat="server" Text="CI"></asp:Label>
-                    </td>
-                    <td>
-                        <asp:TextBox ID="yeartxtci" runat="server"></asp:TextBox>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <asp:Label ID="yearlbltotal" runat="server" Text="Total"></asp:Label>
-                    </td>
-                    <td>
-                        <asp:TextBox ID="yearlbltotalval" runat="server" ReadOnly="true"></asp:TextBox>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2" style="background-color: #FFCC99">
-                        <b>
-                            <asp:Label ID="Label3" runat="server" Text="Estimated savings to be realized are"></asp:Label>
-                        </b>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <asp:Label ID="estlblca" runat="server" Text="CA"></asp:Label>
-                    </td>
-                    <td>
-                        <asp:TextBox ID="esttxtca" runat="server"></asp:TextBox>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <asp:Label ID="estlblcr" runat="server" Text="CR"></asp:Label>
-                    </td>
-                    <td>
-                        <asp:TextBox ID="esttxtcr" runat="server"></asp:TextBox>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <asp:Label ID="estlblrg" runat="server" Text="RG"></asp:Label>
-                    </td>
-                    <td>
-                        <asp:TextBox ID="esttxtrg" runat="server"></asp:TextBox>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <asp:Label ID="estlblci" runat="server" Text="CI"></asp:Label>
-                    </td>
-                    <td>
-                        <asp:TextBox ID="esttxtci" runat="server"></asp:TextBox>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <asp:Label ID="estlbltotal" runat="server" Text="Total"></asp:Label>
-                    </td>
-                    <td>
-                        <asp:TextBox ID="estlbltotalval" runat="server" ReadOnly="true"></asp:TextBox>
-                    </td>
-                </tr>
-            </table>
-        </td>
-    </tr>
 </table>
-<table id="dynamicTable" runat="server" border="1" width="100%" style="table-layout: fixed; empty-cells: show; display: none">
+<div style="width: 100%;">
+    <div class="col1">
+        <table border="0" width="100%" style="padding-bottom: 33px;">
+            <tr>
+                <td>
+                    <asp:Label ID="lblcaprequire" runat="server" Text="Capital Required"></asp:Label>
+                </td>
+                <td>
+                    <asp:RadioButtonList ID="rdoCapitalrequi" runat="server" RepeatDirection="Horizontal">
+                        <asp:ListItem Enabled="true" Text="No" Value="No" Selected="True"></asp:ListItem>
+                        <asp:ListItem Enabled="true" Text="Yes" Value="Yes"></asp:ListItem>
+                    </asp:RadioButtonList>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCapExpAmount" runat="server" Text="CapEx Amount"></asp:Label>
+                </td>
+                <td>
+                    $
+                    <asp:TextBox ID="txtcapExp" Style="padding-top: 4px;" runat="server"></asp:TextBox>&nbsp;<span
+                        class="errmsg"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblImplCost" runat="server" Text="Implementation Cost"></asp:Label>
+                </td>
+                <td>
+                    $
+                    <asp:TextBox ID="txtimplcost" Style="padding-top: 4px;" runat="server"></asp:TextBox>&nbsp;<span
+                        class="errmsg"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lbltotal" runat="server" Text="Total" Style="padding-top: 4px;"></asp:Label>
+                </td>
+                <td>
+                    $
+                    <asp:Label ID="lbltotalval" Style="padding-top: 4px;" runat="server"></asp:Label>
+                    <asp:HiddenField runat="server" ID="hdntotal" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblProjStartDate" runat="server" Text="Project Start Date"></asp:Label>
+                </td>
+                <td>
+                    <asp:Calendar ID ="dtProjStartDate" runat="server" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblImpDate" runat="server" Text="Implementation Date"></asp:Label>
+                </td>
+                <td>
+                    <asp:Calendar ID ="dtImplDate" runat="server" OnSelectionChanged="dtImplDate_SelectionChanged" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCompDate" runat="server" Text="Completion Date"></asp:Label>
+                </td>
+                <td>
+                    <asp:Calendar ID ="dtComplDate" runat="server" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblcancelDate" runat="server" Text="Cancelled Date"></asp:Label>
+                </td>
+                <td>
+                    <asp:Calendar ID ="dtCanceDate" runat="server" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblcelbtype" runat="server" Text="Celebration Type"></asp:Label>
+                </td>
+                <td>
+                    <asp:CheckBox ID="chkcelebtype" runat="server"></asp:CheckBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCelebrDate" runat="server" Text="Celebration Date"></asp:Label>
+                </td>
+                <td>
+                    <asp:Calendar ID ="dtCelebDate" runat="server" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCelebType" runat="server" Text="Celebration Type"></asp:Label>
+                </td>
+                <td>
+                    <asp:DropDownList ID="ddlCelebType" runat="server">
+                    </asp:DropDownList>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblPeriod" runat="server" Text="Period"></asp:Label>
+                </td>
+                <td>
+                    <asp:DropDownList ID="ddlPeriod" runat="server" Width="40%">
+                        <asp:ListItem Enabled="true" Text="Select" Value="0" Selected="True"></asp:ListItem>
+                        <asp:ListItem Enabled="true" Text="1" Value="1"></asp:ListItem>
+                        <asp:ListItem Enabled="true" Text="2" Value="2"></asp:ListItem>
+                        <asp:ListItem Enabled="true" Text="3" Value="3"></asp:ListItem>
+                        <asp:ListItem Enabled="true" Text="4" Value="4"></asp:ListItem>
+                        <asp:ListItem Enabled="true" Text="5" Value="5"></asp:ListItem>
+                        <asp:ListItem Enabled="true" Text="6" Value="6"></asp:ListItem>
+                        <asp:ListItem Enabled="true" Text="7" Value="7"></asp:ListItem>
+                        <asp:ListItem Enabled="true" Text="8" Value="8"></asp:ListItem>
+                        <asp:ListItem Enabled="true" Text="9" Value="9"></asp:ListItem>
+                        <asp:ListItem Enabled="true" Text="10" Value="10"></asp:ListItem>
+                        <asp:ListItem Enabled="true" Text="11" Value="11"></asp:ListItem>
+                        <asp:ListItem Enabled="true" Text="12" Value="12"></asp:ListItem>
+                    </asp:DropDownList>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="col2">
+        <table border="0" width="100%" style="vertical-align: top;">
+            <tr id="twelveheader">
+                <td colspan="2" style="background-color: #FFCC99;" class="style4">
+                    <b>
+                        <asp:Label ID="Label1" runat="server" Text="This CI will save over 12months"></asp:Label>
+                    </b>
+                </td>
+            </tr>
+            <tr id="twelveCostAvoidance">
+                <td>
+                    <asp:Label ID="lblca" runat="server" Text="CA"></asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="twelvtxtcavalue" runat="server"></asp:TextBox>
+                </td>
+            </tr>
+            <tr id="twelveCostReduction">
+                <td>
+                    <asp:Label ID="lblcr" runat="server" Text="CR"></asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="twelvtxtcrvalue" runat="server"></asp:TextBox>
+                </td>
+            </tr>
+            <tr id="twelveRevenueGrowth">
+                <td>
+                    <asp:Label ID="lblrg" runat="server" Text="RG"></asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="twelvtxtrgvalue" runat="server"></asp:TextBox>
+                </td>
+            </tr>
+            <tr id="twelveCapacityIncrease">
+                <td>
+                    <asp:Label ID="lblci" runat="server" Text="CI"></asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="twelvtxtcivalue" runat="server"></asp:TextBox>
+                </td>
+            </tr>
+            <tr id="twelvetotal">
+                <td id="twelvetotal">
+                    <asp:Label ID="lbltotalAmount" runat="server" Text="Total"></asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="twelvtxttatalvalue" runat="server" ReadOnly="true"></asp:TextBox>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="col3">
+        <table border="0" width="100%" style="vertical-align: top;">
+            <tr id="yearheader">
+                <td colspan="2" style="background-color: #FFCC99">
+                    <b>
+                        <asp:Label ID="Label2" runat="server" Text="This CI has saved year to date"></asp:Label>
+                    </b>
+                </td>
+            </tr>
+            <tr id="yearCostAvoidance">
+                <td>
+                    <asp:Label ID="yearlblca" runat="server" Text="CA"></asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="yeartxtca" runat="server"></asp:TextBox>
+                </td>
+            </tr>
+            <tr id="yearCostReduction">
+                <td>
+                    <asp:Label ID="yearlblcr" runat="server" Text="CR"></asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="yeartxtcr" runat="server"></asp:TextBox>
+                </td>
+            </tr>
+            <tr id="yearRevenueGrowth">
+                <td>
+                    <asp:Label ID="yearlblrg" runat="server" Text="RG"></asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="yeartxtrg" runat="server"></asp:TextBox>
+                </td>
+            </tr>
+            <tr id="yearCapacityIncrease">
+                <td>
+                    <asp:Label ID="yearlblci" runat="server" Text="CI"></asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="yeartxtci" runat="server"></asp:TextBox>
+                </td>
+            </tr>
+            <tr id="yeartotal">
+                <td>
+                    <asp:Label ID="yearlbltotal" runat="server" Text="Total"></asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="yearlbltotalval" runat="server" ReadOnly="true"></asp:TextBox>
+                </td>
+            </tr>
+        </table>
+        <table border="0" width="100%" style="vertical-align: top;">
+            <tr id="estheader">
+                <td style="background-color: #FFCC99" colspan="2">
+                    <b>
+                        <asp:Label ID="Label3" runat="server" Text="Estimated savings to be realized are"></asp:Label>
+                    </b>
+                </td>
+            </tr>
+            <tr id="estCostAvoidance">
+                <td>
+                    <asp:Label ID="estlblca" runat="server" Text="CA"></asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="esttxtca" runat="server"></asp:TextBox>
+                </td>
+            </tr>
+            <tr id="estCostReduction">
+                <td>
+                    <asp:Label ID="estlblcr" runat="server" Text="CR"></asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="esttxtcr" runat="server"></asp:TextBox>
+                </td>
+            </tr>
+            <tr id="estRevenueGrowth">
+                <td>
+                    <asp:Label ID="estlblrg" runat="server" Text="RG"></asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="esttxtrg" runat="server"></asp:TextBox>
+                </td>
+            </tr>
+            <tr id="estCapacityIncrease">
+                <td>
+                    <asp:Label ID="estlblci" runat="server" Text="CI"></asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="esttxtci" runat="server"></asp:TextBox>
+                </td>
+            </tr>
+            <tr id="esttotal">
+                <td>
+                    <asp:Label ID="estlbltotal" runat="server" Text="Total"></asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="estlbltotalval" runat="server" ReadOnly="true"></asp:TextBox>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<table id="dynamicTable" runat="server" border="1" width="100%" style="table-layout: fixed;
+    empty-cells: show; display: none">
     <tr id="Header" style="background-color: Blue; color: White; border: 0px !Important;">
         <td>
             <asp:Label ID="lblprojtypheading" runat="server" Text="Project Type"></asp:Label>
@@ -1074,23 +1117,24 @@
         </td>
     </tr>
 </table>
-<table class="ms-formtable" border="0" cellpadding="0" cellspacing="0" width="800"
-    align="center">
+<div id="updatecalc"><asp:Button ID="btnupdatecal" runat="server" 
+        Text="Update Calculation" Width="130px" /></div>
+<div>
+    <asp:Label ID="lblaction" runat="server" Text="Task Action :"></asp:Label>&nbsp;&nbsp;
+    <asp:DropDownList ID="ddlRequesterStatus" runat="server">
+        <asp:ListItem Selected="True" Value="Draft"></asp:ListItem>
+        <asp:ListItem Value="Submit"></asp:ListItem>
+    </asp:DropDownList>
+</div>
+<table border="0" cellpadding="0" cellspacing="0" width="100%" align="center">
     <tr>
-        <td colspan="2">
-            <br />
-            <br />
+        <td nowrap="true" valign="top" width="213px">
         </td>
-    </tr>
-    <tr>
-        <td nowrap="true" valign="top" width="213px" class="ms-formlabel"></td>
         <td width="350px">
-            <asp:Button ID="btnSave" runat="server" BackColor="#FF9933" Font-Bold="True" Font-Size="Medium"
-                Text="Submit" OnClick="btnSave_Click" />&nbsp;&nbsp;
-            <asp:Button ID="btnCancel" runat="server" BackColor="#FF9933" Font-Bold="True" CausesValidation="false"
-                Text="Cancel" Font-Size="Medium" />&nbsp;&nbsp;
-            <asp:Button ID="btnDraft" Text="Draft" runat="server" BackColor="#FF9933" Font-Bold="True"
-                CausesValidation="false" Font-Size="Medium" Width="81px" />
+            <asp:Button ID="btnSave" runat="server" CssClass="btnSave" Text="Submit" OnClick="btnSave_Click"
+                OnClientClick="return ApprovalValidation();" />&nbsp;&nbsp;&nbsp;&nbsp;
+            <asp:Button ID="btnCancel" runat="server" CssClass="btnSave" CausesValidation="false"
+                Text="Cancel" />&nbsp;&nbsp;
         </td>
     </tr>
 </table>

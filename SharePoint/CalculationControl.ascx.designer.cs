@@ -310,6 +310,33 @@ namespace SharePoint {
         protected global::System.Web.UI.WebControls.Label lblprojstatusvalue;
         
         /// <summary>
+        /// lblProjectDescription control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblProjectDescription;
+        
+        /// <summary>
+        /// lblProjectBenefits control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblProjectBenefits;
+        
+        /// <summary>
+        /// lblFileUpload control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblFileUpload;
+        
+        /// <summary>
         /// lblCapitalsav control.
         /// </summary>
         /// <remarks>
@@ -409,6 +436,15 @@ namespace SharePoint {
         protected global::System.Web.UI.WebControls.Label lblProjStartDate;
         
         /// <summary>
+        /// dtProjStartDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Calendar dtProjStartDate;
+        
+        /// <summary>
         /// lblImpDate control.
         /// </summary>
         /// <remarks>
@@ -418,13 +454,13 @@ namespace SharePoint {
         protected global::System.Web.UI.WebControls.Label lblImpDate;
         
         /// <summary>
-        /// txtImplementationDate control.
+        /// dtImplDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtImplementationDate;
+        protected global::System.Web.UI.WebControls.Calendar dtImplDate;
         
         /// <summary>
         /// lblCompDate control.
@@ -436,13 +472,13 @@ namespace SharePoint {
         protected global::System.Web.UI.WebControls.Label lblCompDate;
         
         /// <summary>
-        /// txtCompletionDate control.
+        /// dtComplDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtCompletionDate;
+        protected global::System.Web.UI.WebControls.Calendar dtComplDate;
         
         /// <summary>
         /// lblcancelDate control.
@@ -452,6 +488,15 @@ namespace SharePoint {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblcancelDate;
+        
+        /// <summary>
+        /// dtCanceDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Calendar dtCanceDate;
         
         /// <summary>
         /// lblcelbtype control.
@@ -479,6 +524,15 @@ namespace SharePoint {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblCelebrDate;
+        
+        /// <summary>
+        /// dtCelebDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Calendar dtCelebDate;
         
         /// <summary>
         /// lblCelebType control.
@@ -2209,6 +2263,33 @@ namespace SharePoint {
         protected global::System.Web.UI.WebControls.TextBox actual12total;
         
         /// <summary>
+        /// btnupdatecal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnupdatecal;
+        
+        /// <summary>
+        /// lblaction control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblaction;
+        
+        /// <summary>
+        /// ddlRequesterStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlRequesterStatus;
+        
+        /// <summary>
         /// btnSave control.
         /// </summary>
         /// <remarks>
@@ -2225,14 +2306,5 @@ namespace SharePoint {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCancel;
-        
-        /// <summary>
-        /// btnDraft control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnDraft;
     }
 }

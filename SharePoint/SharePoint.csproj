@@ -66,8 +66,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CalculationControl.ascx" />
+    <Content Include="css\style.css" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="js\jquery-1.11.3.min.js" />
+    <Content Include="js\language.js" />
+    <Content Include="js\Validate.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
