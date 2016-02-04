@@ -10,7 +10,8 @@
 <body>
     <form id="form1" runat="server">
     <div>
-        <calculation:CalculationControl runat="server" id="CalculationControl" />    
+        <asp:FileUpload ID="FileUpload1" runat="server" EnableViewState = "true" />
+        <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" />
     </div>
     </form>
 </body>
