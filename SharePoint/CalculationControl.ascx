@@ -492,7 +492,7 @@
                     <asp:Label ID="lblPeriod" runat="server" Text="Period"></asp:Label>
                 </td>
                 <td>
-                    <asp:DropDownList ID="ddlPeriod" runat="server" Width="40%">
+                    <asp:DropDownList ID="ddlPeriod" runat="server" Width="40%" EnableViewState="true">
                         <asp:ListItem Enabled="true" Text="Select" Value="0" Selected="True"></asp:ListItem>
                         <asp:ListItem Enabled="true" Text="1" Value="1"></asp:ListItem>
                         <asp:ListItem Enabled="true" Text="2" Value="2"></asp:ListItem>

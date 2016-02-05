@@ -11,23 +11,20 @@ namespace SharePoint
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["FileUpload"] == null && FileUpload1.HasFile)
-            {
-                Session["FileUpload"] = FileUpload1;
-            }
-            else if (Session["FileUpload"] != null && (!FileUpload1.HasFile))
-            {
-                FileUpload1 = (FileUpload)Session["FileUpload"];
-            }
-            else
-            {
-                Session["FileUpload"] = FileUpload1;
-            }
+    
         }
 
-        protected void btnSave_Click(object sender, EventArgs e)
+        protected void btnUpload_Click(object sender, EventArgs e)
         {
-            btnSave.Text = "Save Done";
+            for (int i = 0; i < Request.Files.Count; i++)
+            {
+                HttpPostedFile PostedFile = Request.Files[i];
+                if (PostedFile.ContentLength > 0)
+                {
+                    //string FileName = System.IO.Path.GetFileName(PostedFile.FileName);
+                    //PostedFile.SaveAs(Server.MapPath("Files\\") + FileName);
+                }
+            }
         }
     }
 }

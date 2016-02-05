@@ -13,10 +13,50 @@ namespace SharePoint
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //cat1.Text = cat2.Text = cat3.Text = cat4.Text = cat5.Text = cat6.Text = cat7.Text = cat8.Text = cat9.Text = cat10.Text = cat11.Text = cat12.Text = "10000";
-            //caa1.Text = caa2.Text = caa3.Text = caa4.Text = caa5.Text = caa6.Text = caa7.Text = caa8.Text = caa9.Text = caa10.Text = caa11.Text = caa12.Text = "5000";
-            //crt1.Text = crt2.Text = crt3.Text = crt4.Text = crt5.Text = crt6.Text = crt7.Text = crt8.Text = crt9.Text = crt10.Text = crt11.Text = crt12.Text = "10000";
-            //cra1.Text = cra2.Text = cra3.Text = cra4.Text = cra5.Text = cra6.Text = cra7.Text = cra8.Text = cra9.Text = cra10.Text = cra11.Text = cra12.Text = "4000";
+            cat1.Text = "1000";
+            cat2.Text = "500";
+            cat3.Text = "5000";
+            cat4.Text = "100000";
+            cat5.Text = "10000";
+            cat6.Text = "10000";
+            cat7.Text = "1000";
+            cat8.Text = "5000";
+            cat9.Text = "1000";
+            cat10.Text = "10000";
+            cat11.Text = "10000"; 
+            cat12.Text = "10000";
+
+            caa1.Text = "5000";
+            caa2.Text = "5000";
+            caa3.Text = "5000";
+            caa4.Text = "5000";
+            caa5.Text = "5000";
+            caa6.Text = "5000"; 
+            //caa7.Text = caa8.Text = caa9.Text = caa10.Text = caa11.Text = caa12.Text = "5000";
+
+            crt1.Text = "1500";
+            crt2.Text = "1500";
+            crt3.Text = "1500";
+            crt4.Text = "1500";
+            crt5.Text = "1500";
+            crt6.Text = "1500";
+            crt7.Text = "1500";
+            crt8.Text = "1500";
+            crt9.Text = "1500";
+            crt10.Text = "1500";
+            crt11.Text = "1500";
+            crt12.Text = "1500";
+
+            cra1.Text = "1000";
+            cra2.Text = "1000";
+            cra3.Text = "1000";
+            cra4.Text = "1000";
+            cra5.Text = "1000";
+            cra6.Text = "1000";
+
+            dtImplDate.SelectedDate = new DateTime(2015, 7, 2);
+            
+            //cra7.Text = cra8.Text = cra9.Text = cra10.Text = cra11.Text = cra12.Text = "4000";
             //rgt1.Text = rgt2.Text = rgt3.Text = rgt4.Text = rgt5.Text = rgt6.Text = rgt7.Text = rgt8.Text = rgt9.Text = rgt10.Text = rgt11.Text = rgt12.Text = "10000";
             //rga1.Text = rga2.Text = rga3.Text = rga4.Text = rga5.Text = rga6.Text = rga7.Text = rga8.Text = rga9.Text = rga10.Text = rga11.Text = rga12.Text = "6000";
             //cit1.Text = cit2.Text = cit3.Text = cit4.Text = cit5.Text = cit6.Text = cit7.Text = cit8.Text = cit9.Text = cit10.Text = cit11.Text = cit12.Text = "10000";
@@ -214,7 +254,8 @@ namespace SharePoint
                     lblmnth12.Text = months[11].ToString();
                 }
                 this.DisableCells(projectTimeLine.MonthDates, new[] { lblmnth1, lblmnth2, lblmnth3, lblmnth4, lblmnth5, lblmnth6, lblmnth7, lblmnth8, lblmnth9, lblmnth10, lblmnth11, lblmnth12 });
-                ddlPeriod.SelectedValue = implementationDate.AddMonths(-1).Month.ToString();
+                //ddlPeriod.SelectedValue = implementationDate.AddMonths(-1).Month.ToString();
+                ddlPeriod.SelectedValue = "8";
                 return months;
             }
             return new int[0];
@@ -227,59 +268,64 @@ namespace SharePoint
                 var lblMonth = labels[index];
                 if (monthDate < DateTime.Now)
                 {
-                    continue;
+                    this.DisableCells(labels[index].ID.ToLower(), true);
                 }
                 else
                 {
-                    TextBox[] textBoxes;
-                    switch (lblMonth.ID.ToLower())
-                    {
-                        case "lblmnth1":
-                            textBoxes = this.ActualTextBoxesForMonth1;
-                            break;
-                        case "lblmnth2":
-                            textBoxes = this.ActualTextBoxesForMonth2;
-                            break;
-                        case "lblmnth3":
-                            textBoxes = this.ActualTextBoxesForMonth3;
-                            break;
-                        case "lblmnth4":
-                            textBoxes = this.ActualTextBoxesForMonth4;
-                            break;
-                        case "lblmnth5":
-                            textBoxes = this.ActualTextBoxesForMonth5;
-                            break;
-                        case "lblmnth6":
-                            textBoxes = this.ActualTextBoxesForMonth6;
-                            break;
-                        case "lblmnth7":
-                            textBoxes = this.ActualTextBoxesForMonth7;
-                            break;
-                        case "lblmnth8":
-                            textBoxes = this.ActualTextBoxesForMonth8;
-                            break;
-                        case "lblmnth9":
-                            textBoxes = this.ActualTextBoxesForMonth9;
-                            break;
-                        case "lblmnth10":
-                            textBoxes = this.ActualTextBoxesForMonth10;
-                            break;
-                        case "lblmnth11":
-                            textBoxes = this.ActualTextBoxesForMonth11;
-                            break;
-                        case "lblmnth12":
-                            textBoxes = this.ActualTextBoxesForMonth12;
-                            break;
-                        default:
-                            textBoxes = new TextBox[0];
-                            break;
-                    }
-
-                    foreach (var textBox in textBoxes)
-                    {
-                        textBox.Enabled = false;
-                    }
+                    this.DisableCells(labels[index].ID.ToLower(), false);
                 }
+            }
+        }
+
+        private void DisableCells(string monthLabel, bool shouldBeEnabled)
+        {
+            TextBox[] textBoxes;
+            switch (monthLabel)
+            {
+                case "lblmnth1":
+                    textBoxes = this.ActualTextBoxesForMonth1;
+                    break;
+                case "lblmnth2":
+                    textBoxes = this.ActualTextBoxesForMonth2;
+                    break;
+                case "lblmnth3":
+                    textBoxes = this.ActualTextBoxesForMonth3;
+                    break;
+                case "lblmnth4":
+                    textBoxes = this.ActualTextBoxesForMonth4;
+                    break;
+                case "lblmnth5":
+                    textBoxes = this.ActualTextBoxesForMonth5;
+                    break;
+                case "lblmnth6":
+                    textBoxes = this.ActualTextBoxesForMonth6;
+                    break;
+                case "lblmnth7":
+                    textBoxes = this.ActualTextBoxesForMonth7;
+                    break;
+                case "lblmnth8":
+                    textBoxes = this.ActualTextBoxesForMonth8;
+                    break;
+                case "lblmnth9":
+                    textBoxes = this.ActualTextBoxesForMonth9;
+                    break;
+                case "lblmnth10":
+                    textBoxes = this.ActualTextBoxesForMonth10;
+                    break;
+                case "lblmnth11":
+                    textBoxes = this.ActualTextBoxesForMonth11;
+                    break;
+                case "lblmnth12":
+                    textBoxes = this.ActualTextBoxesForMonth12;
+                    break;
+                default:
+                    textBoxes = new TextBox[0];
+                    break;
+            }
+
+            foreach (var textBox in textBoxes)
+            {
+                textBox.Enabled = shouldBeEnabled;
             }
         }
 

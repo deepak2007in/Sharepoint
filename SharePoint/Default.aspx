@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="SharePoint.Default" %>
+
 <%@ Register Src="~/CalculationControl.ascx" TagPrefix="calculation" TagName="CalculationControl" %>
 
 <!DOCTYPE html>
@@ -8,11 +9,8 @@
     <title></title>
 </head>
 <body>
-    <form id="form1" runat="server">
-    <div>
-        <asp:FileUpload ID="FileUpload1" runat="server" EnableViewState = "true" />
-        <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" />
-    </div>
+    <form id="form1" runat="server" enctype="multipart/form-data" method="post">
+        <calculation:CalculationControl ID="calc" runat="server" />
     </form>
 </body>
 </html>
