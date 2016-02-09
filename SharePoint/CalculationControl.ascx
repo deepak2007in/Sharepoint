@@ -77,8 +77,7 @@
                             <asp:Label ID="Label11" runat="server" Text="Project Status" Style="margin-left: 310px;">
                                         
                             </asp:Label>
-                            <asp:Label ID="txtProjStatus" runat="server" Text="Draft" Style="background-color: Gray;
-                                border-color: Gray; width: 30px;" />
+                            <asp:Label ID="txtProjStatus" runat="server" Text="Draft" Style="border-color: Gray; width: 30px;" />
                             &nbsp;&nbsp;
                             <asp:Label ID="lblAuditStatushdr" runat="server" Text="Audit Status">                                        
                             </asp:Label>

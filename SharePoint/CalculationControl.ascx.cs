@@ -1,6 +1,7 @@
 ﻿using SCI.CIProject.ProjectSaving;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Web;
@@ -13,49 +14,50 @@ namespace SharePoint
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            cat1.Text = "1000";
-            cat2.Text = "500";
-            cat3.Text = "5000";
-            cat4.Text = "100000";
-            cat5.Text = "10000";
-            cat6.Text = "10000";
-            cat7.Text = "1000";
-            cat8.Text = "5000";
-            cat9.Text = "1000";
-            cat10.Text = "10000";
-            cat11.Text = "10000"; 
-            cat12.Text = "10000";
+            if (!IsPostBack)
+            {
+                cat1.Text = "1000";
+                cat2.Text = "500";
+                cat3.Text = "5000";
+                cat4.Text = "100000";
+                cat5.Text = "10000";
+                cat6.Text = "10000";
+                cat7.Text = "1000";
+                cat8.Text = "5000";
+                cat9.Text = "1000";
+                cat10.Text = "10000";
+                cat11.Text = "10000";
+                cat12.Text = "10000";
 
-            caa1.Text = "5000";
-            caa2.Text = "5000";
-            caa3.Text = "5000";
-            caa4.Text = "5000";
-            caa5.Text = "5000";
-            caa6.Text = "5000"; 
-            //caa7.Text = caa8.Text = caa9.Text = caa10.Text = caa11.Text = caa12.Text = "5000";
+                caa1.Text = "5000";
+                caa2.Text = "5000";
+                caa3.Text = "5000";
+                caa4.Text = "5000";
+                caa5.Text = "5000";
+                caa6.Text = "5000";
+                //caa7.Text = caa8.Text = caa9.Text = caa10.Text = caa11.Text = caa12.Text = "5000";
 
-            crt1.Text = "1500";
-            crt2.Text = "1500";
-            crt3.Text = "1500";
-            crt4.Text = "1500";
-            crt5.Text = "1500";
-            crt6.Text = "1500";
-            crt7.Text = "1500";
-            crt8.Text = "1500";
-            crt9.Text = "1500";
-            crt10.Text = "1500";
-            crt11.Text = "1500";
-            crt12.Text = "1500";
+                crt1.Text = "1500";
+                crt2.Text = "1500";
+                crt3.Text = "1500";
+                crt4.Text = "1500";
+                crt5.Text = "1500";
+                crt6.Text = "1500";
+                crt7.Text = "1500";
+                crt8.Text = "1500";
+                crt9.Text = "1500";
+                crt10.Text = "1500";
+                crt11.Text = "1500";
+                crt12.Text = "1500";
 
-            cra1.Text = "1000";
-            cra2.Text = "1000";
-            cra3.Text = "1000";
-            cra4.Text = "1000";
-            cra5.Text = "1000";
-            cra6.Text = "1000";
+                cra1.Text = "1000";
+                cra2.Text = "1000";
+                cra3.Text = "1000";
+                cra4.Text = "1000";
+                cra5.Text = "1000";
+                cra6.Text = "1000";
+            }
 
-            dtImplDate.SelectedDate = new DateTime(2015, 7, 2);
-            
             //cra7.Text = cra8.Text = cra9.Text = cra10.Text = cra11.Text = cra12.Text = "4000";
             //rgt1.Text = rgt2.Text = rgt3.Text = rgt4.Text = rgt5.Text = rgt6.Text = rgt7.Text = rgt8.Text = rgt9.Text = rgt10.Text = rgt11.Text = rgt12.Text = "10000";
             //rga1.Text = rga2.Text = rga3.Text = rga4.Text = rga5.Text = rga6.Text = rga7.Text = rga8.Text = rga9.Text = rga10.Text = rga11.Text = rga12.Text = "6000";
@@ -254,12 +256,99 @@ namespace SharePoint
                     lblmnth12.Text = months[11].ToString();
                 }
                 this.DisableCells(projectTimeLine.MonthDates, new[] { lblmnth1, lblmnth2, lblmnth3, lblmnth4, lblmnth5, lblmnth6, lblmnth7, lblmnth8, lblmnth9, lblmnth10, lblmnth11, lblmnth12 });
-                //ddlPeriod.SelectedValue = implementationDate.AddMonths(-1).Month.ToString();
-                ddlPeriod.SelectedValue = "8";
+                var color = this.ProcessColor(projectTimeLine.MonthDates, new[] { lblmnth1, lblmnth2, lblmnth3, lblmnth4, lblmnth5, lblmnth6, lblmnth7, lblmnth8, lblmnth9, lblmnth10, lblmnth11, lblmnth12 });
+                switch (color)
+                {
+                    case StatusColor.Yellow:
+                        txtProjStatus.Text = "YELLOW";
+                        txtProjStatus.ForeColor = Color.Black;
+                        txtProjStatus.BackColor = Color.Yellow;
+                        break;
+                    case StatusColor.Green:
+                        txtProjStatus.Text = "GREEN";
+                        txtProjStatus.ForeColor = Color.White;
+                        txtProjStatus.BackColor = Color.Green;
+                        break;
+                    case StatusColor.Red:
+                        txtProjStatus.Text = "RED";
+                        txtProjStatus.ForeColor = Color.White;
+                        txtProjStatus.BackColor = Color.Red;
+                        break;
+                    case StatusColor.Black:
+                        txtProjStatus.Text = "BLACK";
+                        txtProjStatus.ForeColor = Color.White;
+                        txtProjStatus.BackColor = Color.Black;
+                        break;
+                }
+                ddlPeriod.SelectedValue = implementationDate.AddMonths(-1).Month.ToString();
                 return months;
             }
             return new int[0];
         }
+
+        private StatusColor ProcessColor(DateTime[] monthDates, Label[] labels)
+        {
+            DateTime monthDate;
+            var dateToCompareAgainst = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddMinutes(-1);
+            for (var index = 0; index < monthDates.Length; index++)
+            {
+                monthDate = monthDates[index].AddMonths(1);
+                if (monthDate > dateToCompareAgainst.AddMonths(-2))
+                {
+                    var lbl = labels[index];
+                    var actuals = this.GetActualsForMonth(lbl.ID);
+                    foreach (var actual in actuals)
+                    {
+                        if (actual.Text == "" && this.GetCheckBoxForActual(actual.ID).Checked)
+                        {
+                            return StatusColor.Red;
+                        }
+                    }
+                    break;
+                }
+            }
+
+            for (var index = 0; index < monthDates.Length; index++)
+            {
+                monthDate = monthDates[index].AddMonths(1);
+                if (monthDate > dateToCompareAgainst.AddMonths(-1))
+                {
+                    var lbl = labels[index];
+                    var actuals = this.GetActualsForMonth(lbl.ID);
+                    foreach (var actual in actuals)
+                    {
+                        if (actual.Text == "" && this.GetCheckBoxForActual(actual.ID).Checked)
+                        {
+                            return StatusColor.Yellow;
+                        }
+                    }
+                    break;
+                }
+            }
+            return StatusColor.Green;
+        }
+
+        private CheckBox GetCheckBoxForActual(string textBoxId)
+        {
+            if (textBoxId.StartsWith("cia"))
+            {
+                return chkCapacityIncrease;
+            }
+            else if (textBoxId.StartsWith("cra"))
+            {
+                return chkCostReduction;
+            }
+            else if (textBoxId.StartsWith("caa"))
+            {
+                return chkCostAvoidance;
+            }
+            else if (textBoxId.StartsWith("rga"))
+            {
+                return chkRevenueGrowth;
+            }
+            return null;
+        }
+
         private void DisableCells(DateTime[] monthDates, Label[] labels)
         {
             for (var index = 0; index < monthDates.Length; index++)
@@ -277,7 +366,7 @@ namespace SharePoint
             }
         }
 
-        private void DisableCells(string monthLabel, bool shouldBeEnabled)
+        private TextBox[] GetActualsForMonth(string monthLabel)
         {
             TextBox[] textBoxes;
             switch (monthLabel)
@@ -323,6 +412,12 @@ namespace SharePoint
                     break;
             }
 
+            return textBoxes;
+        }
+
+        private void DisableCells(string monthLabel, bool shouldBeEnabled)
+        {
+            var textBoxes = this.GetActualsForMonth(monthLabel);
             foreach (var textBox in textBoxes)
             {
                 textBox.Enabled = shouldBeEnabled;
