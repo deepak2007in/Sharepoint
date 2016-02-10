@@ -95,6 +95,8 @@ namespace SharePoint
             this.ProcessCost(processingMonths);
         }
 
+        #region Calculation
+
         private TextBox[] TargetTextBoxesForCA
         {
             get
@@ -304,10 +306,30 @@ namespace SharePoint
                         txtProjStatus.BackColor = Color.Black;
                         break;
                 }
-                ddlPeriod.SelectedValue = implementationDate.AddMonths(-1).Month.ToString();
+
+                if (ddlPeriod.SelectedValue == "0")
+                {
+                    ddlPeriod.SelectedValue = implementationDate.AddMonths(-1).Month.ToString();
+                }
                 return months;
             }
             return new int[0];
+        }
+
+        private ProjectCost ProcessCost(int[] months)
+        {
+            var period = int.Parse(ddlPeriod.SelectedValue);
+
+            var projectCost = new ProjectCost(period);
+
+            this.ProcessCheckBoxes(projectCost, chkCostAvoidance, ProjectType.CostAvoidance, this.TargetTextBoxesForCA, this.ActualTextBoxesForCA, months);
+            this.ProcessCheckBoxes(projectCost, chkCostReduction, ProjectType.CostReduction, this.TargetTextBoxesForCR, this.ActualTextBoxesForCR, months);
+            this.ProcessCheckBoxes(projectCost, chkRevenueGrowth, ProjectType.RevenueGrowth, this.TargetTextBoxesForRG, this.ActualTextBoxesForRG, months);
+            this.ProcessCheckBoxes(projectCost, chkCapacityIncrease, ProjectType.CapacityIncrease, this.TargetTextBoxesForCI, this.ActualTextBoxesForCI, months);
+
+            var sharepointListItem = SharePointListItem.Convert(projectCost, int.Parse(lblmnth1.Text));
+            this.ProcessTotal(sharepointListItem, projectCost, months);
+            return projectCost;
         }
 
         private StatusColor ProcessColor(DateTime[] monthDates, Label[] labels)
@@ -369,119 +391,6 @@ namespace SharePoint
                 }
             }
             return StatusColor.Green;
-        }
-
-        private CheckBox GetCheckBoxForActual(string textBoxId)
-        {
-            if (textBoxId.StartsWith("cia"))
-            {
-                return chkCapacityIncrease;
-            }
-            else if (textBoxId.StartsWith("cra"))
-            {
-                return chkCostReduction;
-            }
-            else if (textBoxId.StartsWith("caa"))
-            {
-                return chkCostAvoidance;
-            }
-            else if (textBoxId.StartsWith("rga"))
-            {
-                return chkRevenueGrowth;
-            }
-            return null;
-        }
-
-        private void DisableCells(DateTime[] monthDates, Label[] labels)
-        {
-            var thisMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
-            for (var index = 0; index < monthDates.Length; index++)
-            {
-                var monthDate = monthDates[index];
-                var lblMonth = labels[index];
-                if (monthDate < thisMonth)
-                {
-                    this.DisableCells(labels[index].ID.ToLower(), true);
-                }
-                else
-                {
-                    this.DisableCells(labels[index].ID.ToLower(), false);
-                }
-            }
-        }
-
-        private TextBox[] GetActualsForMonth(string monthLabel)
-        {
-            TextBox[] textBoxes;
-            switch (monthLabel)
-            {
-                case "lblmnth1":
-                    textBoxes = this.ActualTextBoxesForMonth1;
-                    break;
-                case "lblmnth2":
-                    textBoxes = this.ActualTextBoxesForMonth2;
-                    break;
-                case "lblmnth3":
-                    textBoxes = this.ActualTextBoxesForMonth3;
-                    break;
-                case "lblmnth4":
-                    textBoxes = this.ActualTextBoxesForMonth4;
-                    break;
-                case "lblmnth5":
-                    textBoxes = this.ActualTextBoxesForMonth5;
-                    break;
-                case "lblmnth6":
-                    textBoxes = this.ActualTextBoxesForMonth6;
-                    break;
-                case "lblmnth7":
-                    textBoxes = this.ActualTextBoxesForMonth7;
-                    break;
-                case "lblmnth8":
-                    textBoxes = this.ActualTextBoxesForMonth8;
-                    break;
-                case "lblmnth9":
-                    textBoxes = this.ActualTextBoxesForMonth9;
-                    break;
-                case "lblmnth10":
-                    textBoxes = this.ActualTextBoxesForMonth10;
-                    break;
-                case "lblmnth11":
-                    textBoxes = this.ActualTextBoxesForMonth11;
-                    break;
-                case "lblmnth12":
-                    textBoxes = this.ActualTextBoxesForMonth12;
-                    break;
-                default:
-                    textBoxes = new TextBox[0];
-                    break;
-            }
-
-            return textBoxes;
-        }
-
-        private void DisableCells(string monthLabel, bool shouldBeEnabled)
-        {
-            var textBoxes = this.GetActualsForMonth(monthLabel);
-            foreach (var textBox in textBoxes)
-            {
-                textBox.Enabled = shouldBeEnabled;
-            }
-        }
-
-        private ProjectCost ProcessCost(int[] months)
-        {
-            var period = int.Parse(ddlPeriod.SelectedValue);
-
-            var projectCost = new ProjectCost(period);
-
-            this.ProcessCheckBoxes(projectCost, chkCostAvoidance, ProjectType.CostAvoidance, this.TargetTextBoxesForCA, this.ActualTextBoxesForCA, months);
-            this.ProcessCheckBoxes(projectCost, chkCostReduction, ProjectType.CostReduction, this.TargetTextBoxesForCR, this.ActualTextBoxesForCR, months);
-            this.ProcessCheckBoxes(projectCost, chkRevenueGrowth, ProjectType.RevenueGrowth, this.TargetTextBoxesForRG, this.ActualTextBoxesForRG, months);
-            this.ProcessCheckBoxes(projectCost, chkCapacityIncrease, ProjectType.CapacityIncrease, this.TargetTextBoxesForCI, this.ActualTextBoxesForCI, months);
-
-            var sharepointListItem = SharePointListItem.Convert(projectCost, int.Parse(lblmnth1.Text));
-            this.ProcessTotal(sharepointListItem, projectCost, months);
-            return projectCost;
         }
 
         private void ProcessTotal(SharePointListItem sharepointListItem, ProjectCost projectCost, int[] months)
@@ -550,9 +459,104 @@ namespace SharePoint
             }
         }
 
-        protected void dtImplDate_SelectionChanged(object sender, EventArgs e)
+        private TextBox[] GetActualsForMonth(string monthLabel)
         {
-            var processingMonths = this.ProcessTimeline();
+            TextBox[] textBoxes;
+            switch (monthLabel)
+            {
+                case "lblmnth1":
+                    textBoxes = this.ActualTextBoxesForMonth1;
+                    break;
+                case "lblmnth2":
+                    textBoxes = this.ActualTextBoxesForMonth2;
+                    break;
+                case "lblmnth3":
+                    textBoxes = this.ActualTextBoxesForMonth3;
+                    break;
+                case "lblmnth4":
+                    textBoxes = this.ActualTextBoxesForMonth4;
+                    break;
+                case "lblmnth5":
+                    textBoxes = this.ActualTextBoxesForMonth5;
+                    break;
+                case "lblmnth6":
+                    textBoxes = this.ActualTextBoxesForMonth6;
+                    break;
+                case "lblmnth7":
+                    textBoxes = this.ActualTextBoxesForMonth7;
+                    break;
+                case "lblmnth8":
+                    textBoxes = this.ActualTextBoxesForMonth8;
+                    break;
+                case "lblmnth9":
+                    textBoxes = this.ActualTextBoxesForMonth9;
+                    break;
+                case "lblmnth10":
+                    textBoxes = this.ActualTextBoxesForMonth10;
+                    break;
+                case "lblmnth11":
+                    textBoxes = this.ActualTextBoxesForMonth11;
+                    break;
+                case "lblmnth12":
+                    textBoxes = this.ActualTextBoxesForMonth12;
+                    break;
+                default:
+                    textBoxes = new TextBox[0];
+                    break;
+            }
+
+            return textBoxes;
         }
+
+        private CheckBox GetCheckBoxForActual(string textBoxId)
+        {
+            if (textBoxId.StartsWith("cia"))
+            {
+                return chkCapacityIncrease;
+            }
+            else if (textBoxId.StartsWith("cra"))
+            {
+                return chkCostReduction;
+            }
+            else if (textBoxId.StartsWith("caa"))
+            {
+                return chkCostAvoidance;
+            }
+            else if (textBoxId.StartsWith("rga"))
+            {
+                return chkRevenueGrowth;
+            }
+            return null;
+        }
+
+        private void DisableCells(DateTime[] monthDates, Label[] labels)
+        {
+            var thisMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            for (var index = 0; index < monthDates.Length; index++)
+            {
+                var monthDate = monthDates[index];
+                var lblMonth = labels[index];
+                if (monthDate < thisMonth)
+                {
+                    this.DisableCells(labels[index].ID.ToLower(), true);
+                }
+                else
+                {
+                    this.DisableCells(labels[index].ID.ToLower(), false);
+                }
+            }
+        }
+
+        private void DisableCells(string monthLabel, bool shouldBeEnabled)
+        {
+            var textBoxes = this.GetActualsForMonth(monthLabel);
+            foreach (var textBox in textBoxes)
+            {
+                textBox.Enabled = shouldBeEnabled;
+            }
+        }
+
+        #endregion
+
     }
 }
