@@ -394,11 +394,12 @@ namespace SharePoint
 
         private void DisableCells(DateTime[] monthDates, Label[] labels)
         {
+            var thisMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
             for (var index = 0; index < monthDates.Length; index++)
             {
                 var monthDate = monthDates[index];
                 var lblMonth = labels[index];
-                if (monthDate < DateTime.Now)
+                if (monthDate < thisMonth)
                 {
                     this.DisableCells(labels[index].ID.ToLower(), true);
                 }
