@@ -2,42 +2,8 @@
 var Checkboxs = ['chkCostAvoidance', 'chkCostReduction', 'chkRevenueGrowth', 'chkCapacityIncrease'];
 var tablevalues = ['CostAvoidance', 'CostReduction', 'RevenueGrowth', 'CapacityIncrease'];
 
-function getValueSelected(checkBox) {
-    var checkBoxName = checkBox.attr('name');
-    if (checkBoxName.indexOf('CostAvoidance') >= 0) {
-        return 'CostAvoidance';
-    }
-    if (checkBoxName.indexOf('CostReduction') >= 0) {
-        return 'CostReduction';
-    }
-    if (checkBoxName.indexOf('RevenueGrowth') >= 0) {
-        return 'RevenueGrowth';
-    }
-    if (checkBoxName.indexOf('CapacityIncrease') >= 0) {
-        return 'CapacityIncrease';
-    }
-    return '';
-}
-function hideAggregateRow(checkBox) {
-    var valueSelected = getValueSelected(checkBox);
-    if (valueSelected != '') {
-        var isChecked = checkBox.is(':checked');
-        if (isChecked) {
-            showTableData();
-            showCheckBoxSelectedRaw(valueSelected);
-            displayAggregate(valueSelected, true);
-        }
-        else {
-            HideSelectedRaw(valueSelected);
-            checkAllcheckboxes();
-            displayAggregate(valueSelected, false);
-        }
-    }
-}
 $(document).ready(function () {
-
-    CheckBoxesSelected();
-    checkAllcheckboxes();
+    HideAttachmentControls();
     $(":checkbox").each(function () {
         hideAggregateRow($(this));
     });
@@ -58,72 +24,126 @@ $(document).ready(function () {
     $('[id*="chkCapacityIncrease"]').click(function () {
         hideAggregateRow($(this));
     });
+    //check confidention ci value
+    if ($('[id$=rdoconfCI] input:checked').val() == "No") {
+        $('[id*="FileControl1"]').show();
+        HideAttachmentControls();
+    }
+    else {
+
+        $('[id*="FileControl1"]').hide();
+    }
+    AuditSection();
+    HideFileControls();
+    CheckBoxesSelected();
+    checkAllcheckboxes();
+    ProjectTypeChangeEvent();
+
+
+
+
+    //    $('[id$="lbltotalval"]')
+    //    $('[id$="hdntotal"]')
+
+    //    $('#total_price').val(Number(a) + Number(b));
+    //    if (!isNaN($('input[name=service_price]').val())
+    $('[id$="txtcapExp"]').blur(function () {
+
+        var total = parseInt($('[id$="txtcapExp"]').val().replace(/,/g, ""), 10) + parseInt($('[id$="txtimplcost"]').val().replace(/,/g, ""), 10);
+        $('[id$="lbltotalval"]').text(total);
+        $('[id$="hdntotal"]').val(total);
+    });
+
+    $('[id$="txtimplcost"]').blur(function () {
+        var total = parseInt($('[id$="txtcapExp"]').val().replace(/,/g, ""), 10) + parseInt($('[id$="txtimplcost"]').val().replace(/,/g, ""), 10);
+        $('[id$="lbltotalval"]').text(total);
+        $('[id$="hdntotal"]').val(total);
+    });
+
 
     if ($('[id$=rdoCIAccept] input:checked').val() == "No")
     { $('[id$=ddlCiIdeaNum]').prop("disabled", true); }
     else { $('[id$=ddlCiIdeaNum]').prop("disabled", false); }
     if ($('[id$=chkIdentyAd]').is(':checked'))
-        $('[id$=txtProjLeaderUser]').hide();  // checked
+        $('[id$=txtnormaluser]').hide();  // checked
     else
-        $('[id$=txtProjLeaderUser]').show(); // unchecked
+        $('[id$=txtnormaluser]').show(); // unchecked
 
 
     if ($('[id$=chlLeanBnft]').is(':checked')) {
         $('[id$=ddlLeanbnftType]').prop("disabled", false);  // checked
-        $('[id*="col2"]').hide();        
+        $('[id*="col2"]').hide();
         $('[id*="col3"]').hide();
         $('[id*="dynamicTable"]').hide();
+        $('[id*="chkCostAvoidance"]').prop('disabled', true); // Unchecks it
+        $('[id*="chkCostReduction"]').prop('disabled', true); // Unchecks it
+        $('[id*="chkRevenueGrowth"]').prop('disabled', true); // Unchecks it
+        $('[id*="chkCapacityIncrease"]').prop('disabled', true); // Unchecks it		
     }
 
     else {
         $('[id$=ddlLeanbnftType]').prop("disabled", true); // unchecked
         $('[id*="col2"]').show();
-        $('[id*="col3"]').show();        
+        $('[id*="col3"]').show();
         $('[id*="dynamicTable"]').show();
     }
 
-    //    var capexpamount = document.getElementById("<%=txtcapExp.ClientID %>");
-    //    var implemcost = document.getElementById("<%=txtimplcost.ClientID %>");
-    //    ValidateNumeric(capexpamount);
-    //    ValidateNumeric(implemcost);
+    //check celebrationtype
 
+    if ($('[id$=chkcelebtype]').is(':checked')) {
+        $('[id*="dtCelebDate"]').removeAttr("disabled");
+        $('[id*="dtCelebDate"]').focus();
+        $('[id*="ddlCelebType"]').prop("disabled", false);
+    }
+    else { $('[id*="dtCelebDate"]').prop("disabled", "disabled"); $('[id*="ddlCelebType"]').prop("disabled", "disabled"); }
 
-    $('[id$=ddlfacilty]').change(function () {
-        if ($('[id*="ddlfacilty"]').children("option").filter(":selected").text() != "Select") {
-            GetFacility($('[id*="ddlfacilty"]').children("option").filter(":selected").text());
-        }
-
-    });
     //check CI Accept yes or no
-
-
     $('[id*="rdoCIAccept"] input').change(function () {
         if ($(this).val() == "Yes") {
             $('[id*="ddlCiIdeaNum"]').prop("disabled", false);
         }
         else { $('[id*="ddlCiIdeaNum"]').prop("disabled", true); }
     });
+
     //chech project leader identity
 
     $('[id*="chkIdentyAd"]').click(function () {
         if ($(this).is(":checked")) {
-            $('[id*="txtProjLeaderUser"]').hide();
-            $('[id*="ProjLeaderUser"]').show();
+            $('[id*="txtnormaluser"]').hide();
+
         } else {
-            $('[id*="txtProjLeaderUser"]').show();
-            $('[id*="ProjLeaderUser"]').hide();
+            $('[id*="txtnormaluser"]').show();
+
         }
     });
 
+
+    ///attachement changefunction
+    var fileCounter = 21;
+    var fileCreated = $('[id$=hdnFileCounder]').val();
+    $('[id$=btnFileUpload1]').click(function (e) {
+        fileCreated++;
+        if (fileCreated != fileCounter) {
+            $('#FileControl' + fileCreated).show();
+        }
+        e.preventDefault();
+    });
     //confidental ci
 
     var msg = "You have checked this CI as confidential and are not able to upload documents to SharePoint.</br> As a result, please email all attachments to CIAuditor@scilogistics.com with the CI # in the Subject Line. </br>- Thank you, The CI Team.";
     $('[id*="rdoconfCI"] input').change(function () {
         if ($(this).val() == "Yes") {
             alert(msg);
+            $('[id*="FileControl1"]').hide();
+            HideAttachmentControls();
+
+
             //hide the attachement controls
         }
         else { //show attachemnt controls 
+            $('[id*="FileControl1"]').show();
+            HideAttachmentControls();
+
         }
     });
 
@@ -141,25 +161,22 @@ $(document).ready(function () {
             $('[id*="chkCapacityIncrease"]').prop('checked', false); // Unchecks it
             $('[id*="chkCostAvoidance"]').prop('checked', false); // Unchecks it
             $('[id*="chkCostReduction"]').prop('checked', false); // Unchecks it
-            $('[id*="chkRevenueGrowth"]').prop('checked', false); // Unchecks it
-
-            $('[id*="cisavetwelve"]').hide();
-            $('[id*="cisaveyear"]').hide();
-            $('[id*="ciest"]').hide();
+            $('[id*="chkRevenueGrowth"]').prop('checked', false); // Unchecks it            
             $('[id*="dynamicTable"]').hide();
+            $('[id*="btnupdatecal"]').hide();
+            $('.col3').css("display", "none");
+            $('.col2').css("display", "none");
 
 
         } else {
             $('[id*="ddlLeanbnftType"]').prop("disabled", true);
             $('[id*="ddlLeanbnftType"]').prop('selectedIndex', 0);
-            $('[id*="cisavetwelve"]').show();
-            $('[id*="cisaveyear"]').show();
-            $('[id*="ciest"]').show();
             $('[id*="chkCostAvoidance"]').prop('disabled', false); // Unchecks it
             $('[id*="chkCostReduction"]').prop('disabled', false); // Unchecks it
             $('[id*="chkRevenueGrowth"]').prop('disabled', false); // Unchecks it
             $('[id*="chkCapacityIncrease"]').prop('disabled', false); // Unchecks it
-            $('[id*="dynamicTable"]').show();
+            $('[id*="dynamicTable"]').hide();
+
 
         }
     });
@@ -169,39 +186,38 @@ $(document).ready(function () {
         if ($(this).is(":checked")) {
             $('[id*="dtCelebDate"]').removeAttr("disabled");
             $('[id*="dtCelebDate"]').focus();
+            $('[id*="ddlCelebType"]').prop("disabled", false);
         } else {
-            $('[id*="dtCelebDate"]').attr("disabled", "disabled");
+            $('[id*="dtCelebDate"]').prop("disabled", "disabled"); $('[id*="ddlCelebType"]').prop("disabled", "disabled");
         }
     });
-
-
 });
 
-function GetFacility(selectedFacility) {
+//function GetFacility(selectedFacility) {
 
-    var params = JSON.stringify({ selectedFacility: selectedFacility });
-    $.ajax({
-        type: "POST",
-        async: false,
-        url: "/_layouts/SCICIProjectWF/CustomJSFunctions.aspx/GetProjectType",
-        contentType: "application/json; charset=utf-8",
-        data: params,
-        dataType: "json",
-        success: function (msg) {
-            if (msg.d.length > 0) {
-                objdata = $.parseJSON(msg.d);
+//    var params = JSON.stringify({ selectedFacility: selectedFacility });
+//    $.ajax({
+//        type: "POST",
+//        async: false,
+//        url: "/_layouts/SCICIProjectWF/CustomJSFunctions.aspx/GetProjectType",
+//        contentType: "application/json; charset=utf-8",
+//        data: params,
+//        dataType: "json",
+//        success: function (msg) {
+//            if (msg.d.length > 0) {
+//                objdata = $.parseJSON(msg.d);
 
-                GetContent(objdata);
-            }
+//                GetContent(objdata);
+//            }
 
 
-        },
-        error: function (data) {
-            //console.log('Error');
-            alert("failed");
-        }
-    });
-}
+//        },
+//        error: function (data) {
+//            //console.log('Error');
+//            alert("failed");
+//        }
+//    });
+//}
 
 
 function GetContent(objdata) {
@@ -233,7 +249,7 @@ function checkAllcheckboxes() {
             uncheckall = true;
     }
     if (!uncheckall)
-        HideTableData();
+    { HideTableData(); $('[id*="btnupdatecal"]').hide(); }
 }
 
 /// validate button click event
@@ -317,9 +333,11 @@ function ValidateSaveFields() {
                 intFlag++;
             }
             var celebType = $('[id*="ddlCelebType"]').children("option").filter(":selected").text();
-            if (celebType == "Select") {
-                strErrMsg = strErrMsg + "Celebration Type Required \n";
-                intFlag++;
+            if (CelebDate != "") {
+                if (celebType == "Select") {
+                    strErrMsg = strErrMsg + "Celebration Type Required \n";
+                    intFlag++;
+                }
             }
 
         }
@@ -355,9 +373,9 @@ function validatePeopleEditor(messageText) {
 
 
 function ConfirmApproval(objMsg) {
-        alert(objMsg)
-        window.location = "/Pages/CIProjectView.aspx";
-        return true;
+    alert(objMsg)
+    window.location = "/sci_ci/Pages/CIProjectView.aspx";
+    return true;
 }
 
 
@@ -366,7 +384,7 @@ function ConfirmApproval(objMsg) {
 
 function showTableData() {
     $('[id*="dynamicTable"]').show();
-    $('[id*="Header"]').show();
+    $('[id*="Tr1"]').show();
     $('[id*="TotalActual"]').show();
     $('[id*="TotalTarget"]').show();
     $('[id*="twelvetotal"]').show();
@@ -379,15 +397,178 @@ function showTableData() {
 function showCheckBoxSelectedRaw(val) {
     $('[id*="' + val + 'Actual"]').show();
     $('[id*="' + val + 'Target"]').show();
+    $('[id*="btnupdatecal"]').show();
 }
 function HideSelectedRaw(val) {
     $('[id*="' + val + 'Actual"]').hide();
     $('[id*="' + val + 'Target"]').hide();
 }
 
+function HideAttachmentControls() {
+    //Hide File Control
+
+    $('[id$="FileControl2"]').hide();
+    $('[id$="FileControl3"]').hide();
+    $('[id$="FileControl4"]').hide();
+    $('[id$="FileControl5"]').hide();
+    $('[id$="FileControl6"]').hide();
+    $('[id$="FileControl7"]').hide();
+    $('[id$="FileControl8"]').hide();
+    $('[id$="FileControl9"]').hide();
+    $('[id$="FileControl10"]').hide();
+    $('[id$="FileControl11"]').hide();
+    $('[id$="FileControl12"]').hide();
+    $('[id$="FileControl13"]').hide();
+    $('[id$="FileControl14"]').hide();
+    $('[id$="FileControl15"]').hide();
+    $('[id$="FileControl16"]').hide();
+    $('[id$="FileControl17"]').hide();
+    $('[id$="FileControl18"]').hide();
+    $('[id$="FileControl19"]').hide();
+    $('[id$="FileControl20"]').hide();
+
+}
+
+function AuditSection() {
+    if ($('[id*="ddlRequesterStatus"]') != null)
+        $('[id*="ddlRequesterStatus"]').css("width", "100px");
+    if ($('[id*="ddlciapprovstatus"]') != null)
+        $('[id*="ddlciapprovstatus"]').css("width", "100px");
+    // change auti status value
+    if ($('[id*="ddlauditstatus"]').children("option").filter(":selected").text() == "Select" || $('[id*="ddlauditstatus"]').children("option").filter(":selected").text() == "") {
+        $('[id*="lblauditstatusvalue"]').hide();
+        $('[id*="txtAudStatus"]').hide();
+        $('[id*="lblAuditStatushdr"]').hide();
+
+    }
+    else {
+        $('[id*="lblauditstatusvalue"]').show();
+        $('[id*="lblauditstatusvalue"]').text($('[id*="ddlauditstatus"]').children("option").filter(":selected").text() + "Status");
+        $('[id*="lblauditstatusvalue"]').css('background-color', $('[id*="ddlauditstatus"]').children("option").filter(":selected").text());
+        $('[id*="lblauditstatusvalue"]').css('color', $('[id*="ddlauditstatus"]').children("option").filter(":selected").text());
+        $('[id*="txtAudStatus"]').show();
+        $('[id*="lblAuditStatushdr"]').show();
+        $('[id*="txtAudStatus"]').css('background-color', $('[id*="ddlauditstatus"]').children("option").filter(":selected").text());
+        $('[id*="txtAudStatus"]').text($('[id*="ddlauditstatus"]').children("option").filter(":selected").text());
+    }
+    $('[id*="ddlauditstatus"]').change(function () {
+        if ($('[id*="ddlauditstatus"]').children("option").filter(":selected").text() != "Select" || $('[id*="ddlauditstatus"]').children("option").filter(":selected").text() != "") {
+            $('[id*="lblauditstatusvalue"]').show();
+            $('[id*="lblauditstatusvalue"]').text($('[id*="ddlauditstatus"]').children("option").filter(":selected").text() + "Status");
+            $('[id*="lblauditstatusvalue"]').css('background-color', $('[id*="ddlauditstatus"]').children("option").filter(":selected").text());
+            $('[id*="lblauditstatusvalue"]').css('color', $('[id*="ddlauditstatus"]').children("option").filter(":selected").text());
+            $('[id*="txtAudStatus"]').show();
+            $('[id*="lblAuditStatushdr"]').show();
+            $('[id*="txtAudStatus"]').css('background-color', $('[id*="ddlauditstatus"]').children("option").filter(":selected").text());
+            $('[id*="txtAudStatus"]').text($('[id*="ddlauditstatus"]').children("option").filter(":selected").text());
+        }
+        else {
+            $('[id*="lblauditstatusvalue"]').hide();
+            $('[id*="txtAudStatus"]').hide();
+            $('[id*="lblAuditStatushdr"]').hide();
+        }
+    });
+}
+
+function ProjectTypeChangeEvent() {
+    // cost avoidance click event chekbox
+    $('[id*="chkCostAvoidance"]').click(function () {
+        if ($(this).is(":checked")) {
+            showTableData();
+            showCheckBoxSelectedRaw("CostAvoidance");
+            $('[id*="twelveca"]').show();
+        }
+        else {
+            HideSelectedRaw("CostAvoidance");
+            checkAllcheckboxes();
+            $('[id*="twelveca"]').hide();
+        }
+
+    });
+
+
+    // cost Reduction click event chekbox
+    $('[id*="chkCostReduction"]').click(function () {
+        if ($(this).is(":checked")) {
+            showTableData();
+            showCheckBoxSelectedRaw("CostReduction");
+            $('[id*="twelvecr"]').show();
+        }
+        else {
+            HideSelectedRaw("CostReduction");
+            checkAllcheckboxes();
+            $('[id*="twelvecr"]').hide();
+        }
+    });
+    // Revenue Growth click event chekbox
+    $('[id*="chkRevenueGrowth"]').click(function () {
+        if ($(this).is(":checked")) {
+            showTableData();
+            showCheckBoxSelectedRaw("RevenueGrowth");
+            $('[id*="twelverg"]').show();
+        }
+        else {
+            HideSelectedRaw("RevenueGrowth");
+            checkAllcheckboxes();
+            $('[id*="twelverg"]').hide();
+        }
+
+    });
+    // Capacity Increase click event chekbox
+    $('[id*="chkCapacityIncrease"]').click(function () {
+        if ($(this).is(":checked")) {
+            showTableData();
+            showCheckBoxSelectedRaw("CapacityIncrease");
+            $('[id*="twelveci"]').show();
+        }
+        else {
+            HideSelectedRaw("CapacityIncrease");
+            $('[id*="twelveci"]').hide();
+        }
+
+    });
+}
+
+
+
+
+
+function getValueSelected(checkBox) {
+    var checkBoxName = checkBox.attr('name');
+    if (checkBoxName.indexOf('CostAvoidance') >= 0) {
+        return 'CostAvoidance';
+    }
+    if (checkBoxName.indexOf('CostReduction') >= 0) {
+        return 'CostReduction';
+    }
+    if (checkBoxName.indexOf('RevenueGrowth') >= 0) {
+        return 'RevenueGrowth';
+    }
+    if (checkBoxName.indexOf('CapacityIncrease') >= 0) {
+        return 'CapacityIncrease';
+    }
+    return '';
+}
+function hideAggregateRow(checkBox) {
+    var valueSelected = getValueSelected(checkBox);
+    if (valueSelected != '') {
+        var isChecked = checkBox.is(':checked');
+        if (isChecked) {
+            showTableData();
+            showCheckBoxSelectedRaw(valueSelected);
+            displayAggregate(valueSelected, true);
+        }
+        else {
+            HideSelectedRaw(valueSelected);
+            checkAllcheckboxes();
+            displayAggregate(valueSelected, false);
+        }
+    }
+}
+
 function HideTableData() {
     $('[id*="dynamicTable"]').hide();
-    $('[id*="Header"]').hide();
+    $('[id*="Tr1"]').hide();
     $('[id*="TotalActual"]').hide();
     $('[id*="TotalTarget"]').hide();
     displayAggregate("header", false);
@@ -409,4 +590,28 @@ function displayAggregate(val, flagShow) {
         $('[id*="year' + val + '"]').hide();
         $('[id*="est' + val + '"]').hide();
     }
+}
+
+
+function HideFileControls() {
+    //Hide File Control
+    $('[id$="FileControl2"]').hide();
+    $('[id$="FileControl3"]').hide();
+    $('[id$="FileControl4"]').hide();
+    $('[id$="FileControl5"]').hide();
+    $('[id$="FileControl6"]').hide();
+    $('[id$="FileControl7"]').hide();
+    $('[id$="FileControl8"]').hide();
+    $('[id$="FileControl9"]').hide();
+    $('[id$="FileControl10"]').hide();
+    $('[id$="FileControl11"]').hide();
+    $('[id$="FileControl12"]').hide();
+    $('[id$="FileControl13"]').hide();
+    $('[id$="FileControl14"]').hide();
+    $('[id$="FileControl15"]').hide();
+    $('[id$="FileControl16"]').hide();
+    $('[id$="FileControl17"]').hide();
+    $('[id$="FileControl18"]').hide();
+    $('[id$="FileControl19"]').hide();
+    $('[id$="FileControl20"]').hide();
 }

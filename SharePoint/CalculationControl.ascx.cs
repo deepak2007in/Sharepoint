@@ -57,16 +57,39 @@ namespace SharePoint
                 cra5.Text = "1000";
                 cra6.Text = "1000";
             }
-
-            var capEx = string.IsNullOrEmpty(txtcapExp.Text.Trim()) ? 0 : long.Parse(txtcapExp.Text);
-            var implementationCost = string.IsNullOrEmpty(txtimplcost.Text.Trim()) ? 0 : long.Parse(txtimplcost.Text);
-            if (capEx > 0 || implementationCost > 0)
-            {
-                tot
-            }
         }
 
         protected void btnSave_Click(object sender, EventArgs e)
+        {
+            var processingMonths = this.ProcessTimeline();
+            this.ProcessCost(processingMonths);
+        }
+
+        protected void ddlPeriod_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (dtImplDate != null)
+            {
+                dtComplDate.Enabled = true;
+                dtComplDate.SelectedDate = dtImplDate.SelectedDate.AddYears(1);
+                dtComplDate.Enabled = false;
+                var processingMonths = this.ProcessTimeline();
+            }
+        }
+
+        protected void dtImplDate_OnDateChanged(object sender, EventArgs e)
+        {
+            if (dtImplDate != null)
+            {
+                dtComplDate.Enabled = true;
+                dtComplDate.SelectedDate = dtImplDate.SelectedDate.AddYears(1);
+                dtComplDate.Enabled = false;
+                var processingMonths = this.ProcessTimeline();
+                //this.ProcessCost(processingMonths);
+
+            }
+        }
+
+        protected void btnupdatecal_Click(object sender, EventArgs e)
         {
             var processingMonths = this.ProcessTimeline();
             this.ProcessCost(processingMonths);
@@ -446,15 +469,9 @@ namespace SharePoint
 
         private ProjectCost ProcessCost(int[] months)
         {
-            var capEx = long.Parse(txtcapExp.Text);
-            var implementationCost = long.Parse(txtimplcost.Text);
             var period = int.Parse(ddlPeriod.SelectedValue);
 
             var projectCost = new ProjectCost(period);
-            projectCost.CapExAmount = capEx;
-            projectCost.ImplementationCost = implementationCost;
-
-            lbltotal.Text = projectCost.TotalCost.ToString();
 
             this.ProcessCheckBoxes(projectCost, chkCostAvoidance, ProjectType.CostAvoidance, this.TargetTextBoxesForCA, this.ActualTextBoxesForCA, months);
             this.ProcessCheckBoxes(projectCost, chkCostReduction, ProjectType.CostReduction, this.TargetTextBoxesForCR, this.ActualTextBoxesForCR, months);

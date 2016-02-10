@@ -67,20 +67,20 @@ namespace SCI.CIProject.ProjectSaving
         /// <returns>True if it is greater than 10 months from now; false otherwise.</returns>
         public static bool ValidateImplementationDate(DateTime implementationDate)
         {
-            if (implementationDate > DateTime.Now.AddMonths(-13))
+            if (implementationDate > DateTime.Now.AddMonths(-10) && implementationDate < DateTime.Now.AddMonths(6))
             {
-                if(implementationDate < DateTime.Now)
-                {
-                    return true;
-                }
-                else
-                {
-                    throw new ArgumentException("Can only select date in the past.  No future date selection option available.");
-                }
+                return true;
             }
             else
             {
-                throw new ArgumentException("Implementation Date should not be  < 10 months from the current month and year.");
+                if (!(implementationDate > DateTime.Now.AddMonths(-10)))
+                {
+                    throw new ArgumentException("Implementation Date should not be  < 10 months from the current month and year.");
+                }
+                else
+                {
+                    throw new ArgumentException("Implementation Date should not be > 6 months from current date.");
+                }
             }
         }
 
