@@ -16,46 +16,46 @@ namespace SharePoint
         {
             if (!IsPostBack)
             {
-                cat1.Text = "1000";
+                cat1.Text = "1,000";
                 cat2.Text = "500";
-                cat3.Text = "5000";
-                cat4.Text = "100000";
-                cat5.Text = "10000";
-                cat6.Text = "10000";
-                cat7.Text = "1000";
-                cat8.Text = "5000";
-                cat9.Text = "1000";
-                cat10.Text = "10000";
-                cat11.Text = "10000";
-                cat12.Text = "10000";
+                cat3.Text = "5,000";
+                cat4.Text = "1,00,000";
+                cat5.Text = "10,000";
+                cat6.Text = "10,000";
+                cat7.Text = "1,000";
+                cat8.Text = "5,000";
+                cat9.Text = "1,000";
+                cat10.Text = "10,000";
+                cat11.Text = "10,000";
+                cat12.Text = "10,000";
 
-                caa1.Text = "5000";
-                caa2.Text = "5000";
-                caa3.Text = "5000";
-                caa4.Text = "5000";
-                caa5.Text = "5000";
-                caa6.Text = "5000";
+                caa1.Text = "5,000";
+                caa2.Text = "5,000";
+                caa3.Text = "5,000";
+                caa4.Text = "5,000";
+                caa5.Text = "5,000";
+                caa6.Text = "5,000";
                 //caa7.Text = caa8.Text = caa9.Text = caa10.Text = caa11.Text = caa12.Text = "5000";
 
-                crt1.Text = "1500";
-                crt2.Text = "1500";
-                crt3.Text = "1500";
-                crt4.Text = "1500";
-                crt5.Text = "1500";
-                crt6.Text = "1500";
-                crt7.Text = "1500";
-                crt8.Text = "1500";
-                crt9.Text = "1500";
-                crt10.Text = "1500";
-                crt11.Text = "1500";
-                crt12.Text = "1500";
+                crt1.Text = "1,500";
+                crt2.Text = "1,500";
+                crt3.Text = "1,500";
+                crt4.Text = "1,500";
+                crt5.Text = "1,500";
+                crt6.Text = "1,500";
+                crt7.Text = "1,500";
+                crt8.Text = "1,500";
+                crt9.Text = "1,500";
+                crt10.Text = "1,500";
+                crt11.Text = "1,500";
+                crt12.Text = "1,500";
 
-                cra1.Text = "1000";
-                cra2.Text = "1000";
-                cra3.Text = "1000";
-                cra4.Text = "1000";
-                cra5.Text = "1000";
-                cra6.Text = "1000";
+                cra1.Text = "1,000";
+                cra2.Text = "1,000";
+                cra3.Text = "1,000";
+                cra4.Text = "1,000";
+                cra5.Text = "1,000";
+                cra6.Text = "1,000";
             }
         }
 
@@ -395,23 +395,23 @@ namespace SharePoint
 
         private void ProcessTotal(SharePointListItem sharepointListItem, ProjectCost projectCost, int[] months)
         {
-            twelvtxtcavalue.Text = sharepointListItem.SavedOver12Months_CA.ToString();
-            twelvtxtcrvalue.Text = sharepointListItem.SavedOver12Months_CR.ToString();
-            twelvtxtrgvalue.Text = sharepointListItem.SavedOver12Months_RG.ToString();
-            twelvtxtcivalue.Text = sharepointListItem.SavedOver12Months_CI.ToString();
-            twelvtxttatalvalue.Text = sharepointListItem.SavedOver12Months_Total.ToString();
+            twelvtxtcavalue.Text = string.Format("{0:n0}", sharepointListItem.SavedOver12Months_CA);
+            twelvtxtcrvalue.Text = string.Format("{0:n0}", sharepointListItem.SavedOver12Months_CR);
+            twelvtxtrgvalue.Text = string.Format("{0:n0}", sharepointListItem.SavedOver12Months_RG);
+            twelvtxtcivalue.Text = string.Format("{0:n0}", sharepointListItem.SavedOver12Months_CI);
+            twelvtxttatalvalue.Text = string.Format("{0:n0}", sharepointListItem.SavedOver12Months_Total);
 
-            yeartxtca.Text = sharepointListItem.SavedYearToDate_CA.ToString();
-            yeartxtcr.Text = sharepointListItem.SavedYearToDate_CR.ToString();
-            yeartxtrg.Text = sharepointListItem.SavedYearToDate_RG.ToString();
-            yeartxtci.Text = sharepointListItem.SavedYearToDate_CI.ToString();
-            yearlbltotalval.Text = sharepointListItem.SavedYearToDate_Total.ToString();
+            yeartxtca.Text = string.Format("{0:n0}", sharepointListItem.SavedYearToDate_CA);
+            yeartxtcr.Text = string.Format("{0:n0}", sharepointListItem.SavedYearToDate_CR);
+            yeartxtrg.Text = string.Format("{0:n0}", sharepointListItem.SavedYearToDate_RG);
+            yeartxtci.Text = string.Format("{0:n0}", sharepointListItem.SavedYearToDate_CI);
+            yearlbltotalval.Text = string.Format("{0:n0}", sharepointListItem.SavedYearToDate_Total);
 
-            esttxtca.Text = sharepointListItem.EstimatedSaving_CA.ToString();
-            esttxtcr.Text = sharepointListItem.EstimatedSaving_CR.ToString();
-            esttxtrg.Text = sharepointListItem.EstimatedSaving_RG.ToString();
-            esttxtci.Text = sharepointListItem.EstimatedSaving_CI.ToString();
-            estlbltotalval.Text = sharepointListItem.EstimatedSaving_Total.ToString();
+            esttxtca.Text = string.Format("{0:n0}", sharepointListItem.EstimatedSaving_CA);
+            esttxtcr.Text = string.Format("{0:n0}", sharepointListItem.EstimatedSaving_CR);
+            esttxtrg.Text = string.Format("{0:n0}", sharepointListItem.EstimatedSaving_RG);
+            esttxtci.Text = string.Format("{0:n0}", sharepointListItem.EstimatedSaving_CI);
+            estlbltotalval.Text = string.Format("{0:n0}", sharepointListItem.EstimatedSaving_Total);
 
             var targets = new[] { target1total, target2total, target3total, target4total, target5total, target6total, target7total, target8total, target9total, target10total, target11total, target12total };
             this.ProcessFooter(targets, months, projectCost.GetTargetTotal);
@@ -424,24 +424,29 @@ namespace SharePoint
         {
             for (var index = 0; index < textBoxes.Length; index++)
             {
-                textBoxes[index].Text = calculator.Invoke(months[index]).ToString();
+                textBoxes[index].Text = string.Format("{0:n0}", calculator.Invoke(months[index]));
             }
         }
 
         private void ProcessCheckBoxes(ProjectCost projectCost, CheckBox checkBox, ProjectType projectType, TextBox[] targets, TextBox[] actuals, int[] months)
         {
-            var cost = 0L;
+
             for (var index = 0; index < months.Length; index++)
             {
-                var parseResult = long.TryParse(targets[index].Text, out cost);
-                projectCost.SetCostEntry(projectType, CostType.Target, months[index], checkBox.Checked && parseResult ? cost : 0);
+                projectCost.SetCostEntry(projectType, CostType.Target, months[index], this.GetProcessedCost(checkBox, targets[index].Text));
             }
 
             for (var index = 0; index < months.Length; index++)
             {
-                var parseResult = long.TryParse(actuals[index].Text, out cost);
-                projectCost.SetCostEntry(projectType, CostType.Actual, months[index], checkBox.Checked && parseResult ? cost : 0);
+                projectCost.SetCostEntry(projectType, CostType.Actual, months[index], this.GetProcessedCost(checkBox, actuals[index].Text));
             }
+        }
+
+        private long GetProcessedCost(CheckBox checkBox, string costInput)
+        {
+            var cost = 0L;
+            var parseResult = long.TryParse(costInput.Replace(",", string.Empty), out cost);
+            return checkBox.Checked && parseResult ? cost : 0L;
         }
 
         private void ProcessCheckBoxes(ProjectCost projectCost, ProjectType projectType, TextBox[] targets, TextBox[] actuals, int[] months)

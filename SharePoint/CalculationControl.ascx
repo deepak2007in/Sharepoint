@@ -1358,40 +1358,40 @@
                         <asp:Label ID="hdngCAAct" runat="server" Text="Cost Avoidance-Target"></asp:Label>
                     </td>
                     <td>
-                        <asp:TextBox ID="cat1" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="cat1" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cat2" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="cat2" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cat3" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="cat3" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cat4" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="cat4" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cat5" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="cat5" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cat6" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="cat6" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cat7" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="cat7" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cat8" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="cat8" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cat9" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="cat9" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cat10" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="cat10" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cat11" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="cat11" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cat12" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="cat12" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                 </tr>
                 <tr id="CostAvoidanceActual">
@@ -1399,40 +1399,40 @@
                         <asp:Label ID="Label4" runat="server" Text="Cost Avoidance-Actual"></asp:Label>
                     </td>
                     <td>
-                        <asp:TextBox ID="caa1" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="caa1" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="caa2" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="caa2" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="caa3" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="caa3" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="caa4" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="caa4" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="caa5" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="caa5" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="caa6" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="caa6" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="caa7" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="caa7" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="caa8" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="caa8" runat="server"  onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="caa9" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="caa9" runat="server"  onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="caa10" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="caa10" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="caa11" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="caa11" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="caa12" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="caa12" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                 </tr>
                 <tr id="CostReductionTarget">
@@ -1440,40 +1440,40 @@
                         <asp:Label ID="Label5" runat="server" Text="Cost Reduction-Target"></asp:Label>
                     </td>
                     <td>
-                        <asp:TextBox ID="crt1" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="crt1" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="crt2" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="crt2" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="crt3" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="crt3" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="crt4" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="crt4" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="crt5" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="crt5" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="crt6" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="crt6" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="crt7" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="crt7" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="crt8" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="crt8" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="crt9" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="crt9" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="crt10" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="crt10" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="crt11" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="crt11" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="crt12" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="crt12" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                 </tr>
                 <tr id="CostReductionActual">
@@ -1481,40 +1481,40 @@
                         <asp:Label ID="Label6" runat="server" Text="Cost Reduction-Actual"></asp:Label>
                     </td>
                     <td>
-                        <asp:TextBox ID="cra1" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="cra1" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cra2" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="cra2" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cra3" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="cra3" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cra4" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="cra4" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cra5" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="cra5" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cra6" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="cra6" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cra7" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="cra7" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cra8" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="cra8" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cra9" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="cra9" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cra10" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="cra10" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cra11" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="cra11" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cra12" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="cra12" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                 </tr>
                 <tr id="RevenueGrowthTarget">
@@ -1522,40 +1522,40 @@
                         <asp:Label ID="Label7" runat="server" Text="Revenue Growth-Target"></asp:Label>
                     </td>
                     <td>
-                        <asp:TextBox ID="rgt1" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="rgt1" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="rgt2" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="rgt2" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="rgt3" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="rgt3" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="rgt4" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="rgt4" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="rgt5" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="rgt5" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="rgt6" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="rgt6" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="rgt7" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="rgt7" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="rgt8" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="rgt8" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="rgt9" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="rgt9" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="rgt10" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="rgt10" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="rgt11" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="rgt11" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="rgt12" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="rgt12" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                 </tr>
                 <tr id="RevenueGrowthActual">
@@ -1563,40 +1563,40 @@
                         <asp:Label ID="Label8" runat="server" Text="Revenue Growth-Actual"></asp:Label>
                     </td>
                     <td>
-                        <asp:TextBox ID="rga1" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="rga1" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="rga2" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="rga2" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="rga3" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="rga3" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="rga4" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="rga4" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="rga5" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="rga5" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="rga6" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="rga6" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="rga7" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="rga7" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="rga8" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="rga8" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="rga9" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="rga9" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="rga10" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="rga10" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="rga11" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="rga11" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="rga12" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="rga12" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                 </tr>
                 <tr id="CapacityIncreaseTarget">
@@ -1604,40 +1604,40 @@
                         <asp:Label ID="Label9" runat="server" Text="Capacity Increase-Target"></asp:Label>
                     </td>
                     <td>
-                        <asp:TextBox ID="cit1" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="cit1" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cit2" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="cit2" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cit3" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="cit3" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cit4" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="cit4" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cit5" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="cit5" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cit6" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="cit6" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cit7" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="cit7" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cit8" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="cit8" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cit9" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="cit9" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cit10" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="cit10" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cit11" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="cit11" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cit12" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="cit12" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                 </tr>
                 <tr id="CapacityIncreaseActual">
@@ -1645,40 +1645,40 @@
                         <asp:Label ID="Label10" runat="server" Text="Capacity Increase-Actual"></asp:Label>
                     </td>
                     <td>
-                        <asp:TextBox ID="cia1" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="cia1" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cia2" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="cia2" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cia3" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="cia3" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cia4" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="cia4" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cia5" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="cia5" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cia6" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="cia6" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cia7" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="cia7" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cia8" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="cia8" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cia9" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="cia9" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cia10" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="cia10" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cia11" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="cia11" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cia12" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="cia12" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"></asp:TextBox>
                     </td>
                 </tr>
                 <tr id="TotalTarget">
@@ -1686,40 +1686,40 @@
                         <asp:Label ID="targettotal" runat="server" Text="Target Total"></asp:Label>
                     </td>
                     <td>
-                        <asp:TextBox ID="target1total" runat="server" ReadOnly="true"></asp:TextBox>
+                        <asp:TextBox ID="target1total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" ReadOnly="true"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="target2total" runat="server" ReadOnly="true"></asp:TextBox>
+                        <asp:TextBox ID="target2total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" ReadOnly="true"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="target3total" runat="server" ReadOnly="true"></asp:TextBox>
+                        <asp:TextBox ID="target3total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" ReadOnly="true"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="target4total" runat="server" ReadOnly="true"></asp:TextBox>
+                        <asp:TextBox ID="target4total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" ReadOnly="true"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="target5total" runat="server" ReadOnly="true"></asp:TextBox>
+                        <asp:TextBox ID="target5total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" ReadOnly="true"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="target6total" runat="server" ReadOnly="true"></asp:TextBox>
+                        <asp:TextBox ID="target6total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" ReadOnly="true"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="target7total" runat="server" ReadOnly="true"></asp:TextBox>
+                        <asp:TextBox ID="target7total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" ReadOnly="true"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="target8total" runat="server" ReadOnly="true"></asp:TextBox>
+                        <asp:TextBox ID="target8total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" ReadOnly="true"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="target9total" runat="server" ReadOnly="true"></asp:TextBox>
+                        <asp:TextBox ID="target9total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" ReadOnly="true"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="target10total" runat="server" ReadOnly="true"></asp:TextBox>
+                        <asp:TextBox ID="target10total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" ReadOnly="true"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="target11total" runat="server" ReadOnly="true"></asp:TextBox>
+                        <asp:TextBox ID="target11total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" ReadOnly="true"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="target12total" runat="server" ReadOnly="true"></asp:TextBox>
+                        <asp:TextBox ID="target12total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" ReadOnly="true"></asp:TextBox>
                     </td>
                 </tr>
                 <tr id="TotalActual">
@@ -1727,40 +1727,40 @@
                         <asp:Label ID="ActualTotal" runat="server" Text="Actual Total"></asp:Label>
                     </td>
                     <td>
-                        <asp:TextBox ID="actual1total" runat="server" ReadOnly="true"></asp:TextBox>
+                        <asp:TextBox ID="actual1total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" ReadOnly="true"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="actual2total" runat="server" ReadOnly="true"></asp:TextBox>
+                        <asp:TextBox ID="actual2total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" ReadOnly="true"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="actual3total" runat="server" ReadOnly="true"></asp:TextBox>
+                        <asp:TextBox ID="actual3total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" ReadOnly="true"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="actual4total" runat="server" ReadOnly="true"></asp:TextBox>
+                        <asp:TextBox ID="actual4total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" ReadOnly="true"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="actual5total" runat="server" ReadOnly="true"></asp:TextBox>
+                        <asp:TextBox ID="actual5total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" ReadOnly="true"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="actual6total" runat="server" ReadOnly="true"></asp:TextBox>
+                        <asp:TextBox ID="actual6total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" ReadOnly="true"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="actual7total" runat="server" ReadOnly="true"></asp:TextBox>
+                        <asp:TextBox ID="actual7total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" ReadOnly="true"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="actual8total" runat="server" ReadOnly="true"></asp:TextBox>
+                        <asp:TextBox ID="actual8total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" ReadOnly="true"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="actual9total" runat="server" ReadOnly="true"></asp:TextBox>
+                        <asp:TextBox ID="actual9total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" ReadOnly="true"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="actual10total" runat="server" ReadOnly="true"></asp:TextBox>
+                        <asp:TextBox ID="actual10total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" ReadOnly="true"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="actual11total" runat="server" ReadOnly="true"></asp:TextBox>
+                        <asp:TextBox ID="actual11total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" ReadOnly="true"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="actual12total" runat="server" ReadOnly="true"></asp:TextBox>
+                        <asp:TextBox ID="actual12total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" ReadOnly="true"></asp:TextBox>
                     </td>
                 </tr>
             </table>
