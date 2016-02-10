@@ -58,11 +58,12 @@ namespace SharePoint
                 cra6.Text = "1000";
             }
 
-            //cra7.Text = cra8.Text = cra9.Text = cra10.Text = cra11.Text = cra12.Text = "4000";
-            //rgt1.Text = rgt2.Text = rgt3.Text = rgt4.Text = rgt5.Text = rgt6.Text = rgt7.Text = rgt8.Text = rgt9.Text = rgt10.Text = rgt11.Text = rgt12.Text = "10000";
-            //rga1.Text = rga2.Text = rga3.Text = rga4.Text = rga5.Text = rga6.Text = rga7.Text = rga8.Text = rga9.Text = rga10.Text = rga11.Text = rga12.Text = "6000";
-            //cit1.Text = cit2.Text = cit3.Text = cit4.Text = cit5.Text = cit6.Text = cit7.Text = cit8.Text = cit9.Text = cit10.Text = cit11.Text = cit12.Text = "10000";
-            //cia1.Text = cia2.Text = cia3.Text = cia4.Text = cia5.Text = cia6.Text = cia7.Text = cia8.Text = cia9.Text = cia10.Text = cia11.Text = cia12.Text = "7000";
+            var capEx = string.IsNullOrEmpty(txtcapExp.Text.Trim()) ? 0 : long.Parse(txtcapExp.Text);
+            var implementationCost = string.IsNullOrEmpty(txtimplcost.Text.Trim()) ? 0 : long.Parse(txtimplcost.Text);
+            if (capEx > 0 || implementationCost > 0)
+            {
+                tot
+            }
         }
 
         protected void btnSave_Click(object sender, EventArgs e)

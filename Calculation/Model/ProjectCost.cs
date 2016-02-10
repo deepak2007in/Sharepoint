@@ -34,27 +34,6 @@ namespace SCI.CIProject.ProjectSaving
         public int Period { get; set; }
 
         /// <summary>
-        /// Gets or sets the CapEx amount for the calculation.
-        /// </summary>
-        public long CapExAmount { get; set; }
-
-        /// <summary>
-        /// Gets or sets the implementation cost.
-        /// </summary>
-        public long ImplementationCost { get; set; }
-
-        /// <summary>
-        /// Gets the total cost calculated as the CapEx amount and the implementation cost.
-        /// </summary>
-        public long TotalCost
-        {
-            get
-            {
-                return this.CapExAmount + this.ImplementationCost;
-            }
-        }
-
-        /// <summary>
         /// Populates the cost specific entries in the dictionary.
         /// </summary>
         /// <param name="costEntries">The list of cost entries.</param>

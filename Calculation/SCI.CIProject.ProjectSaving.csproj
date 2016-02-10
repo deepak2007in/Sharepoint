@@ -48,7 +48,6 @@
     </Compile>
     <Compile Include="Model\ProjectTimeline.cs" />
     <Compile Include="Model\ProjectCostEntry.cs" />
-    <Compile Include="Model\ProjectMetaData.cs" />
     <Compile Include="ENum\CostType.cs" />
     <Compile Include="ENum\ProjectType.cs" />
     <Compile Include="Model\SharePointListItem.cs" />
