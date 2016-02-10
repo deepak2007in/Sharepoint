@@ -1172,7 +1172,7 @@
                                 <asp:Label ID="lblca" runat="server" Text="CA"></asp:Label>
                             </td>
                             <td>
-                                <asp:TextBox ID="twelvtxtcavalue" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="twelvtxtcavalue" runat="server" ReadOnly="true"></asp:TextBox>
                             </td>
                         </tr>
                         <tr id="twelveCostReduction">
@@ -1180,7 +1180,7 @@
                                 <asp:Label ID="lblcr" runat="server" Text="CR"></asp:Label>
                             </td>
                             <td>
-                                <asp:TextBox ID="twelvtxtcrvalue" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="twelvtxtcrvalue" runat="server" ReadOnly="true"></asp:TextBox>
                             </td>
                         </tr>
                         <tr id="twelveRevenueGrowth">
@@ -1188,7 +1188,7 @@
                                 <asp:Label ID="lblrg" runat="server" Text="RG"></asp:Label>
                             </td>
                             <td>
-                                <asp:TextBox ID="twelvtxtrgvalue" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="twelvtxtrgvalue" runat="server" ReadOnly="true"></asp:TextBox>
                             </td>
                         </tr>
                         <tr id="twelveCapacityIncrease">
@@ -1196,7 +1196,7 @@
                                 <asp:Label ID="lblci" runat="server" Text="CI"></asp:Label>
                             </td>
                             <td>
-                                <asp:TextBox ID="twelvtxtcivalue" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="twelvtxtcivalue" runat="server" ReadOnly="true"></asp:TextBox>
                             </td>
                         </tr>
                         <tr id="twelvetotal">
@@ -1223,7 +1223,7 @@
                                 <asp:Label ID="yearlblca" runat="server" Text="CA"></asp:Label>
                             </td>
                             <td>
-                                <asp:TextBox ID="yeartxtca" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="yeartxtca" runat="server" ReadOnly="true"></asp:TextBox>
                             </td>
                         </tr>
                         <tr id="yearCostReduction">
@@ -1231,7 +1231,7 @@
                                 <asp:Label ID="yearlblcr" runat="server" Text="CR"></asp:Label>
                             </td>
                             <td>
-                                <asp:TextBox ID="yeartxtcr" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="yeartxtcr" runat="server" ReadOnly="true"></asp:TextBox>
                             </td>
                         </tr>
                         <tr id="yearRevenueGrowth">
@@ -1239,7 +1239,7 @@
                                 <asp:Label ID="yearlblrg" runat="server" Text="RG"></asp:Label>
                             </td>
                             <td>
-                                <asp:TextBox ID="yeartxtrg" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="yeartxtrg" runat="server" ReadOnly="true"></asp:TextBox>
                             </td>
                         </tr>
                         <tr id="yearCapacityIncrease">
@@ -1247,7 +1247,7 @@
                                 <asp:Label ID="yearlblci" runat="server" Text="CI"></asp:Label>
                             </td>
                             <td>
-                                <asp:TextBox ID="yeartxtci" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="yeartxtci" runat="server" ReadOnly="true"></asp:TextBox>
                             </td>
                         </tr>
                         <tr id="yeartotal">
@@ -1272,7 +1272,7 @@
                                 <asp:Label ID="estlblca" runat="server" Text="CA"></asp:Label>
                             </td>
                             <td>
-                                <asp:TextBox ID="esttxtca" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="esttxtca" runat="server" ReadOnly="true"></asp:TextBox>
                             </td>
                         </tr>
                         <tr id="estCostReduction">
@@ -1280,7 +1280,7 @@
                                 <asp:Label ID="estlblcr" runat="server" Text="CR"></asp:Label>
                             </td>
                             <td>
-                                <asp:TextBox ID="esttxtcr" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="esttxtcr" runat="server" ReadOnly="true"></asp:TextBox>
                             </td>
                         </tr>
                         <tr id="estRevenueGrowth">
@@ -1288,7 +1288,7 @@
                                 <asp:Label ID="estlblrg" runat="server" Text="RG"></asp:Label>
                             </td>
                             <td>
-                                <asp:TextBox ID="esttxtrg" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="esttxtrg" runat="server" ReadOnly="true"></asp:TextBox>
                             </td>
                         </tr>
                         <tr id="estCapacityIncrease">
@@ -1296,7 +1296,7 @@
                                 <asp:Label ID="estlblci" runat="server" Text="CI"></asp:Label>
                             </td>
                             <td>
-                                <asp:TextBox ID="esttxtci" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="esttxtci" runat="server" ReadOnly="true"></asp:TextBox>
                             </td>
                         </tr>
                         <tr id="esttotal">
