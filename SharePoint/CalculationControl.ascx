@@ -72,8 +72,10 @@
         var implemcost = document.getElementById("<%=txtimplcost.ClientID %>");
 
         if (capexpamount.value != "" || implemcost.value != "") {
-            var result = parseInt(capexpamount.value) + parseInt(implemcost.value);
-            $("#<%=lbltotalval.ClientID %>").text(result);
+            var capexpamountvalue = capexpamount.value.replace(',', '');
+            var implemcostvalue = implemcost.value.replace(',', '');
+            var result = parseInt(capexpamountvalue) + parseInt(implemcostvalue);
+            $("#<%=lbltotalval.ClientID %>").text(result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
         }
     });
 
@@ -1056,7 +1058,7 @@
                             </td>
                             <td>
                                 $
-                                <asp:TextBox ID="txtimplcost" Text="0" Style="padding-top: 4px;" runat="server"></asp:TextBox>&nbsp;<span
+                                <asp:TextBox ID="txtimplcost" Text="0" Style="padding-top: 4px;" runat="server" onkeyup="FormatCurrency(this);" onkeypress="return NumberOnly()"></asp:TextBox>&nbsp;<span
                                     class="errmsg"></span>
                             </td>
                         </tr>

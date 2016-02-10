@@ -48,16 +48,15 @@ $(document).ready(function () {
     //    $('#total_price').val(Number(a) + Number(b));
     //    if (!isNaN($('input[name=service_price]').val())
     $('[id$="txtcapExp"]').blur(function () {
-
-        var total = parseInt($('[id$="txtcapExp"]').val().replace(/,/g, ""), 10) + parseInt($('[id$="txtimplcost"]').val().replace(/,/g, ""), 10);
-        $('[id$="lbltotalval"]').text(total);
-        $('[id$="hdntotal"]').val(total);
+        var total = parseInt($('[id$="txtcapExp"]').val().replace(/,/g, '').trim().replace('', '0'), 10) + parseInt($('[id$="txtimplcost"]').val().replace(/,/g, '').trim().replace('', '0'), 10);
+        $('[id$="lbltotalval"]').text(total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+        $('[id$="hdntotal"]').val(total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
     });
 
     $('[id$="txtimplcost"]').blur(function () {
-        var total = parseInt($('[id$="txtcapExp"]').val().replace(/,/g, ""), 10) + parseInt($('[id$="txtimplcost"]').val().replace(/,/g, ""), 10);
-        $('[id$="lbltotalval"]').text(total);
-        $('[id$="hdntotal"]').val(total);
+        var total = parseInt($('[id$="txtcapExp"]').val().replace(/,/g, '').trim().replace('', '0'), 10) + parseInt($('[id$="txtimplcost"]').val().replace(/,/g, '').trim().replace('', '0'), 10);
+        $('[id$="lbltotalval"]').text(total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+        $('[id$="hdntotal"]').val(total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
     });
 
 
