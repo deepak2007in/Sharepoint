@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
 namespace SharePoint
@@ -56,6 +57,8 @@ namespace SharePoint
                 cra4.Text = "1,000";
                 cra5.Text = "1,000";
                 cra6.Text = "1,000";
+
+                DisableWritingInCalculation(true);
             }
         }
 
@@ -561,7 +564,36 @@ namespace SharePoint
             }
         }
 
+        private void DisableWritingInCalculation(bool flag)
+        {
+            foreach (var child in dynamicTable.Controls)
+            {
+                if (child is HtmlTableRow)
+                {
+                    var row = child as HtmlTableRow;
+                    foreach (var rowChild in row.Controls)
+                    {
+                        if (rowChild is HtmlTableCell)
+                        {
+                            var cell = rowChild as HtmlTableCell;
+                            foreach (var cellChild in cell.Controls)
+                            {
+                                if (cellChild is TextBox)
+                                {
+                                    var textBox = cellChild as TextBox;
+                                    textBox.ReadOnly = flag;
+                                }
+                            }
+
+                        }
+                    }
+                }
+            }
+        }
+
         #endregion
+
+
 
     }
 }
