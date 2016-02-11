@@ -1068,7 +1068,7 @@
                             </td>
                             <td>
                                 $
-                                <asp:Label ID="lbltotalval" Style="padding-top: 4px;" runat="server"></asp:Label>
+                                <asp:Label ID="lbltotalval" Style="padding-top: 4px;" runat="server" EnableViewState="true"></asp:Label>
                                 <asp:HiddenField runat="server" ID="hdntotal" />
                             </td>
                         </tr>

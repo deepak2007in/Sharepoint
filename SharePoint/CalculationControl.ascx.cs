@@ -57,8 +57,6 @@ namespace SharePoint
                 cra4.Text = "1,000";
                 cra5.Text = "1,000";
                 cra6.Text = "1,000";
-
-                DisableWritingInCalculation(true);
             }
         }
 
@@ -564,33 +562,24 @@ namespace SharePoint
             }
         }
 
-        private void DisableWritingInCalculation(bool flag)
+        private void DisableWritingInCalculation(Control control, bool flag)
         {
-            foreach (var child in dynamicTable.Controls)
+            if (control is TextBox)
             {
-                if (child is HtmlTableRow)
+                var textBox = control as TextBox;
+                textBox.ReadOnly = flag;
+            }
+            else
+            {
+                if (control.Controls.Count > 0)
                 {
-                    var row = child as HtmlTableRow;
-                    foreach (var rowChild in row.Controls)
+                    foreach (var childControl in control.Controls)
                     {
-                        if (rowChild is HtmlTableCell)
-                        {
-                            var cell = rowChild as HtmlTableCell;
-                            foreach (var cellChild in cell.Controls)
-                            {
-                                if (cellChild is TextBox)
-                                {
-                                    var textBox = cellChild as TextBox;
-                                    textBox.ReadOnly = flag;
-                                }
-                            }
-
-                        }
+                        this.DisableWritingInCalculation(childControl as Control, flag);
                     }
                 }
             }
         }
-
         #endregion
 
 
