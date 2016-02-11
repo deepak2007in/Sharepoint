@@ -67,12 +67,12 @@ namespace SharePoint
 
         protected void ddlPeriod_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (dtImplDate != null)
+            if (ddlPeriod.SelectedValue != "0")
             {
-                dtComplDate.Enabled = true;
-                dtComplDate.SelectedDate = dtImplDate.SelectedDate.AddYears(1);
-                dtComplDate.Enabled = false;
-                var processingMonths = this.ProcessTimeline();
+                if (dtImplDate != null)
+                {
+                    var processingMonths = this.ProcessTimeline();
+                }
             }
         }
 
