@@ -174,8 +174,9 @@ $(document).ready(function () {
             $('[id*="chkCostReduction"]').prop('disabled', false); // Unchecks it
             $('[id*="chkRevenueGrowth"]').prop('disabled', false); // Unchecks it
             $('[id*="chkCapacityIncrease"]').prop('disabled', false); // Unchecks it
-            $('[id*="dynamicTable"]').hide();
-
+            $('[id*="dynamicTable"]').show();
+            $('.col3').css("display", "inline");
+            $('.col2').css("display", "inline");
 
         }
     });
@@ -310,7 +311,6 @@ function ValidateSaveFields() {
     //    }
     // CI Saving Part
     if (!$('[id*="chlLeanBnft"]').is(":checked")) {
-
         var capitalrequired = $('[id*="rdoCapitalrequi"] input:checked').val();
         if (capitalrequired == "Yes") {
             if (!capexpamount.length > 0) {

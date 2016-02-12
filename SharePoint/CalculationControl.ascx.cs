@@ -33,9 +33,7 @@ namespace SharePoint
                 caa1.Text = "5,000";
                 caa2.Text = "5,000";
                 caa3.Text = "5,000";
-                caa4.Text = "5,000";
-                caa5.Text = "5,000";
-                caa6.Text = "5,000";
+                
                 //caa7.Text = caa8.Text = caa9.Text = caa10.Text = caa11.Text = caa12.Text = "5000";
 
                 crt1.Text = "1,500";
@@ -54,9 +52,6 @@ namespace SharePoint
                 cra1.Text = "1,000";
                 cra2.Text = "1,000";
                 cra3.Text = "1,000";
-                cra4.Text = "1,000";
-                cra5.Text = "1,000";
-                cra6.Text = "1,000";
             }
         }
 
@@ -587,8 +582,6 @@ namespace SharePoint
             }
         }
         #endregion
-
-
 
     }
 }
