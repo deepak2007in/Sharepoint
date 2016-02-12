@@ -445,9 +445,15 @@ namespace SharePoint
 
         private long GetProcessedCost(CheckBox checkBox, string costInput)
         {
+            var cost = GetProcessedCost(costInput);
+            return checkBox.Checked ? cost : 0L;
+        }
+
+        private long GetProcessedCost(string costInput)
+        {
             var cost = 0L;
-            var parseResult = long.TryParse(costInput.Replace(",", string.Empty), out cost);
-            return checkBox.Checked && parseResult ? cost : 0L;
+            long.TryParse(costInput.Replace(",", string.Empty), out cost);
+            return cost;
         }
 
         private void ProcessCheckBoxes(ProjectCost projectCost, ProjectType projectType, TextBox[] targets, TextBox[] actuals, int[] months)
