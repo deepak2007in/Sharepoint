@@ -1222,7 +1222,7 @@
                         </tr>
                         <tr id="yearCostAvoidance">
                             <td>
-                                <asp:Label ID="yearlblca" runat="server" Text="CA"></asp:Label>
+                                <asp:Label ID="yearlblca" runat="server" Text="CA" Width="20%"></asp:Label>
                             </td>
                             <td>
                                 $<asp:TextBox ID="yeartxtca" runat="server" ReadOnly="true" Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
@@ -1230,7 +1230,7 @@
                         </tr>
                         <tr id="yearCostReduction">
                             <td>
-                                <asp:Label ID="yearlblcr" runat="server" Text="CR" ></asp:Label>
+                                <asp:Label ID="yearlblcr" runat="server" Text="CR" Width="20%"></asp:Label>
                             </td>
                             <td>
                                 $<asp:TextBox ID="yeartxtcr" runat="server" ReadOnly="true" Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
@@ -1238,7 +1238,7 @@
                         </tr>
                         <tr id="yearRevenueGrowth">
                             <td>
-                                <asp:Label ID="yearlblrg" runat="server" Text="RG"></asp:Label>
+                                <asp:Label ID="yearlblrg" runat="server" Text="RG" Width="20%"></asp:Label>
                             </td>
                             <td>
                                 $<asp:TextBox ID="yeartxtrg" runat="server" ReadOnly="true" Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
@@ -1246,7 +1246,7 @@
                         </tr>
                         <tr id="yearCapacityIncrease">
                             <td>
-                                <asp:Label ID="yearlblci" runat="server" Text="CI"></asp:Label>
+                                <asp:Label ID="yearlblci" runat="server" Text="CI" Width="20%"></asp:Label>
                             </td>
                             <td>
                                 $<asp:TextBox ID="yeartxtci" runat="server" ReadOnly="true" Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
@@ -1254,7 +1254,7 @@
                         </tr>
                         <tr id="yeartotal">
                             <td>
-                                <asp:Label ID="yearlbltotal" runat="server" Text="Total"></asp:Label>
+                                <asp:Label ID="yearlbltotal" runat="server" Text="Total" Width="20%"></asp:Label>
                             </td>
                             <td>
                                 $<asp:TextBox ID="yearlbltotalval" runat="server" ReadOnly="true" Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
@@ -1271,7 +1271,7 @@
                         </tr>
                         <tr id="estCostAvoidance">
                             <td>
-                                <asp:Label ID="estlblca" runat="server" Text="CA"></asp:Label>
+                                <asp:Label ID="estlblca" runat="server" Text="CA" Width="20%"></asp:Label>
                             </td>
                             <td>
                                 $<asp:TextBox ID="esttxtca" runat="server" ReadOnly="true" Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
@@ -1279,7 +1279,7 @@
                         </tr>
                         <tr id="estCostReduction">
                             <td>
-                                <asp:Label ID="estlblcr" runat="server" Text="CR"></asp:Label>
+                                <asp:Label ID="estlblcr" runat="server" Text="CR" Width="20%"></asp:Label>
                             </td>
                             <td>
                                 $<asp:TextBox ID="esttxtcr" runat="server" ReadOnly="true" Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
@@ -1287,7 +1287,7 @@
                         </tr>
                         <tr id="estRevenueGrowth">
                             <td>
-                                <asp:Label ID="estlblrg" runat="server" Text="RG"></asp:Label>
+                                <asp:Label ID="estlblrg" runat="server" Text="RG" Width="20%"></asp:Label>
                             </td>
                             <td>
                                 $<asp:TextBox ID="esttxtrg" runat="server" ReadOnly="true" Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
@@ -1295,7 +1295,7 @@
                         </tr>
                         <tr id="estCapacityIncrease">
                             <td>
-                                <asp:Label ID="estlblci" runat="server" Text="CI"></asp:Label>
+                                <asp:Label ID="estlblci" runat="server" Text="CI" Width="20%"></asp:Label>
                             </td>
                             <td>
                                 $<asp:TextBox ID="esttxtci" runat="server" ReadOnly="true" Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
@@ -1303,7 +1303,7 @@
                         </tr>
                         <tr id="esttotal">
                             <td>
-                                <asp:Label ID="estlbltotal" runat="server" Text="Total"></asp:Label>
+                                <asp:Label ID="estlbltotal" runat="server" Text="Total" Width="20%"></asp:Label>
                             </td>
                             <td>
                                 $<asp:TextBox ID="estlbltotalval" runat="server" ReadOnly="true" Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
