@@ -15,11 +15,27 @@ namespace SharePoint
     {
         public static bool IsDateEmpty(this System.Web.UI.WebControls.Calendar calender)
         {
-            return false;
+            return calender.SelectedDates.Count == 0;
         }
     }
     public partial class CalculationControl : System.Web.UI.UserControl
     {
+        private bool IsProjectApprovedByCI
+        {
+            get
+            {
+                return true;
+            }
+        }
+
+        private bool isChangedToBlueChecked
+        {
+            get
+            {
+                return false;
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -40,7 +56,7 @@ namespace SharePoint
                 caa1.Text = "5,000";
                 caa2.Text = "5,000";
                 caa3.Text = "5,000";
-                
+
                 //caa7.Text = caa8.Text = caa9.Text = caa10.Text = caa11.Text = caa12.Text = "5000";
 
                 crt1.Text = "1,500";
@@ -59,6 +75,8 @@ namespace SharePoint
                 cra1.Text = "1,000";
                 cra2.Text = "1,000";
                 cra3.Text = "1,000";
+
+                this.ProcessTimeline(DateTime.Now);
             }
         }
 
@@ -277,76 +295,59 @@ namespace SharePoint
             }
         }
 
+        private Label[] MonthLabels
+        {
+            get
+            {
+                return new[] { lblmnth1, lblmnth2, lblmnth3, lblmnth4, lblmnth5, lblmnth6, lblmnth7, lblmnth8, lblmnth9, lblmnth10, lblmnth11, lblmnth12 };
+            }
+        }
+
         private int[] ProcessTimeline()
         {
             var implementationDate = dtImplDate.SelectedDate;
+            return this.ProcessTimeline();
+        }
+
+        private int[] ProcessTimeline(DateTime implementationDate)
+        {
             var validationResult = ProjectTimeline.ValidateImplementationDate(implementationDate);
             if (validationResult)
             {
                 var projectTimeLine = new ProjectTimeline(implementationDate);
-                if (!dtImplDate.IsDateEmpty())
-                    dtComplDate.SelectedDate = projectTimeLine.CompletionDate;
-                var months = projectTimeLine.Months;
-                if (months.Length == 12)
-                {
-                    lblmnth1.Text = months[0].ToString();
-                    lblmnth2.Text = months[1].ToString();
-                    lblmnth3.Text = months[2].ToString();
-                    lblmnth4.Text = months[3].ToString();
-                    lblmnth5.Text = months[4].ToString();
-                    lblmnth6.Text = months[5].ToString();
-                    lblmnth7.Text = months[6].ToString();
-                    lblmnth8.Text = months[7].ToString();
-                    lblmnth9.Text = months[8].ToString();
-                    lblmnth10.Text = months[9].ToString();
-                    lblmnth11.Text = months[10].ToString();
-                    lblmnth12.Text = months[11].ToString();
-                }
-                this.DisableCells(projectTimeLine.MonthDates, new[] { lblmnth1, lblmnth2, lblmnth3, lblmnth4, lblmnth5, lblmnth6, lblmnth7, lblmnth8, lblmnth9, lblmnth10, lblmnth11, lblmnth12 });
-                var color = this.ProcessColor(projectTimeLine.MonthDates, new[] { lblmnth1, lblmnth2, lblmnth3, lblmnth4, lblmnth5, lblmnth6, lblmnth7, lblmnth8, lblmnth9, lblmnth10, lblmnth11, lblmnth12 });
-                switch (color)
-                {
-                    case StatusColor.Yellow:
-                        txtProjStatus.Text = "YELLOW";
-                        txtProjStatus.ForeColor = Color.Black;
-                        txtProjStatus.BackColor = Color.Yellow;
-                        lblprojstatusvalue.Text = "YELLOW";
-                        lblprojstatusvalue.ForeColor = Color.Black;
-                        lblprojstatusvalue.BackColor = Color.Yellow;
-                        break;
-                    case StatusColor.Green:
-                        txtProjStatus.Text = "GREEN";
-                        txtProjStatus.ForeColor = Color.White;
-                        txtProjStatus.BackColor = Color.Green;
-                        lblprojstatusvalue.Text = "GREEN";
-                        lblprojstatusvalue.ForeColor = Color.White;
-                        lblprojstatusvalue.BackColor = Color.Green;
-                        break;
-                    case StatusColor.Red:
-                        txtProjStatus.Text = "RED";
-                        txtProjStatus.ForeColor = Color.White;
-                        txtProjStatus.BackColor = Color.Red;
-                        lblprojstatusvalue.Text = "RED";
-                        lblprojstatusvalue.ForeColor = Color.White;
-                        lblprojstatusvalue.BackColor = Color.Red;
-                        break;
-                    case StatusColor.Black:
-                        txtProjStatus.Text = "BLACK";
-                        txtProjStatus.ForeColor = Color.White;
-                        txtProjStatus.BackColor = Color.Black;
-                        lblprojstatusvalue.Text = "BLACK";
-                        lblprojstatusvalue.ForeColor = Color.White;
-                        lblprojstatusvalue.BackColor = Color.Black;
-                        break;
-                }
-
-                if (ddlPeriod.SelectedValue == "0")
-                {
-                    ddlPeriod.SelectedValue = implementationDate.AddMonths(-1).Month.ToString();
-                }
-                return months;
+                return this.ProcessTimeline(projectTimeLine);
             }
             return new int[0];
+        }
+
+        private int[] ProcessTimeline(ProjectTimeline projectTimeLine)
+        {
+            if (!dtImplDate.IsDateEmpty())
+                dtComplDate.SelectedDate = projectTimeLine.CompletionDate;
+            var months = projectTimeLine.Months;
+            if (months.Length == 12)
+            {
+                lblmnth1.Text = months[0].ToString();
+                lblmnth2.Text = months[1].ToString();
+                lblmnth3.Text = months[2].ToString();
+                lblmnth4.Text = months[3].ToString();
+                lblmnth5.Text = months[4].ToString();
+                lblmnth6.Text = months[5].ToString();
+                lblmnth7.Text = months[6].ToString();
+                lblmnth8.Text = months[7].ToString();
+                lblmnth9.Text = months[8].ToString();
+                lblmnth10.Text = months[9].ToString();
+                lblmnth11.Text = months[10].ToString();
+                lblmnth12.Text = months[11].ToString();
+            }
+            this.DisableCells(projectTimeLine.MonthDates, this.MonthLabels);
+            this.ProcessColor(projectTimeLine, this.IsProjectApprovedByCI, this.IsChildControlStateCleared);
+            if (ddlPeriod.SelectedValue == "0")
+            {
+                ddlPeriod.SelectedValue = projectTimeLine.ClosestPeriod.ToString();
+            }
+            return months;
+
         }
 
         private ProjectCost ProcessCost(int[] months)
@@ -366,65 +367,120 @@ namespace SharePoint
             return projectCost;
         }
 
-        private StatusColor ProcessColor(DateTime[] monthDates, Label[] labels)
+        private void ProcessColor(ProjectTimeline projectTimeLine, bool isProjectApprovedByCI, bool isChangedToBlueChecked)
         {
-            if (monthDates[monthDates.Length - 1] < DateTime.Now)
+            var color = this.ProcessColor(projectTimeLine.MonthDates, this.MonthLabels, isProjectApprovedByCI, isChangedToBlueChecked);
+            switch (color)
             {
-                var lbl = labels[monthDates.Length - 1];
-                var actuals = this.GetActualsForMonth(lbl.ID);
-                var areAllValuesEnteredForActuals = true;
-                foreach (var actual in actuals)
+                case StatusColor.Yellow:
+                    this.ProcessColor(txtProjStatus, "YELLOW", Color.Yellow, Color.Black);
+                    this.ProcessColor(lblprojstatusvalue, "YELLOW", Color.Yellow, Color.Black);
+                    break;
+                case StatusColor.Green:
+                    this.ProcessColor(txtProjStatus, "GREEN", Color.Green, Color.White);
+                    this.ProcessColor(lblprojstatusvalue, "GREEN", Color.Green, Color.White);
+                    break;
+                case StatusColor.Red:
+                    this.ProcessColor(txtProjStatus, "RED", Color.Red, Color.White);
+                    this.ProcessColor(lblprojstatusvalue, "RED", Color.Red, Color.White);
+                    break;
+                case StatusColor.Black:
+                    this.ProcessColor(txtProjStatus, "BLACK", Color.Black, Color.White);
+                    this.ProcessColor(lblprojstatusvalue, "BLACK", Color.Black, Color.White);
+                    break;
+                case StatusColor.Gray:
+                    this.ProcessColor(txtProjStatus, "DRAFT", Color.Gray, Color.White);
+                    this.ProcessColor(lblprojstatusvalue, "BLACK", Color.Gray, Color.White);
+                    break;
+                case StatusColor.Blue:
+                    this.ProcessColor(txtProjStatus, "BLUE", Color.Blue, Color.White);
+                    this.ProcessColor(lblprojstatusvalue, "BLUE", Color.Blue, Color.White);
+                    break;
+            }
+        }
+
+        private void ProcessColor(WebControl control, string displayText, Color backColor, Color foreColor)
+        {
+            if (control is ITextControl)
+            {
+                var textControl = control as ITextControl;
+                textControl.Text = displayText;
+            }
+            control.BackColor = backColor;
+            control.ForeColor = foreColor;
+        }
+
+        private StatusColor ProcessColor(DateTime[] monthDates, Label[] labels, bool isProjectApprovedByCI, bool isChangedToBlueChecked)
+        {
+            if (isProjectApprovedByCI)
+            {
+                if (isChangedToBlueChecked)
                 {
-                    if (actual.Text == "" && this.GetCheckBoxForActual(actual.ID).Checked)
+                    return StatusColor.Blue;
+                }
+
+                if (monthDates[monthDates.Length - 1] < DateTime.Now)
+                {
+                    var lbl = labels[monthDates.Length - 1];
+                    var actuals = this.GetActualsForMonth(lbl.ID);
+                    var areAllValuesEnteredForActuals = true;
+                    foreach (var actual in actuals)
                     {
-                        areAllValuesEnteredForActuals = false;
+                        if (actual.Text == "" && this.GetCheckBoxForActual(actual.ID).Checked)
+                        {
+                            areAllValuesEnteredForActuals = false;
+                            break;
+                        }
+                    }
+
+                    if (areAllValuesEnteredForActuals)
+                    {
+                        return StatusColor.Black;
+                    }
+                }
+                DateTime monthDate;
+                var dateToCompareAgainst = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddMinutes(-1);
+                for (var index = 0; index < monthDates.Length; index++)
+                {
+                    monthDate = monthDates[index].AddMonths(1);
+                    if (monthDate > dateToCompareAgainst.AddMonths(-2))
+                    {
+                        var lbl = labels[index];
+                        var actuals = this.GetActualsForMonth(lbl.ID);
+                        foreach (var actual in actuals)
+                        {
+                            if (actual.Text == "" && this.GetCheckBoxForActual(actual.ID).Checked)
+                            {
+                                return StatusColor.Red;
+                            }
+                        }
                         break;
                     }
                 }
 
-                if (areAllValuesEnteredForActuals)
+                for (var index = 0; index < monthDates.Length; index++)
                 {
-                    return StatusColor.Black;
-                }
-            }
-            DateTime monthDate;
-            var dateToCompareAgainst = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddMinutes(-1);
-            for (var index = 0; index < monthDates.Length; index++)
-            {
-                monthDate = monthDates[index].AddMonths(1);
-                if (monthDate > dateToCompareAgainst.AddMonths(-2))
-                {
-                    var lbl = labels[index];
-                    var actuals = this.GetActualsForMonth(lbl.ID);
-                    foreach (var actual in actuals)
+                    monthDate = monthDates[index].AddMonths(1);
+                    if (monthDate > dateToCompareAgainst.AddMonths(-1))
                     {
-                        if (actual.Text == "" && this.GetCheckBoxForActual(actual.ID).Checked)
+                        var lbl = labels[index];
+                        var actuals = this.GetActualsForMonth(lbl.ID);
+                        foreach (var actual in actuals)
                         {
-                            return StatusColor.Red;
+                            if (actual.Text == "" && this.GetCheckBoxForActual(actual.ID).Checked)
+                            {
+                                return StatusColor.Yellow;
+                            }
                         }
+                        break;
                     }
-                    break;
                 }
+                return StatusColor.Green;
             }
-
-            for (var index = 0; index < monthDates.Length; index++)
+            else
             {
-                monthDate = monthDates[index].AddMonths(1);
-                if (monthDate > dateToCompareAgainst.AddMonths(-1))
-                {
-                    var lbl = labels[index];
-                    var actuals = this.GetActualsForMonth(lbl.ID);
-                    foreach (var actual in actuals)
-                    {
-                        if (actual.Text == "" && this.GetCheckBoxForActual(actual.ID).Checked)
-                        {
-                            return StatusColor.Yellow;
-                        }
-                    }
-                    break;
-                }
+                return StatusColor.Gray;
             }
-            return StatusColor.Green;
         }
 
         private void ProcessTotal(SharePointListItem sharepointListItem, ProjectCost projectCost, int[] months)

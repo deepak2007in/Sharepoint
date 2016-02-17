@@ -86,6 +86,17 @@ namespace SCI.CIProject.ProjectSaving
         }
 
         /// <summary>
+        /// Gets the closest period value for the implementation date.
+        /// </summary>
+        public int ClosestPeriod
+        {
+            get
+            {
+                return this.ImplementationDate.AddMonths(-1).Month;
+            }
+        }
+
+        /// <summary>
         /// Determines that the implementation date does fall in first 5 days of the month or not.
         /// </summary>
         /// <returns>True if the implementation date does fall in first 5 days of the month; false otherwise.</returns>

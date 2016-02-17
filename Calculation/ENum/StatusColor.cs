@@ -11,6 +11,8 @@ namespace SCI.CIProject.ProjectSaving
         Yellow,
         Red,
         Black,
-        Green
+        Green,
+        Gray,
+        Blue
     }
 }
