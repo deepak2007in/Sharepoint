@@ -11,6 +11,13 @@ using System.Web.UI.WebControls;
 
 namespace SharePoint
 {
+    public static class Extensions
+    {
+        public static bool IsDateEmpty(this System.Web.UI.WebControls.Calendar calender)
+        {
+            return false;
+        }
+    }
     public partial class CalculationControl : System.Web.UI.UserControl
     {
         protected void Page_Load(object sender, EventArgs e)
@@ -92,7 +99,24 @@ namespace SharePoint
         }
 
         #region Calculation
-
+        private void DisableWritingInCalculation(Control control, bool flag)
+        {
+            if (control is TextBox)
+            {
+                var textBox = control as TextBox;
+                textBox.ReadOnly = flag;
+            }
+            else
+            {
+                if (control.Controls.Count > 0)
+                {
+                    foreach (var childControl in control.Controls)
+                    {
+                        this.DisableWritingInCalculation(childControl as Control, flag);
+                    }
+                }
+            }
+        }
         private TextBox[] TargetTextBoxesForCA
         {
             get
@@ -260,7 +284,8 @@ namespace SharePoint
             if (validationResult)
             {
                 var projectTimeLine = new ProjectTimeline(implementationDate);
-                dtComplDate.SelectedDate = projectTimeLine.CompletionDate;
+                if (!dtImplDate.IsDateEmpty())
+                    dtComplDate.SelectedDate = projectTimeLine.CompletionDate;
                 var months = projectTimeLine.Months;
                 if (months.Length == 12)
                 {
@@ -285,21 +310,33 @@ namespace SharePoint
                         txtProjStatus.Text = "YELLOW";
                         txtProjStatus.ForeColor = Color.Black;
                         txtProjStatus.BackColor = Color.Yellow;
+                        lblprojstatusvalue.Text = "YELLOW";
+                        lblprojstatusvalue.ForeColor = Color.Black;
+                        lblprojstatusvalue.BackColor = Color.Yellow;
                         break;
                     case StatusColor.Green:
                         txtProjStatus.Text = "GREEN";
                         txtProjStatus.ForeColor = Color.White;
                         txtProjStatus.BackColor = Color.Green;
+                        lblprojstatusvalue.Text = "GREEN";
+                        lblprojstatusvalue.ForeColor = Color.White;
+                        lblprojstatusvalue.BackColor = Color.Green;
                         break;
                     case StatusColor.Red:
                         txtProjStatus.Text = "RED";
                         txtProjStatus.ForeColor = Color.White;
                         txtProjStatus.BackColor = Color.Red;
+                        lblprojstatusvalue.Text = "RED";
+                        lblprojstatusvalue.ForeColor = Color.White;
+                        lblprojstatusvalue.BackColor = Color.Red;
                         break;
                     case StatusColor.Black:
                         txtProjStatus.Text = "BLACK";
                         txtProjStatus.ForeColor = Color.White;
                         txtProjStatus.BackColor = Color.Black;
+                        lblprojstatusvalue.Text = "BLACK";
+                        lblprojstatusvalue.ForeColor = Color.White;
+                        lblprojstatusvalue.BackColor = Color.Black;
                         break;
                 }
 
@@ -315,9 +352,10 @@ namespace SharePoint
         private ProjectCost ProcessCost(int[] months)
         {
             var period = int.Parse(ddlPeriod.SelectedValue);
-
             var projectCost = new ProjectCost(period);
-
+            projectCost.CapExAmount = this.GetProcessedCost(txtcapExp.Text.Trim());
+            projectCost.ImplementationCost = this.GetProcessedCost(txtimplcost.Text.Trim());
+            hdntotal.Value = string.Format("{0:n0}", projectCost.TotalCost);
             this.ProcessCheckBoxes(projectCost, chkCostAvoidance, ProjectType.CostAvoidance, this.TargetTextBoxesForCA, this.ActualTextBoxesForCA, months);
             this.ProcessCheckBoxes(projectCost, chkCostReduction, ProjectType.CostReduction, this.TargetTextBoxesForCR, this.ActualTextBoxesForCR, months);
             this.ProcessCheckBoxes(projectCost, chkRevenueGrowth, ProjectType.RevenueGrowth, this.TargetTextBoxesForRG, this.ActualTextBoxesForRG, months);
@@ -563,24 +601,6 @@ namespace SharePoint
             }
         }
 
-        private void DisableWritingInCalculation(Control control, bool flag)
-        {
-            if (control is TextBox)
-            {
-                var textBox = control as TextBox;
-                textBox.ReadOnly = flag;
-            }
-            else
-            {
-                if (control.Controls.Count > 0)
-                {
-                    foreach (var childControl in control.Controls)
-                    {
-                        this.DisableWritingInCalculation(childControl as Control, flag);
-                    }
-                }
-            }
-        }
         #endregion
 
     }

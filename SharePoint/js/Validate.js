@@ -7,6 +7,29 @@ $(document).ready(function () {
     $(":checkbox").each(function () {
         hideAggregateRow($(this));
     });
+
+
+    // audit action
+    $('[id*="ddlauditstatus"]').change(function () {
+        if ($('[id*="ddlauditstatus"]').children("option").filter(":selected").text() != "") {
+
+            $('[id*="lblauditstatusvalue"]').show();
+            $('[id*="lblauditstatusvalue"]').text($('[id*="ddlauditstatus"]').children("option").filter(":selected").text() + "Status");
+            $('[id*="lblauditstatusvalue"]').css('background-color', $('[id*="ddlauditstatus"]').children("option").filter(":selected").text());
+            $('[id*="lblauditstatusvalue"]').css('color', $('[id*="ddlauditstatus"]').children("option").filter(":selected").text());
+            $('[id*="txtAudStatus"]').show();
+            $('[id*="lblAuditStatushdr"]').show();
+            $('[id*="txtAudStatus"]').css('background-color', $('[id*="ddlauditstatus"]').children("option").filter(":selected").text());
+            $('[id*="txtAudStatus"]').text($('[id*="ddlauditstatus"]').children("option").filter(":selected").text());
+        }
+        else {
+
+            $('[id*="lblauditstatusvalue"]').hide();
+            $('[id*="lblauditstatusvalue"]').text("");
+            $('[id*="txtAudStatus"]').hide();
+            $('[id*="lblAuditStatushdr"]').hide();
+        }
+    });
     // cost avoidance click event chekbox
     $('[id*="chkCostAvoidance"]').click(function () {
         hideAggregateRow($(this));
@@ -50,13 +73,13 @@ $(document).ready(function () {
     $('[id$="txtcapExp"]').blur(function () {
         var total = parseInt($('[id$="txtcapExp"]').val().replace(/,/g, '').trim().replace('', '0'), 10) + parseInt($('[id$="txtimplcost"]').val().replace(/,/g, '').trim().replace('', '0'), 10);
         $('[id$="lbltotalval"]').text(total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-        $('[id$="hdntotal"]').val(total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+        $('[id$="hdntotal"]').val($('[id$="lbltotalval"]').val());
     });
 
     $('[id$="txtimplcost"]').blur(function () {
         var total = parseInt($('[id$="txtcapExp"]').val().replace(/,/g, '').trim().replace('', '0'), 10) + parseInt($('[id$="txtimplcost"]').val().replace(/,/g, '').trim().replace('', '0'), 10);
         $('[id$="lbltotalval"]').text(total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-        $('[id$="hdntotal"]').val(total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+        $('[id$="hdntotal"]').val($('[id$="lbltotalval"]').val());
     });
 
 
@@ -72,19 +95,26 @@ $(document).ready(function () {
     if ($('[id$=chlLeanBnft]').is(':checked')) {
         $('[id$=ddlLeanbnftType]').prop("disabled", false);  // checked
         $('[id*="col2"]').hide();
+        //$('[id*="hidecol2"]').hide();
+
         $('[id*="col3"]').hide();
         $('[id*="dynamicTable"]').hide();
-        $('[id*="chkCostAvoidance"]').prop('disabled', true); // Unchecks it
-        $('[id*="chkCostReduction"]').prop('disabled', true); // Unchecks it
-        $('[id*="chkRevenueGrowth"]').prop('disabled', true); // Unchecks it
-        $('[id*="chkCapacityIncrease"]').prop('disabled', true); // Unchecks it		
+        $('[id*="chkCostAvoidance"]').hide(); // Unchecks it
+        $('[id*="chkCostReduction"]').hide(); // Unchecks it
+        $('[id*="chkRevenueGrowth"]').hide(); // Unchecks it
+        $('[id*="chkCapacityIncrease"]').hide(); // Unchecks it	
+        $('[id*="trLeanBn"]').show();
+        $('[id*="trProjectType"]').hide();
     }
 
     else {
         $('[id$=ddlLeanbnftType]').prop("disabled", true); // unchecked
         $('[id*="col2"]').show();
+        //$('[id*="hidecol2"]').show();
         $('[id*="col3"]').show();
         $('[id*="dynamicTable"]').show();
+        $('[id*="trLeanBn"]').hide();
+        $('[id*="trProjectType"]').show();
     }
 
     //check celebrationtype
@@ -129,7 +159,7 @@ $(document).ready(function () {
     });
     //confidental ci
 
-    var msg = "You have checked this CI as confidential and are not able to upload documents to SharePoint.</br> As a result, please email all attachments to CIAuditor@scilogistics.com with the CI # in the Subject Line. </br>- Thank you, The CI Team.";
+    var msg = "You have checked this CI as confidential and are not able to upload documents to SharePoint.As a result, please email all attachments to CIAuditor@scilogistics.com with the CI # in the Subject Line.- Thank you, The CI Team.";
     $('[id*="rdoconfCI"] input').change(function () {
         if ($(this).val() == "Yes") {
             alert(msg);
@@ -159,24 +189,39 @@ $(document).ready(function () {
             $('[id*="chkCapacityIncrease"]').prop('disabled', true); // Unchecks it
             $('[id*="chkCapacityIncrease"]').prop('checked', false); // Unchecks it
             $('[id*="chkCostAvoidance"]').prop('checked', false); // Unchecks it
-            $('[id*="chkCostReduction"]').prop('checked', false); // Unchecks it
-            $('[id*="chkRevenueGrowth"]').prop('checked', false); // Unchecks it            
+            $('[id*="chkCostReduction"]').prop('checked', false); // Unchecks it                     
+            $('[id*="chkRevenueGrowth"]').prop('checked', false); // Unchecks it
+
+
+            $('[id*="trLeanBn"]').show();
+            $('[id*="trProjectType"]').hide();
+
             $('[id*="dynamicTable"]').hide();
             $('[id*="btnupdatecal"]').hide();
-            $('.col3').css("display", "none");
-            $('.col2').css("display", "none");
+            $('.col3').hide();
+            $('.col2').hide();
+            //            $('#hidecol2').css("display", "none");
+
+
 
 
         } else {
+
+
             $('[id*="ddlLeanbnftType"]').prop("disabled", true);
             $('[id*="ddlLeanbnftType"]').prop('selectedIndex', 0);
             $('[id*="chkCostAvoidance"]').prop('disabled', false); // Unchecks it
             $('[id*="chkCostReduction"]').prop('disabled', false); // Unchecks it
             $('[id*="chkRevenueGrowth"]').prop('disabled', false); // Unchecks it
             $('[id*="chkCapacityIncrease"]').prop('disabled', false); // Unchecks it
+
+
+            $('[id*="trLeanBn"]').hide();
+            $('[id*="trProjectType"]').show();
             $('[id*="dynamicTable"]').show();
-            $('.col3').css("display", "inline");
-            $('.col2').css("display", "inline");
+            $('.col3').show();
+            $('.col2').show();
+
 
         }
     });
@@ -267,17 +312,17 @@ function ValidateSaveFields() {
         intFlag++;
     }
 
-    if ($('[id*="ddlprojpriority"]').children("option").filter(":selected").text() == "Select") {
+    if ($('[id*="ddlprojpriority"]').children("option").filter(":selected").text() == "Select" || $('[id*="ddlprojpriority"]').children("option").filter(":selected").text() == "") {
         strErrMsg = strErrMsg + "Project Prioritization Type Required \n";
         intFlag++;
     }
-    if ($('[id*="ddlProjClasfction"]').children("option").filter(":selected").text() == "Select") {
+    if ($('[id*="ddlProjClasfction"]').children("option").filter(":selected").text() == "Select" || $('[id*="ddlProjClasfction"]').children("option").filter(":selected").text() == "") {
         strErrMsg = strErrMsg + "Project Classification Type Required \n";
         intFlag++;
     }
 
     if ($('[id*="chlLeanBnft"]').is(":checked")) {
-        if ($('[id*="ddlLeanbnftType"]').children("option").filter(":selected").text() == "Select") {
+        if ($('[id*="ddlLeanbnftType"]').children("option").filter(":selected").text() == "Select" || $('[id*="ddlLeanbnftType"]').children("option").filter(":selected").text() == "") {
             strErrMsg = strErrMsg + "Lean Benefit Type Required \n";
             intFlag++;
         }
@@ -290,12 +335,12 @@ function ValidateSaveFields() {
     }
 
     if ($('[id*="rdoITResrc"] input:checked').val() == "Yes") {
-        if ($('[id*="ddlItReview"]').children("option").filter(":selected").text() == "Select") {
+        if ($('[id*="ddlItReview"]').children("option").filter(":selected").text() == "Select" || $('[id*="ddlItReview"]').children("option").filter(":selected").text() == "") {
             strErrMsg = strErrMsg + "IT Reviewer Required \n";
             intFlag++;
         }
     }
-    if ($('[id*="ddlCILeaderApprov"]').children("option").filter(":selected").text() == "Select") {
+    if ($('[id*="ddlCILeaderApprov"]').children("option").filter(":selected").text() == "Select" || $('[id*="ddlCILeaderApprov"]').children("option").filter(":selected").text() == "") {
         strErrMsg = strErrMsg + "CI Leader Required \n";
         intFlag++;
     }
@@ -311,9 +356,10 @@ function ValidateSaveFields() {
     //    }
     // CI Saving Part
     if (!$('[id*="chlLeanBnft"]').is(":checked")) {
+
         var capitalrequired = $('[id*="rdoCapitalrequi"] input:checked').val();
         if (capitalrequired == "Yes") {
-            if (!capexpamount.length > 0) {
+            if (!$('[id$="txtcapExp"]').length > 0 || $('[id$="txtcapExp"]').val() == 0 || $('[id$="txtcapExp"]').val() == "") {
                 strErrMsg = strErrMsg + "CapEx Amount is Required \n";
                 intFlag++;
             }
@@ -449,24 +495,21 @@ function AuditSection() {
         $('[id*="lblAuditStatushdr"]').show();
         $('[id*="txtAudStatus"]').css('background-color', $('[id*="ddlauditstatus"]').children("option").filter(":selected").text());
         $('[id*="txtAudStatus"]').text($('[id*="ddlauditstatus"]').children("option").filter(":selected").text());
+
     }
-    $('[id*="ddlauditstatus"]').change(function () {
-        if ($('[id*="ddlauditstatus"]').children("option").filter(":selected").text() != "Select" || $('[id*="ddlauditstatus"]').children("option").filter(":selected").text() != "") {
-            $('[id*="lblauditstatusvalue"]').show();
-            $('[id*="lblauditstatusvalue"]').text($('[id*="ddlauditstatus"]').children("option").filter(":selected").text() + "Status");
-            $('[id*="lblauditstatusvalue"]').css('background-color', $('[id*="ddlauditstatus"]').children("option").filter(":selected").text());
-            $('[id*="lblauditstatusvalue"]').css('color', $('[id*="ddlauditstatus"]').children("option").filter(":selected").text());
-            $('[id*="txtAudStatus"]').show();
-            $('[id*="lblAuditStatushdr"]').show();
-            $('[id*="txtAudStatus"]').css('background-color', $('[id*="ddlauditstatus"]').children("option").filter(":selected").text());
-            $('[id*="txtAudStatus"]').text($('[id*="ddlauditstatus"]').children("option").filter(":selected").text());
-        }
-        else {
-            $('[id*="lblauditstatusvalue"]').hide();
-            $('[id*="txtAudStatus"]').hide();
-            $('[id*="lblAuditStatushdr"]').hide();
-        }
-    });
+    if ($('[id*="hdnAuditStatus"]').val() != "") {
+
+        $('[id*="txtAudStatus"]').css('background-color', $('[id*="hdnAuditStatus"]').val());
+        $('[id*="txtAudStatus"]').text($('[id*="hdnAuditStatus"]').val());
+        $('[id*="txtAudStatus"]').show();
+        $('[id*="lblAuditStatushdr"]').show();
+    }
+    else {
+
+        $('[id*="txtAudStatus"]').hide();
+        $('[id*="lblAuditStatushdr"]').hide();
+    }
+
 }
 
 function ProjectTypeChangeEvent() {

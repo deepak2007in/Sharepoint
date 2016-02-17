@@ -2,7 +2,7 @@
 #content
 {
     float: left;
-    width: 60%;
+    /*width: 60%;*/
     background-color: #CCF;
 }
 #sidebar
@@ -71,17 +71,17 @@ label
 .col1
 {
     float: left;
-    width: 33%;
+    width: 35%;
 }
 .col2
 {
     float: none;
-    width: 33%;
+    width: 30%;
     display: inline-block;
 }
 .col3
 {
     float: right;
-    width: 33%;
+    width: 35%;
 }
 
