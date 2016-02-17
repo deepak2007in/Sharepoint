@@ -14,6 +14,25 @@
         else
             event.returnValue = false;
     }
+    function PreventCopyPaste(ctrl) {
+        // Allow: backspace, delete, tab, escape, enter and .
+        if ($.inArray(event.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+            // Allow: Ctrl+A
+        (event.keyCode == 65 && event.ctrlKey === true) ||
+            // Allow: Ctrl+C
+        (event.keyCode == 67 && event.ctrlKey === true) ||
+            // Allow: Ctrl+X
+        (event.keyCode == 88 && event.ctrlKey === true) ||
+            // Allow: home, end, left, right
+        (event.keyCode >= 35 && event.keyCode <= 39)) {
+            // let it happen, don't do anything
+            return;
+        }
+        // Ensure that it is a number and stop the keypress
+        if ((event.shiftKey || (event.keyCode < 48 || event.keyCode > 57)) && (event.keyCode < 96 || event.keyCode > 105)) {
+            event.preventDefault();
+        }
+    }
     function FormatCurrency(ctrl) {
         //Check if arrow keys are pressed - we want to allow navigation around textbox using arrow keys
         if (event.keyCode == 37 || event.keyCode == 38 || event.keyCode == 39 || event.keyCode == 40) {
@@ -563,11 +582,9 @@
                                 <td align="right" class="style1">
                                     <b>
                                         <asp:Label ID="Label11" runat="server" Text="Project Status"></asp:Label>
-                                        <asp:Label ID="txtProjStatus" runat="server" Text="DRAFT" Style="border-color: Gray;
-                                            padding: 3px;" />&nbsp;&nbsp;
+                                        <asp:Label ID="txtProjStatus" runat="server" Text="DRAFT" Style="border-color: Gray; padding: 3px;" />&nbsp;&nbsp;
                                         <asp:Label ID="lblAuditStatushdr" runat="server" Text="Audit Status"></asp:Label>
-                                        <asp:Label ID="txtAudStatus" runat="server" Text="Draft" Style="background-color: Gray;
-                                            border-color: Gray; padding: 3px;" /></b>
+                                        <asp:Label ID="txtAudStatus" runat="server" Text="Draft" Style="background-color: Gray; border-color: Gray; padding: 3px;" /></b>
                                 </td>
                             </tr>
                         </table>
@@ -713,8 +730,7 @@
                             Lean Benefits
                         </label>
                     </td>
-                    <td>
-                        &nbsp;<asp:CheckBox ID="chlLeanBnft" runat="server" Checked="false" />
+                    <td>&nbsp;<asp:CheckBox ID="chlLeanBnft" runat="server" Checked="false" />
                     </td>
                 </tr>
                 <tr id="trLeanBn">
@@ -723,9 +739,8 @@
                             Lean Benefit Type
                         </label>
                     </td>
-                    <td>
-                        &nbsp;<asp:DropDownList ID="ddlLeanbnftType" runat="server" Height="20px" Width="250px">
-                        </asp:DropDownList>
+                    <td>&nbsp;<asp:DropDownList ID="ddlLeanbnftType" runat="server" Height="20px" Width="250px">
+                    </asp:DropDownList>
                     </td>
                 </tr>
                 <tr id="trProjectType" runat="server">
@@ -786,9 +801,7 @@
                         </label>
                         <span style="color: Red">*</span>
                     </td>
-                    <td>
-                        
-                    </td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td>
@@ -843,8 +856,7 @@
                         </label>
                     </td>
                     <td>
-                        <asp:Label ID="lblprojstatusvalue" runat="server" Text="DRAFT" Style="border-color: Gray;
-                            font-weight: bold; padding: 3px;" />
+                        <asp:Label ID="lblprojstatusvalue" runat="server" Text="DRAFT" Style="border-color: Gray; font-weight: bold; padding: 3px;" />
                     </td>
                 </tr>
             </table>
@@ -913,10 +925,9 @@
                             <td>
                                 <asp:Label ID="lblCapExpAmount" runat="server" Text="CapEx Amount"></asp:Label>
                             </td>
-                            <td>
-                                $
+                            <td>$
                                 <asp:TextBox ID="txtcapExp" Style="padding-top: 4px; text-align: right" Text="0"
-                                    runat="server" onkeyup="FormatCurrency(this);" onkeypress="return NumberOnly()"
+                                    runat="server" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);" onkeypress="return NumberOnly()"
                                     Height="15px" Width="133px" Font-Size="8pt"></asp:TextBox>&nbsp;<span class="errmsg"></span>
                             </td>
                         </tr>
@@ -924,10 +935,9 @@
                             <td>
                                 <asp:Label ID="lblImplCost" runat="server" Text="Implementation Cost"></asp:Label>
                             </td>
-                            <td>
-                                $
+                            <td>$
                                 <asp:TextBox ID="txtimplcost" Text="0" Style="padding-top: 4px; text-align: right"
-                                    runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                                    runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                                     Height="15px" Width="133px" Font-Size="8pt"></asp:TextBox>&nbsp;<span class="errmsg"></span>
                             </td>
                         </tr>
@@ -935,8 +945,7 @@
                             <td>
                                 <asp:Label ID="lbltotal" runat="server" Text="Total" Style="padding-top: 4px;"></asp:Label>
                             </td>
-                            <td>
-                                $
+                            <td>$
                                 <asp:Label ID="lbltotalval" Style="padding-top: 4px;" runat="server"></asp:Label>
                                 <asp:HiddenField runat="server" ID="hdntotal" EnableViewState="true" />
                             </td>
@@ -948,8 +957,7 @@
                             <td>
                                 <asp:Calendar ID="dtProjStartDate" runat="server" />
                             </td>
-                            <td>
-                                (dd/mm/yyyy)<span style="color: Red">*</span>
+                            <td>(dd/mm/yyyy)<span style="color: Red">*</span>
                             </td>
                         </tr>
                         <tr>
@@ -959,8 +967,7 @@
                             <td>
                                 <asp:Calendar ID="dtImplDate" runat="server" />
                             </td>
-                            <td>
-                                (dd/mm/yyyy)<span style="color: Red">*</span>
+                            <td>(dd/mm/yyyy)<span style="color: Red">*</span>
                             </td>
                         </tr>
                         <tr>
@@ -978,8 +985,7 @@
                             <td>
                                 <asp:Calendar ID="dtCanceDate" runat="server" />
                             </td>
-                            <td>
-                                (dd/mm/yyyy)
+                            <td>(dd/mm/yyyy)
                             </td>
                         </tr>
                         <tr>
@@ -989,17 +995,14 @@
                             <td>
                                 <asp:CheckBox ID="chkcelebtype" runat="server"></asp:CheckBox>
                             </td>
-                            <td>
-                            </td>
+                            <td></td>
                         </tr>
                         <tr>
-                            <td>
-                            </td>
+                            <td></td>
                             <td>
                                 <asp:Calendar ID="dtCelebDate" runat="server" />
                             </td>
-                            <td>
-                                (dd/mm/yyyy)
+                            <td>(dd/mm/yyyy)
                             </td>
                         </tr>
                         <tr>
@@ -1054,45 +1057,40 @@
                             <td>
                                 <asp:Label ID="lblca" runat="server" Text="CA"></asp:Label>
                             </td>
-                            <td>
-                                $<asp:TextBox ID="twelvtxtcavalue" runat="server" ReadOnly="true" Height="15px" Width="40%"
-                                    Style="text-align: right" Font-Size="8pt"></asp:TextBox>
+                            <td>$<asp:TextBox ID="twelvtxtcavalue" runat="server" ReadOnly="true" Height="15px" Width="40%"
+                                Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                             </td>
                         </tr>
                         <tr id="twelveCostReduction">
                             <td>
                                 <asp:Label ID="lblcr" runat="server" Text="CR"></asp:Label>
                             </td>
-                            <td>
-                                $<asp:TextBox ID="twelvtxtcrvalue" runat="server" ReadOnly="true" Height="15px" Width="40%"
-                                    Style="text-align: right" Font-Size="8pt"></asp:TextBox>
+                            <td>$<asp:TextBox ID="twelvtxtcrvalue" runat="server" ReadOnly="true" Height="15px" Width="40%"
+                                Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                             </td>
                         </tr>
                         <tr id="twelveRevenueGrowth">
                             <td>
                                 <asp:Label ID="lblrg" runat="server" Text="RG"></asp:Label>
                             </td>
-                            <td>
-                                $<asp:TextBox ID="twelvtxtrgvalue" runat="server" ReadOnly="true" Height="15px" Width="40%"
-                                    Style="text-align: right" Font-Size="8pt"></asp:TextBox>
+                            <td>$<asp:TextBox ID="twelvtxtrgvalue" runat="server" ReadOnly="true" Height="15px" Width="40%"
+                                Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                             </td>
                         </tr>
                         <tr id="twelveCapacityIncrease">
                             <td>
                                 <asp:Label ID="lblci" runat="server" Text="CI"></asp:Label>
                             </td>
-                            <td>
-                                $<asp:TextBox ID="twelvtxtcivalue" runat="server" ReadOnly="true" Height="15px" Width="40%"
-                                    Style="text-align: right" Font-Size="8pt"></asp:TextBox>
+                            <td>$<asp:TextBox ID="twelvtxtcivalue" runat="server" ReadOnly="true" Height="15px" Width="40%"
+                                Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                             </td>
                         </tr>
                         <tr id="twelvetotal">
                             <td id="twelvetotals">
                                 <asp:Label ID="lbltotalAmount" runat="server" Text="Total"></asp:Label>
                             </td>
-                            <td>
-                                $<asp:TextBox ID="twelvtxttatalvalue" runat="server" ReadOnly="true" Height="15px"
-                                    Width="40%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
+                            <td>$<asp:TextBox ID="twelvtxttatalvalue" runat="server" ReadOnly="true" Height="15px"
+                                Width="40%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                             </td>
                         </tr>
                     </table>
@@ -1110,45 +1108,40 @@
                             <td>
                                 <asp:Label ID="yearlblca" runat="server" Text="CA"></asp:Label>
                             </td>
-                            <td>
-                                $<asp:TextBox ID="yeartxtca" runat="server" ReadOnly="true" Height="15px" Width="133px"
-                                    Style="text-align: right" Font-Size="8pt"></asp:TextBox>
+                            <td>$<asp:TextBox ID="yeartxtca" runat="server" ReadOnly="true" Height="15px" Width="133px"
+                                Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                             </td>
                         </tr>
                         <tr id="yearCostReduction">
                             <td>
                                 <asp:Label ID="yearlblcr" runat="server" Text="CR"></asp:Label>
                             </td>
-                            <td>
-                                $<asp:TextBox ID="yeartxtcr" runat="server" ReadOnly="true" Height="15px" Width="133px"
-                                    Style="text-align: right" Font-Size="8pt"></asp:TextBox>
+                            <td>$<asp:TextBox ID="yeartxtcr" runat="server" ReadOnly="true" Height="15px" Width="133px"
+                                Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                             </td>
                         </tr>
                         <tr id="yearRevenueGrowth">
                             <td>
                                 <asp:Label ID="yearlblrg" runat="server" Text="RG"></asp:Label>
                             </td>
-                            <td>
-                                $<asp:TextBox ID="yeartxtrg" runat="server" ReadOnly="true" Height="15px" Width="133px"
-                                    Style="text-align: right" Font-Size="8pt"></asp:TextBox>
+                            <td>$<asp:TextBox ID="yeartxtrg" runat="server" ReadOnly="true" Height="15px" Width="133px"
+                                Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                             </td>
                         </tr>
                         <tr id="yearCapacityIncrease">
                             <td>
                                 <asp:Label ID="yearlblci" runat="server" Text="CI"></asp:Label>
                             </td>
-                            <td>
-                                $<asp:TextBox ID="yeartxtci" runat="server" ReadOnly="true" Height="15px" Width="133px"
-                                    Style="text-align: right" Font-Size="8pt"></asp:TextBox>
+                            <td>$<asp:TextBox ID="yeartxtci" runat="server" ReadOnly="true" Height="15px" Width="133px"
+                                Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                             </td>
                         </tr>
                         <tr id="yeartotal">
                             <td>
                                 <asp:Label ID="yearlbltotal" runat="server" Text="Total"></asp:Label>
                             </td>
-                            <td>
-                                $<asp:TextBox ID="yearlbltotalval" runat="server" ReadOnly="true" Height="15px" Width="133px"
-                                    Style="text-align: right" Font-Size="8pt"></asp:TextBox>
+                            <td>$<asp:TextBox ID="yearlbltotalval" runat="server" ReadOnly="true" Height="15px" Width="133px"
+                                Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                             </td>
                         </tr>
                     </table>
@@ -1164,52 +1157,47 @@
                             <td>
                                 <asp:Label ID="estlblca" runat="server" Text="CA"></asp:Label>
                             </td>
-                            <td>
-                                $<asp:TextBox ID="esttxtca" runat="server" ReadOnly="true"  Height="15px" Width="133px"
-                                    Style="text-align: right" Font-Size="8pt"></asp:TextBox>
+                            <td>$<asp:TextBox ID="esttxtca" runat="server" ReadOnly="true" Height="15px" Width="133px"
+                                Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                             </td>
                         </tr>
                         <tr id="estCostReduction">
                             <td>
                                 <asp:Label ID="estlblcr" runat="server" Text="CR"></asp:Label>
                             </td>
-                            <td>
-                                $<asp:TextBox ID="esttxtcr" runat="server" ReadOnly="true" Height="15px" Width="133px"
-                                    Style="text-align: right" Font-Size="8pt"></asp:TextBox>
+                            <td>$<asp:TextBox ID="esttxtcr" runat="server" ReadOnly="true" Height="15px" Width="133px"
+                                Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                             </td>
                         </tr>
                         <tr id="estRevenueGrowth">
                             <td>
                                 <asp:Label ID="estlblrg" runat="server" Text="RG"></asp:Label>
                             </td>
-                            <td>
-                                $<asp:TextBox ID="esttxtrg" runat="server" ReadOnly="true" Height="15px" Width="133px"
-                                    Style="text-align: right" Font-Size="8pt"></asp:TextBox>
+                            <td>$<asp:TextBox ID="esttxtrg" runat="server" ReadOnly="true" Height="15px" Width="133px"
+                                Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                             </td>
                         </tr>
                         <tr id="estCapacityIncrease">
                             <td>
                                 <asp:Label ID="estlblci" runat="server" Text="CI"></asp:Label>
                             </td>
-                            <td>
-                                $<asp:TextBox ID="esttxtci" runat="server" ReadOnly="true" Height="15px" Width="133px"
-                                    Style="text-align: right" Font-Size="8pt"></asp:TextBox>
+                            <td>$<asp:TextBox ID="esttxtci" runat="server" ReadOnly="true" Height="15px" Width="133px"
+                                Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                             </td>
                         </tr>
                         <tr id="esttotal">
                             <td>
                                 <asp:Label ID="estlbltotal" runat="server" Text="Total"></asp:Label>
                             </td>
-                            <td>
-                                $<asp:TextBox ID="estlbltotalval" runat="server" ReadOnly="true" Height="15px" Width="133px"
-                                    Style="text-align: right" Font-Size="8pt"></asp:TextBox>
+                            <td>$<asp:TextBox ID="estlbltotalval" runat="server" ReadOnly="true" Height="15px" Width="133px"
+                                Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                             </td>
                         </tr>
                     </table>
                 </div>
             </div>
-            <table id="dynamicTable" runat="server" border="0" width="100%" style="color: Black;
-                table-layout: fixed; empty-cells: show; display: none" frame="box">
+            <table id="dynamicTable" runat="server" border="0" width="100%" style="color: Black; table-layout: fixed; empty-cells: show; display: none"
+                frame="box">
                 <tr id="Tr1" style="background-color: Blue; color: White; border: 0px !Important;">
                     <td>
                         <b>
@@ -1257,51 +1245,51 @@
                         <asp:Label ID="hdngCAAct" runat="server" Text="Cost Avoidance-Target"></asp:Label>
                     </td>
                     <td>
-                        <asp:TextBox ID="cat1" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="cat1" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
+                           Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="cat2" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cat2" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="cat3" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cat3" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="cat4" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cat4" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="cat5" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cat5" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="cat6" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cat6" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="cat7" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cat7" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="cat8" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cat8" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="cat9" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cat9" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="cat10" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cat10" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="cat11" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cat11" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
-                            Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
-                    </td>
-                    <td>
-                        <asp:TextBox ID="cat12" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="cat12" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                 </tr>
@@ -1310,51 +1298,51 @@
                         <asp:Label ID="Label4" runat="server" Text="Cost Avoidance-Actual"></asp:Label>
                     </td>
                     <td>
-                        <asp:TextBox ID="caa1" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="caa1" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="caa2" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="caa2" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="caa3" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="caa3" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="caa4" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="caa4" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="caa5" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="caa5" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="caa6" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="caa6" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="caa7" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="caa7" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="caa8" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="caa8" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="caa9" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="caa9" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="caa10" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="caa10" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="caa11" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="caa11" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="caa12" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="caa12" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                 </tr>
@@ -1363,51 +1351,51 @@
                         <asp:Label ID="Label5" runat="server" Text="Cost Reduction-Target"></asp:Label>
                     </td>
                     <td>
-                        <asp:TextBox ID="crt1" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="crt1" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="crt2" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="crt2" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="crt3" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="crt3" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="crt4" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="crt4" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="crt5" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="crt5" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="crt6" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="crt6" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="crt7" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="crt7" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="crt8" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="crt8" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="crt9" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="crt9" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="crt10" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="crt10" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="crt11" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="crt11" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="crt12" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="crt12" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                 </tr>
@@ -1416,51 +1404,51 @@
                         <asp:Label ID="Label6" runat="server" Text="Cost Reduction-Actual"></asp:Label>
                     </td>
                     <td>
-                        <asp:TextBox ID="cra1" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="cra1" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cra2" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="cra2" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cra3" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="cra3" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cra4" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="cra4" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cra5" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="cra5" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cra6" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="cra6" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cra7" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="cra7" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cra8" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="cra8" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cra9" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="cra9" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cra10" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="cra10" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cra11" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="cra11" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cra12" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="cra12" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                 </tr>
@@ -1469,51 +1457,51 @@
                         <asp:Label ID="Label7" runat="server" Text="Revenue Growth-Target"></asp:Label>
                     </td>
                     <td>
-                        <asp:TextBox ID="rgt1" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="rgt1" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="rgt2" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="rgt2" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="rgt3" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="rgt3" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="rgt4" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="rgt4" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="rgt5" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="rgt5" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="rgt6" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="rgt6" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="rgt7" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="rgt7" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="rgt8" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="rgt8" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="rgt9" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="rgt9" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="rgt10" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="rgt10" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="rgt11" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="rgt11" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="rgt12" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="rgt12" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                 </tr>
@@ -1522,51 +1510,51 @@
                         <asp:Label ID="Label8" runat="server" Text="Revenue Growth-Actual"></asp:Label>
                     </td>
                     <td>
-                        <asp:TextBox ID="rga1" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="rga1" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="rga2" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="rga2" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="rga3" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="rga3" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="rga4" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="rga4" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="rga5" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="rga5" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="rga6" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="rga6" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="rga7" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="rga7" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="rga8" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="rga8" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="rga9" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="rga9" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="rga10" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="rga10" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="rga11" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="rga11" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="rga12" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="rga12" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                 </tr>
@@ -1575,51 +1563,51 @@
                         <asp:Label ID="Label9" runat="server" Text="Capacity Increase-Target"></asp:Label>
                     </td>
                     <td>
-                        <asp:TextBox ID="cit1" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="cit1" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cit2" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="cit2" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cit3" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="cit3" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cit4" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="cit4" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cit5" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="cit5" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cit6" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="cit6" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cit7" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="cit7" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cit8" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="cit8" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cit9" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="cit9" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cit10" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="cit10" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cit11" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="cit11" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cit12" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="cit12" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                 </tr>
@@ -1628,51 +1616,51 @@
                         <asp:Label ID="Label10" runat="server" Text="Capacity Increase-Actual"></asp:Label>
                     </td>
                     <td>
-                        <asp:TextBox ID="cia1" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="cia1" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cia2" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="cia2" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cia3" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="cia3" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cia4" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="cia4" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cia5" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="cia5" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cia6" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="cia6" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cia7" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="cia7" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cia8" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="cia8" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cia9" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="cia9" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cia10" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="cia10" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cia11" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="cia11" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="cia12" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="cia12" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt"></asp:TextBox>
                     </td>
                 </tr>
@@ -1682,54 +1670,54 @@
                             <asp:Label ID="targettotal" runat="server" Text="Target Total"></asp:Label></b>
                     </td>
                     <td>
-                        <asp:TextBox ID="target1total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="target1total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt" ReadOnly="true"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="target2total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="target2total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt" ReadOnly="true"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="target3total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="target3total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt" ReadOnly="true"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="target4total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="target4total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt" ReadOnly="true"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="target5total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="target5total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt" ReadOnly="true"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="target6total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="target6total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt" ReadOnly="true"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="target7total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="target7total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt" ReadOnly="true"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="target8total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="target8total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt" ReadOnly="true"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="target9total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="target9total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt" ReadOnly="true"></asp:TextBox>
                     </td>
                     <td>
                         <asp:TextBox ID="target10total" runat="server" onkeypress="return NumberOnly()"
-                            onkeyup="FormatCurrency(this);" Height="15px" Width="80%" Style="text-align: right"
+                            onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);" Height="15px" Width="80%" Style="text-align: right"
                             Font-Size="8pt" ReadOnly="true"></asp:TextBox>
                     </td>
                     <td>
                         <asp:TextBox ID="target11total" runat="server" onkeypress="return NumberOnly()"
-                            onkeyup="FormatCurrency(this);" Height="15px" Width="80%" Style="text-align: right"
+                            onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);" Height="15px" Width="80%" Style="text-align: right"
                             Font-Size="8pt" ReadOnly="true"></asp:TextBox>
                     </td>
                     <td>
                         <asp:TextBox ID="target12total" runat="server" onkeypress="return NumberOnly()"
-                            onkeyup="FormatCurrency(this);" Height="15px" Width="80%" Style="text-align: right"
+                            onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);" Height="15px" Width="80%" Style="text-align: right"
                             Font-Size="8pt" ReadOnly="true"></asp:TextBox>
                     </td>
                 </tr>
@@ -1739,54 +1727,54 @@
                             <asp:Label ID="ActualTotal" runat="server" Text="Actual Total"></asp:Label></b>
                     </td>
                     <td>
-                        <asp:TextBox ID="actual1total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="actual1total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt" ReadOnly="true"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="actual2total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="actual2total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt" ReadOnly="true"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="actual3total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="actual3total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt" ReadOnly="true"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="actual4total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="actual4total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt" ReadOnly="true"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="actual5total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="actual5total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt" ReadOnly="true"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="actual6total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="actual6total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt" ReadOnly="true"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="actual7total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="actual7total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt" ReadOnly="true"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="actual8total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="actual8total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt" ReadOnly="true"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="actual9total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);"
+                        <asp:TextBox ID="actual9total" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
                             Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt" ReadOnly="true"></asp:TextBox>
                     </td>
                     <td>
                         <asp:TextBox ID="actual10total" runat="server" onkeypress="return NumberOnly()"
-                            onkeyup="FormatCurrency(this);" Height="15px" Width="80%" Style="text-align: right"
+                            onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);" Height="15px" Width="80%" Style="text-align: right"
                             Font-Size="8pt" ReadOnly="true"></asp:TextBox>
                     </td>
                     <td>
                         <asp:TextBox ID="actual11total" runat="server" onkeypress="return NumberOnly()"
-                            onkeyup="FormatCurrency(this);" Height="15px" Width="80%" Style="text-align: right"
+                            onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);" Height="15px" Width="80%" Style="text-align: right"
                             Font-Size="8pt" ReadOnly="true"></asp:TextBox>
                     </td>
                     <td>
                         <asp:TextBox ID="actual12total" runat="server" onkeypress="return NumberOnly()"
-                            onkeyup="FormatCurrency(this);" Height="15px" Width="80%" Style="text-align: right"
+                            onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);" Height="15px" Width="80%" Style="text-align: right"
                             Font-Size="8pt" ReadOnly="true"></asp:TextBox>
                     </td>
                 </tr>
@@ -1794,12 +1782,12 @@
             </br>
             <div id="updatecalc">
                 <asp:Button ID="btnupdatecal" runat="server" Text="Update Calculation" OnClick="btnupdatecal_Click"
-                    Width="150px" /></div>
+                    Width="150px" />
+            </div>
             </br>
             <div id="historycon" runat="server">
                 <div id="wfhistory" runat="server" class="Audit">
-                    <h3>
-                        Workflow History
+                    <h3>Workflow History
                     </h3>
                 </div>
                 <div id="wfhistorycontent" runat="server">
@@ -1808,8 +1796,7 @@
             <table id="Audittable" class="Audits" runat="server" style="display: none;">
                 <tbody>
                     <tr>
-                        <th colspan="2" style="text-align: left; background: #FFCC99;">
-                            Audit Section
+                        <th colspan="2" style="text-align: left; background: #FFCC99;">Audit Section
                         </th>
                     </tr>
                     <tr>
@@ -1853,17 +1840,14 @@
             <table id="tblReassign" class="Audits" runat="server" visible="false">
                 <tbody>
                     <tr class="Audit">
-                        <th colspan="2" style="text-align: left; background: #FFCC99;">
-                            ReAssign Task :
+                        <th colspan="2" style="text-align: left; background: #FFCC99;">ReAssign Task :
                         </th>
                     </tr>
                     <tr>
                         <td class="style6">
                             <asp:Label ID="lblreasUser" Text="ReAssign User :" runat="server"></asp:Label>
                         </td>
-                        <td>
-                            
-                        </td>
+                        <td></td>
                     </tr>
                 </tbody>
             </table>
@@ -1915,7 +1899,7 @@
     <tr>
         <td colspan="2" style="background-color: #d6d6c2">
             <b>&nbsp;<asp:Label ID="lblProjectTracking" runat="server" Text="Project Tracking"></asp:Label></b>
-            
+
         </td>
     </tr>
     <tr>
@@ -2037,7 +2021,7 @@
         <td colspan="2" style="background-color: #d6d6c2">
             <b>
                 <asp:Label ID="lblCommnets" runat="server" Text="Comments / Updates"></asp:Label></b>
-            
+
         </td>
     </tr>
     <tr>
