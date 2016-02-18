@@ -306,7 +306,7 @@ namespace SharePoint
         private int[] ProcessTimeline()
         {
             var implementationDate = dtImplDate.SelectedDate;
-            return this.ProcessTimeline();
+            return this.ProcessTimeline(implementationDate);
         }
 
         private int[] ProcessTimeline(DateTime implementationDate)
@@ -390,7 +390,7 @@ namespace SharePoint
                     break;
                 case StatusColor.Gray:
                     this.ProcessColor(txtProjStatus, "DRAFT", Color.Gray, Color.White);
-                    this.ProcessColor(lblprojstatusvalue, "BLACK", Color.Gray, Color.White);
+                    this.ProcessColor(lblprojstatusvalue, "DRAFT", Color.Gray, Color.White);
                     break;
                 case StatusColor.Blue:
                     this.ProcessColor(txtProjStatus, "BLUE", Color.Blue, Color.White);
