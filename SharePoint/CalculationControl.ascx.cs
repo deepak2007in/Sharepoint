@@ -40,41 +40,41 @@ namespace SharePoint
         {
             if (!IsPostBack)
             {
-                cat1.Text = "1,000";
-                cat2.Text = "500";
-                cat3.Text = "5,000";
-                cat4.Text = "1,00,000";
-                cat5.Text = "10,000";
-                cat6.Text = "10,000";
-                cat7.Text = "1,000";
-                cat8.Text = "5,000";
-                cat9.Text = "1,000";
-                cat10.Text = "10,000";
-                cat11.Text = "10,000";
-                cat12.Text = "10,000";
+                //cat1.Text = "1,000";
+                //cat2.Text = "500";
+                //cat3.Text = "5,000";
+                //cat4.Text = "1,00,000";
+                //cat5.Text = "10,000";
+                //cat6.Text = "10,000";
+                //cat7.Text = "1,000";
+                //cat8.Text = "5,000";
+                //cat9.Text = "1,000";
+                //cat10.Text = "10,000";
+                //cat11.Text = "10,000";
+                //cat12.Text = "10,000";
 
-                caa1.Text = "5,000";
-                caa2.Text = "5,000";
-                caa3.Text = "5,000";
+                //caa1.Text = "5,000";
+                //caa2.Text = "5,000";
+                //caa3.Text = "5,000";
 
-                //caa7.Text = caa8.Text = caa9.Text = caa10.Text = caa11.Text = caa12.Text = "5000";
+                ////caa7.Text = caa8.Text = caa9.Text = caa10.Text = caa11.Text = caa12.Text = "5000";
 
-                crt1.Text = "1,500";
-                crt2.Text = "1,500";
-                crt3.Text = "1,500";
-                crt4.Text = "1,500";
-                crt5.Text = "1,500";
-                crt6.Text = "1,500";
-                crt7.Text = "1,500";
-                crt8.Text = "1,500";
-                crt9.Text = "1,500";
-                crt10.Text = "1,500";
-                crt11.Text = "1,500";
-                crt12.Text = "1,500";
+                //crt1.Text = "1,500";
+                //crt2.Text = "1,500";
+                //crt3.Text = "1,500";
+                //crt4.Text = "1,500";
+                //crt5.Text = "1,500";
+                //crt6.Text = "1,500";
+                //crt7.Text = "1,500";
+                //crt8.Text = "1,500";
+                //crt9.Text = "1,500";
+                //crt10.Text = "1,500";
+                //crt11.Text = "1,500";
+                //crt12.Text = "1,500";
 
-                cra1.Text = "1,000";
-                cra2.Text = "1,000";
-                cra3.Text = "1,000";
+                //cra1.Text = "1,000";
+                //cra2.Text = "1,000";
+                //cra3.Text = "1,000";
 
                 this.ProcessTimeline(DateTime.Now);
             }

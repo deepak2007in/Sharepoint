@@ -677,3 +677,20 @@ function PreventCopyPaste(ctrl) {
         event.preventDefault ? event.preventDefault() : (event.returnValue = false);
     }
 }
+
+function GetCheckBoxSelected(textBox) {
+    var textBoxName = textBox.id;
+    if (textBoxName.indexOf('cat') >= 0) {
+        return $('[id*="chkCostAvoidance"]').is(":checked");
+    }
+    if (textBoxName.indexOf('crt') >= 0) {
+        return $('[id*="CostReduction"]').is(":checked");
+    }
+    if (textBoxName.indexOf('rgt') >= 0) {
+        return $('[id*="RevenueGrowth"]').is(":checked");
+    }
+    if (textBoxName.indexOf('cit') >= 0) {
+        return $('[id*="CapacityIncrease"]').is(":checked");
+    }
+    return true;
+}
