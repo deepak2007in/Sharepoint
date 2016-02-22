@@ -352,67 +352,72 @@ namespace SCI.CIProject.ProjectSaving
             item.CI_Target_Oct = ToProcessedString(projectCost.GetCostEntry(ProjectType.CapacityIncrease, CostType.Target, 10));
             item.CI_Target_Nov = ToProcessedString(projectCost.GetCostEntry(ProjectType.CapacityIncrease, CostType.Target, 11));
             item.CI_Target_Dec = ToProcessedString(projectCost.GetCostEntry(ProjectType.CapacityIncrease, CostType.Target, 12));
-            item.Total_Actual_Jan = ToProcessedString(projectCost.GetActualTotal(1));
-            item.Total_Actual_Feb = ToProcessedString(projectCost.GetActualTotal(2));
-            item.Total_Actual_Mar = ToProcessedString(projectCost.GetActualTotal(3));
-            item.Total_Actual_Apr = ToProcessedString(projectCost.GetActualTotal(4));
-            item.Total_Actual_May = ToProcessedString(projectCost.GetActualTotal(5));
-            item.Total_Actual_Jun = ToProcessedString(projectCost.GetActualTotal(6));
-            item.Total_Actual_Jul = ToProcessedString(projectCost.GetActualTotal(7));
-            item.Total_Actual_Aug = ToProcessedString(projectCost.GetActualTotal(8));
-            item.Total_Actual_Sep = ToProcessedString(projectCost.GetActualTotal(9));
-            item.Total_Actual_Oct = ToProcessedString(projectCost.GetActualTotal(10));
-            item.Total_Actual_Nov = ToProcessedString(projectCost.GetActualTotal(11));
-            item.Total_Actual_Dec = ToProcessedString(projectCost.GetActualTotal(12));
-            item.Total_Target_Jan = ToProcessedString(projectCost.GetTargetTotal(1));
-            item.Total_Target_Feb = ToProcessedString(projectCost.GetTargetTotal(2));
-            item.Total_Target_Mar = ToProcessedString(projectCost.GetTargetTotal(3));
-            item.Total_Target_Apr = ToProcessedString(projectCost.GetTargetTotal(4));
-            item.Total_Target_May = ToProcessedString(projectCost.GetTargetTotal(5));
-            item.Total_Target_Jun = ToProcessedString(projectCost.GetTargetTotal(6));
-            item.Total_Target_Jul = ToProcessedString(projectCost.GetTargetTotal(7));
-            item.Total_Target_Aug = ToProcessedString(projectCost.GetTargetTotal(8));
-            item.Total_Target_Sep = ToProcessedString(projectCost.GetTargetTotal(9));
-            item.Total_Target_Oct = ToProcessedString(projectCost.GetTargetTotal(10));
-            item.Total_Target_Nov = ToProcessedString(projectCost.GetTargetTotal(11));
-            item.Total_Target_Dec = ToProcessedString(projectCost.GetTargetTotal(12));
+            item.Total_Actual_Jan = ToActualString(projectCost.GetActualTotal(1));
+            item.Total_Actual_Feb = ToActualString(projectCost.GetActualTotal(2));
+            item.Total_Actual_Mar = ToActualString(projectCost.GetActualTotal(3));
+            item.Total_Actual_Apr = ToActualString(projectCost.GetActualTotal(4));
+            item.Total_Actual_May = ToActualString(projectCost.GetActualTotal(5));
+            item.Total_Actual_Jun = ToActualString(projectCost.GetActualTotal(6));
+            item.Total_Actual_Jul = ToActualString(projectCost.GetActualTotal(7));
+            item.Total_Actual_Aug = ToActualString(projectCost.GetActualTotal(8));
+            item.Total_Actual_Sep = ToActualString(projectCost.GetActualTotal(9));
+            item.Total_Actual_Oct = ToActualString(projectCost.GetActualTotal(10));
+            item.Total_Actual_Nov = ToActualString(projectCost.GetActualTotal(11));
+            item.Total_Actual_Dec = ToActualString(projectCost.GetActualTotal(12));
+            item.Total_Target_Jan = ToActualString(projectCost.GetTargetTotal(1));
+            item.Total_Target_Feb = ToActualString(projectCost.GetTargetTotal(2));
+            item.Total_Target_Mar = ToActualString(projectCost.GetTargetTotal(3));
+            item.Total_Target_Apr = ToActualString(projectCost.GetTargetTotal(4));
+            item.Total_Target_May = ToActualString(projectCost.GetTargetTotal(5));
+            item.Total_Target_Jun = ToActualString(projectCost.GetTargetTotal(6));
+            item.Total_Target_Jul = ToActualString(projectCost.GetTargetTotal(7));
+            item.Total_Target_Aug = ToActualString(projectCost.GetTargetTotal(8));
+            item.Total_Target_Sep = ToActualString(projectCost.GetTargetTotal(9));
+            item.Total_Target_Oct = ToActualString(projectCost.GetTargetTotal(10));
+            item.Total_Target_Nov = ToActualString(projectCost.GetTargetTotal(11));
+            item.Total_Target_Dec = ToActualString(projectCost.GetTargetTotal(12));
 
             var savedOver12Months_CA = projectCost.GetSavedOver12Months(ProjectType.CostAvoidance, monthToStart);
             var savedOver12Months_CR = projectCost.GetSavedOver12Months(ProjectType.CostReduction, monthToStart);
             var savedOver12Months_RG = projectCost.GetSavedOver12Months(ProjectType.RevenueGrowth, monthToStart);
             var savedOver12Months_CI = projectCost.GetSavedOver12Months(ProjectType.CapacityIncrease, monthToStart);
 
-            item.SavedOver12Months_CA = ToProcessedString(savedOver12Months_CA);
-            item.SavedOver12Months_CR = ToProcessedString(savedOver12Months_CR);
-            item.SavedOver12Months_RG = ToProcessedString(savedOver12Months_RG);
-            item.SavedOver12Months_CI = ToProcessedString(savedOver12Months_CI);
-            item.SavedOver12Months_Total = ToProcessedString(savedOver12Months_CA + savedOver12Months_CR + savedOver12Months_RG + savedOver12Months_CI);
+            item.SavedOver12Months_CA = ToActualString(savedOver12Months_CA);
+            item.SavedOver12Months_CR = ToActualString(savedOver12Months_CR);
+            item.SavedOver12Months_RG = ToActualString(savedOver12Months_RG);
+            item.SavedOver12Months_CI = ToActualString(savedOver12Months_CI);
+            item.SavedOver12Months_Total = ToActualString(savedOver12Months_CA + savedOver12Months_CR + savedOver12Months_RG + savedOver12Months_CI);
 
             var savedYearToDate_CA = projectCost.GetSavedYearToDate(ProjectType.CostAvoidance, monthToStart);
             var savedYearToDate_CR = projectCost.GetSavedYearToDate(ProjectType.CostReduction, monthToStart);
             var savedYearToDate_RG = projectCost.GetSavedYearToDate(ProjectType.RevenueGrowth, monthToStart);
             var savedYearToDate_CI = projectCost.GetSavedYearToDate(ProjectType.CapacityIncrease, monthToStart);
-            item.SavedYearToDate_CA = ToProcessedString(savedYearToDate_CA);
-            item.SavedYearToDate_CR = ToProcessedString(savedYearToDate_CR);
-            item.SavedYearToDate_RG = ToProcessedString(savedYearToDate_RG);
-            item.SavedYearToDate_CI = ToProcessedString(savedYearToDate_CI);
-            item.SavedYearToDate_Total = ToProcessedString(savedYearToDate_CA + savedYearToDate_CR + savedYearToDate_RG + savedYearToDate_CI);
+            item.SavedYearToDate_CA = ToActualString(savedYearToDate_CA);
+            item.SavedYearToDate_CR = ToActualString(savedYearToDate_CR);
+            item.SavedYearToDate_RG = ToActualString(savedYearToDate_RG);
+            item.SavedYearToDate_CI = ToActualString(savedYearToDate_CI);
+            item.SavedYearToDate_Total = ToActualString(savedYearToDate_CA + savedYearToDate_CR + savedYearToDate_RG + savedYearToDate_CI);
 
             var estimatedSaving_CA = projectCost.GetEstimatedSavingsToBeRealized(ProjectType.CostAvoidance, monthToStart);
             var estimatedSaving_CR = projectCost.GetEstimatedSavingsToBeRealized(ProjectType.CostReduction, monthToStart);
             var estimatedSaving_RG = projectCost.GetEstimatedSavingsToBeRealized(ProjectType.RevenueGrowth, monthToStart);
             var estimatedSaving_CI = projectCost.GetEstimatedSavingsToBeRealized(ProjectType.CapacityIncrease, monthToStart);
-            item.EstimatedSaving_CA = ToProcessedString(estimatedSaving_CA);
-            item.EstimatedSaving_CR = ToProcessedString(estimatedSaving_CR);
-            item.EstimatedSaving_RG = ToProcessedString(estimatedSaving_RG);
-            item.EstimatedSaving_CI = ToProcessedString(estimatedSaving_CI);
-            item.EstimatedSaving_Total = ToProcessedString(estimatedSaving_CA + estimatedSaving_CR + estimatedSaving_RG + estimatedSaving_CI);
+            item.EstimatedSaving_CA = ToActualString(estimatedSaving_CA);
+            item.EstimatedSaving_CR = ToActualString(estimatedSaving_CR);
+            item.EstimatedSaving_RG = ToActualString(estimatedSaving_RG);
+            item.EstimatedSaving_CI = ToActualString(estimatedSaving_CI);
+            item.EstimatedSaving_Total = ToActualString(estimatedSaving_CA + estimatedSaving_CR + estimatedSaving_RG + estimatedSaving_CI);
             return item;
         }
 
         private static string ToProcessedString(long value)
         {
             return value == 0 ? string.Empty : value.ToString();
+        }
+
+        private static string ToActualString(long value)
+        {
+            return string.Format("{0:n0}", value);
         }
     }
 }
