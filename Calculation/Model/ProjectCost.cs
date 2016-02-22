@@ -96,7 +96,7 @@ namespace SCI.CIProject.ProjectSaving
 
         public void SetCostEntry(ProjectType projectType, CostType costTye, int month, string costValue)
         {
-            var cost = 0l;
+            var cost = 0L;
             long.TryParse(costValue, out cost);
             this.SetCostEntry(projectType, costTye, month, cost);
         }

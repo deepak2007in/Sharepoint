@@ -10,7 +10,6 @@ namespace SCI.CIProject.ProjectSaving
     /// <summary>
     /// ENumeration specifying the various types of projects related to cost saving.
     /// </summary>
-    [Flags]
     public enum ProjectType
     {
         /// <summary>
