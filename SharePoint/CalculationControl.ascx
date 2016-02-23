@@ -39,7 +39,7 @@
         ctrl.value = x1 + x2;
     }
 
-    function ApprovalValidation() {
+    function ValidateTargetAndActual() {
         var blankTargetCount = $(".Target").filter(function () {
             if (GetCheckBoxSelected(this)) {
                 var value = parseInt(this.value.replace(',', ''));
@@ -60,7 +60,17 @@
             alert("Actual values should not be set to zero.");
             return false;
         }
+    }
+    function UpdateCalculation() {
+        if (ValidateTargetAndActual() == false) {
+            return false;
+        }
+    }
 
+    function ApprovalValidation() {
+        if (ValidateTargetAndActual() == false) {
+            return false;
+        }
         if ($('[id*="ddlRequesterStatus"]').children("option").filter(":selected").text() == "") {
             alert("Please select Action");
             return false;
@@ -1784,7 +1794,7 @@
             </table>
             </br>
             <div id="updatecalc">
-                <asp:Button ID="btnupdatecal" runat="server" Text="Update Calculation" OnClick="btnupdatecal_Click"
+                <asp:Button ID="btnupdatecal" runat="server" Text="Update Calculation" OnClick="btnupdatecal_Click" OnClientClick="return UpdateCalculation();"
                     Width="150px" />
             </div>
             </br>
