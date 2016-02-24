@@ -93,6 +93,8 @@ function DefaultLableValues() {
     $('[id$=lblCIApproverComments]').text("CI Approver Comment");
     $('[id$=lblReassignTask]').text("ReAssign Task ");
     $('[id$=lblreasUser]').text("ReAssign User :");
+    // = Help Text
+    $('[id$=imgHelpProjectInformation]').attr("title", "Project Information Help");
     
 }
 
@@ -173,4 +175,7 @@ function SetFrenchLables() {
     $('[id$=lblaction]').text("Task Action_Fr :");
     $('[id$=lblReassignTask]').text("ReAssign Task_Fr ");
     $('[id$=lblreasUser]').text("ReAssign User_Fr :");
+    // = Help Text
+    //console.log($('[id$=imgHelpProjectInformation]').attr('title'));
+    $('[id$=imgHelpProjectInformation]').attr("title", "Information sur le projet Aide");
 }

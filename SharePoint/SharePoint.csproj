@@ -66,10 +66,19 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CalculationControl.ascx" />
+    <Content Include="css\jquery.alerts.css" />
     <Content Include="css\style.css" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="images\help.gif" />
+    <Content Include="images\HelpInfo.png" />
+    <Content Include="images\important.gif" />
+    <Content Include="images\info.gif" />
+    <Content Include="images\title.gif" />
     <Content Include="js\jquery-1.11.3.min.js" />
+    <Content Include="js\jquery.alerts.js" />
+    <Content Include="js\jquery.browser.min.js" />
+    <Content Include="js\jquery.ui.draggable.js" />
     <Content Include="js\language.js" />
     <Content Include="js\Validate.js" />
     <Content Include="Web.config" />

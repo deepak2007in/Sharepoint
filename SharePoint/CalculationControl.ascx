@@ -1,10 +1,15 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="CalculationControl.ascx.cs" Inherits="SharePoint.CalculationControl" ClientIDMode="Static" %>
-<script src="/js/jquery-1.11.3.min.js" type="text/javascript"></script>
-<script src="/js/language.js" type="text/javascript"></script>
-<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js" type="text/javascript"></script>
-<script src="/js/Validate.js" type="text/javascript"></script>
-<link href="/css/style.css" rel="stylesheet" type="text/css" />
+    <script src="/js/jquery-1.11.3.min.js" type="text/javascript"></script>
+    <script src="/js/language.js" type="text/javascript"></script>
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js" type="text/javascript"></script>
+    <script src="/js/Validate.js" type="text/javascript"></script>
+    <script src="/js/jquery.browser.min.js" type="text/javascript"></script>
+    <script src="/js/jquery.alerts.js" type="text/javascript"></script>    
+    <script src="/js/jquery.ui.draggable.js" type="text/javascript"></script>
+    <link href="/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="/css/jquery.alerts.css" rel="stylesheet" />
 <script type="text/javascript">
+
     var errmgs = "";
 
     function NumberOnly() {
@@ -47,7 +52,8 @@
             }
         }).length;
         if (blankTargetCount > 0) {
-            alert("Please enter all the target values before submitting the form.");
+            //alert("Please enter all the target values before submitting the form.");
+            jAlert('Please enter all the target values before submitting the form.', 'Alert Dialog');
             return false;
         }
 
@@ -57,7 +63,8 @@
         }).length;
 
         if (invalidActualCount > 0) {
-            alert("Actual values should not be set to zero.");
+            //alert("Actual values should not be set to zero.");
+            jAlert('Actual values should not be set to zero.', 'Alert Dialog');
             return false;
         }
     }
@@ -72,12 +79,14 @@
             return false;
         }
         if ($('[id*="ddlRequesterStatus"]').children("option").filter(":selected").text() == "") {
-            alert("Please select Action");
+            //alert("Please select Action");
+            jAlert('Please select Action', 'Alert Dialog');
             return false;
         }
         if ($('[id*="ddlRequesterStatus"]').children("option").filter(":selected").text() == "Draft") {
             if (!$('[id*="txtProjectName"]').val().length > 0) {
-                alert("Project Name Required");
+                //alert("Project Name Required");
+                jAlert('Project Name Required', 'Alert Dialog');
                 return false;
             }
             else {
@@ -96,7 +105,7 @@
                 errmgs += "Project Benefits Required\n";
             }
             if (errmgs != "") {
-                alert(errmgs);
+                jAlert(errmgs);
                 return false;
             }
 
@@ -565,6 +574,11 @@
         }
         return isValidFile;
     }
+    function printThisForm()
+    {
+        window.print();
+        return false;
+    }
 </script>
 <asp:HiddenField ID="hdnactionuser" runat="server" />
 <asp:HiddenField ID="hdnAppAction" runat="server" />
@@ -579,6 +593,9 @@
                 <tr>
                     <td style="font-family: trebuchet ms, lucida grande, sans-serif">
                         <asp:Label ID="lblciprojheader" Width="500px" runat="server" Font-Size="17pt" Text="Continuous Improvement Project Form"></asp:Label>
+                       
+                        
+                        <asp:HyperLink NavigateUrl="javaScript:window.print();" runat="server" Text="[Print]" Visible="false" />
                     </td>
                     <td>
                         <table>
@@ -616,6 +633,10 @@
                                 Project Information
                             </label>
                         </b>
+                       <%-- <asp:Image ID="" ImageUrl="/images/HelpInfo.png" AlternateText="Project Information Help" runat="server" />
+                        <asp:Image ImageUrl="imageurl" runat="server" />--%>
+                        <img id="imgHelpProjectInformation" src="/images/HelpInfo.png" title="Project Information Help" alt="Project Information Help" />
+
                     </td>
                 </tr>
                 <tr>
@@ -1259,7 +1280,7 @@
                     </td>
                     <td>
                         <asp:TextBox ID="cat1" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
-                           Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt" CssClass="Target"></asp:TextBox>
+                            Height="15px" Width="80%" Style="text-align: right" Font-Size="8pt" CssClass="Target"></asp:TextBox>
                     </td>
                     <td>
                         <asp:TextBox ID="cat2" runat="server" onkeypress="return NumberOnly()" onkeyup="FormatCurrency(this);" onkeydown="PreventCopyPaste(this);"
@@ -2061,8 +2082,9 @@
                     <td style="text-align: right">
                         <asp:Button ID="btnSave" runat="server" Text="Submit" OnClick="btnSave_Click" Font-Bold="True"
                             Font-Size="Medium" OnClientClick="return ApprovalValidation(); " />&nbsp;
+                        <asp:Button ID="btnPrint" Text="Print" runat="server" Font-Bold="True" Font-Size="Medium" ToolTip="Click to print the form" OnClientClick="return printThisForm();" />
                         <asp:Button ID="btnCancel" runat="server" CausesValidation="false" Font-Bold="True"
-                            Font-Size="Medium" Text="Cancel" />&nbsp;&nbsp;
+                            Font-Size="Medium" Text="Cancel" />&nbsp;&nbsp;                       
                     </td>
                 </tr>
             </table>
