@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ENum\StatusColor.cs" />
+    <Compile Include="Model\ProjectColor.cs" />
     <Compile Include="Model\ProjectCost.cs">
       <SubType>Code</SubType>
     </Compile>

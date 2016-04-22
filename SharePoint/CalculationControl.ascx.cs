@@ -53,11 +53,11 @@ namespace SharePoint
                 cat11.Text = "10,000";
                 cat12.Text = "10,000";
 
-                caa1.Text = "5,000";
-                caa2.Text = "5,000";
-                caa3.Text = "5,000";
+                //caa1.Text = "5,000";
+                //caa2.Text = "5,000";
+                //caa3.Text = "5,000";
 
-                caa4.Text = caa5.Text = caa6.Text  = caa7.Text = caa8.Text = caa9.Text = caa10.Text = caa11.Text = caa12.Text = "5000";
+                //caa4.Text = caa5.Text = caa6.Text = caa7.Text = caa8.Text = caa9.Text = caa10.Text = caa11.Text = caa12.Text = "5000";
 
                 crt1.Text = "1,500";
                 crt2.Text = "1,500";
@@ -72,9 +72,9 @@ namespace SharePoint
                 crt11.Text = "1,500";
                 crt12.Text = "1,500";
 
-                cra1.Text = "1,000";
-                cra2.Text = "1,000";
-                cra3.Text = "1,000";
+                //cra1.Text = "1,000";
+                //cra2.Text = "1,000";
+                //cra3.Text = "1,000";
 
                 this.ProcessTimeline(DateTime.Now);
             }
@@ -439,42 +439,23 @@ namespace SharePoint
                     }
                 }
                 DateTime monthDate;
-                var dateToCompareAgainst = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddMinutes(-1);
                 for (var index = 0; index < monthDates.Length; index++)
                 {
-                    monthDate = monthDates[index].AddMonths(1);
-                    if (monthDate > dateToCompareAgainst.AddMonths(-2))
+                    monthDate = monthDates[index];
+
+                    var lbl = labels[index];
+                    var actuals = this.GetActualsForMonth(lbl.ID);
+                    foreach (var actual in actuals)
                     {
-                        var lbl = labels[index];
-                        var actuals = this.GetActualsForMonth(lbl.ID);
-                        foreach (var actual in actuals)
+                        var continueProcessing = false;
+                        var statusColor = ProjectColor.GetColor(monthDate, actual.Text, this.GetCheckBoxForActual(actual.ID).Checked, out continueProcessing);
+                        if (!continueProcessing)
                         {
-                            if (actual.Text == "" && this.GetCheckBoxForActual(actual.ID).Checked)
-                            {
-                                return StatusColor.Red;
-                            }
+                            return statusColor;
                         }
-                        break;
                     }
                 }
 
-                for (var index = 0; index < monthDates.Length; index++)
-                {
-                    monthDate = monthDates[index].AddMonths(1);
-                    if (monthDate > dateToCompareAgainst.AddMonths(-1))
-                    {
-                        var lbl = labels[index];
-                        var actuals = this.GetActualsForMonth(lbl.ID);
-                        foreach (var actual in actuals)
-                        {
-                            if (actual.Text == "" && this.GetCheckBoxForActual(actual.ID).Checked)
-                            {
-                                return StatusColor.Yellow;
-                            }
-                        }
-                        break;
-                    }
-                }
                 return StatusColor.Green;
             }
             else
