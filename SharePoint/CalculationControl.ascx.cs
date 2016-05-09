@@ -288,6 +288,25 @@ namespace SharePoint
 
         private StatusColor ProcessColor(DateTime[] monthDates, Label[] labels)
         {
+            if (monthDates[monthDates.Length - 1] < DateTime.Now)
+            {
+                var lbl = labels[monthDates.Length - 1];
+                var actuals = this.GetActualsForMonth(lbl.ID);
+                var areAllValuesEnteredForActuals = true;
+                foreach (var actual in actuals)
+                {
+                    if (actual.Text == "" && this.GetCheckBoxForActual(actual.ID).Checked)
+                    {
+                        areAllValuesEnteredForActuals = false;
+                        break;
+                    }
+                }
+
+                if (areAllValuesEnteredForActuals)
+                {
+                    return StatusColor.Black;
+                }
+            }
             DateTime monthDate;
             var dateToCompareAgainst = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddMinutes(-1);
             for (var index = 0; index < monthDates.Length; index++)
